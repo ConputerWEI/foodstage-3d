@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalSt
 import { foods, type FoodDefinition } from './data/foods';
 import { createSequenceState, sequenceReducer, type SequenceEvent } from './core/sequence';
 import { readSettings, saveSettings, type Settings } from './core/settings';
-import { biteFeedback } from './core/feedback';
+import { biteFeedback, cancelBiteAudio, primeBiteAudio, primeMilestoneAudio, milestoneFeedback } from './core/feedback';
 import { createModelStore } from './scene/assets';
 import { createMotion, impulse } from './scene/motion';
 import { CHEW_SECONDS } from './scene/bite-effects';
@@ -13,6 +13,8 @@ import { HelpSheet } from './ui/HelpSheet';
 import { SettingsSheet } from './ui/SettingsSheet';
 import { FoodPicker } from './ui/FoodPicker';
 import { Progress } from './ui/Progress';
+import { FoodMark } from './ui/FoodMark';
+import { ArrowLeft } from 'lucide-react';
 
 function useSystemReducedMotion() {
   const [reduced, setReduced] = useState(() => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -26,12 +28,12 @@ function useSystemReducedMotion() {
 }
 
 function Brand() {
-  return <div className="brand"><svg className="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 14c0-6 4.5-10 10-10s10 4 10 10H6ZM6 23h20c0 3-4 5-10 5S6 26 6 23Z" fill="currentColor"/><path d="m6 18 5 2 5-2 5 2 5-2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/></svg><h1>食刻</h1></div>;
+  return <div className="brand"><FoodMark className="brand-mark" /><h1>食刻</h1></div>;
 }
 
 function AppHeader({ settings, onSettingsChange, onBack }: { settings: Settings; onSettingsChange: (settings: Settings) => void; onBack?: () => void }) {
   return <header className="masthead">
-    {onBack ? <button className="back-button" type="button" onClick={onBack}><span aria-hidden="true">←</span> 食物柜</button> : <Brand />}
+    {onBack ? <button className="back-button" type="button" onClick={onBack}><ArrowLeft size={20} strokeWidth={1.8} style={{ verticalAlign: 'middle', marginRight: 7 }} aria-hidden="true" /> 食物柜</button> : <Brand />}
     {onBack && <Brand />}
     <nav className="header-tools" aria-label="工具"><HelpSheet /><SettingsSheet settings={settings} onChange={onSettingsChange} /></nav>
   </header>;
@@ -60,14 +62,33 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
 
   useEffect(() => { void store.load(0); }, [store]);
   useEffect(() => {
+    if (settings.sound) { primeBiteAudio(food.sound); primeMilestoneAudio(); }
+    else cancelBiteAudio();
+    return cancelBiteAudio;
+  }, [food.sound, settings.sound]);
+  useEffect(() => {
     entries.forEach((entry, stage) => { if (entry.status === 'ready') dispatch({ type: 'READY', stage, run: state.run }); });
   }, [entries, state.run]);
+
+  const lastMilestone = useRef({ run: state.run, stage: 0, finished: false });
+  useEffect(() => {
+    const previous = lastMilestone.current;
+    if (previous.run !== state.run) {
+      cancelBiteAudio();
+    } else if (state.phase === 'finished' && !previous.finished) {
+      milestoneFeedback(settings, 'complete', state.stage);
+    } else if (state.stage > previous.stage) {
+      milestoneFeedback(settings, 'transition', state.stage);
+    }
+    lastMilestone.current = { run: state.run, stage: state.stage, finished: state.phase === 'finished' };
+  }, [state.run, state.stage, state.phase, settings]);
 
   const bite = useCallback(() => {
     if (chewTimer.current || state.phase !== 'idle' || contextLost || !hitReady || !hit.current) return;
     const finishing = state.bites === food.stages[state.stage]!.bites - 1;
+    const role = finishing ? 'finish' : state.bites === 0 ? 'bite' : 'chew';
     impulse(motion, finishing ? 1 : 0.65);
-    biteFeedback(settings, finishing);
+    biteFeedback(settings, food.sound, role);
     setChewing(true);
     if (!finishing) dispatch({ type: 'BITE' });
     chewTimer.current = setTimeout(() => {
@@ -75,7 +96,7 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
       setChewing(false);
       if (finishing) dispatch({ type: 'BITE' });
     }, CHEW_SECONDS * 1000);
-  }, [contextLost, food.stages, hitReady, motion, settings, state.bites, state.phase, state.stage]);
+  }, [contextLost, food.stages, food.sound, hitReady, motion, settings, state.bites, state.phase, state.stage]);
   const playable = state.phase === 'idle' && !chewing && !contextLost && hitReady;
   const input = useFoodInput(motion, hit, playable, bite, settings.sensitivity);
   const current = entries[state.stage];
@@ -86,7 +107,7 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
 
   return <main className="experience" data-testid="experience" data-food={food.id} data-stage={state.stage} data-bites={state.bites} data-phase={state.phase} data-hit-ready={hitReady}>
     <AppHeader settings={settings} onSettingsChange={onSettingsChange} onBack={onBack} />
-    <div className="play-meta"><div><span className="play-kicker">正在品尝</span><h2>{food.name}</h2></div><Progress stage={state.stage} bites={state.bites} stages={food.stages} /></div>
+    <div className="play-meta"><Progress stage={state.stage} bites={state.bites} stages={food.stages} /></div>
     <section className={`stage${state.phase === 'finished' ? ' empty' : ''}`} aria-label="食物空间">
       {state.phase === 'finished' && <div className="finished-state"><div className="finished-stamp">吃光了</div><h2>刚刚好</h2><p>这一刻，值得再来一次。</p></div>}
       {state.phase !== 'finished' && <SceneBoundary><div className="food-input" role="button" tabIndex={0} aria-label={food.name} aria-describedby="food-hint" aria-disabled={!playable} data-hit-ready={hitReady} {...input} onContextMenu={event => event.preventDefault()}>

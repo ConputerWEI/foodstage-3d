@@ -8,7 +8,7 @@ describe('foods', () => {
     expect(burger).toMatchObject({ name: '经典汉堡', description: '四层香气，慢慢吃完。' });
     expect(burger!.stages).toHaveLength(4);
     expect(new Set(burger!.stages.map(stage => stage.url)).size).toBe(4);
-    expect(burger!.stages.every(stage => stage.bites === 4)).toBe(true);
+    expect(burger!.stages.map(stage => stage.bites)).toEqual([5, 6, 5, 6]);
     expect(burger!.cover).toBe('/foods/classic-burger.svg');
   });
 

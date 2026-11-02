@@ -1,5 +1,5 @@
-export const CHEW_SECONDS = 0.55;
-export const STAGE_BLEND_SECONDS = 0.24;
+export const CHEW_SECONDS = 0.32;
+export const STAGE_BLEND_SECONDS = 0.16;
 export function stageBlend(age: number, reduced: boolean): number {
   if (reduced) return 1;
   const t = Math.max(0, Math.min(1, age / STAGE_BLEND_SECONDS));
@@ -10,15 +10,15 @@ const rest = { x: 0, y: 0, roll: 0, scaleX: 1, scaleY: 1 };
 
 /** Short damped recoil; zero offset at the end preserves the rotation pivot. */
 export function bitePose(age: number, strength: number, reduced: boolean) {
-  if (reduced || age >= 0.55 || strength <= 0) return rest;
+  if (reduced || age >= CHEW_SECONDS || strength <= 0) return rest;
   // Two rounded jaw movements, followed by a gentle settle.
-  const pulse = Math.sin(Math.PI * Math.min(age / 0.26, 2)) ** 2;
-  const envelope = Math.max(0, 1 - age / 0.55) * strength;
+  const pulse = Math.sin(Math.PI * Math.min(age / 0.16, 2)) ** 2;
+  const envelope = Math.max(0, 1 - age / CHEW_SECONDS) * strength;
   const squash = pulse * envelope;
   return {
-    x: Math.sin(age * 10) * envelope * 0.0015,
+    x: Math.sin(age * 17) * envelope * 0.0015,
     y: -squash * 0.0012,
-    roll: Math.sin(age * 10) * envelope * 0.009,
+    roll: Math.sin(age * 17) * envelope * 0.009,
     scaleX: 1 + squash * 0.035,
     scaleY: 1 - squash * 0.065,
   };

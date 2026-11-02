@@ -7,3 +7,8 @@ playwright-report/
 .env.*
 !.env.example
 *.log
+
+# Local asset auditions and PR review downloads
+.audio-candidates/
+.pr1-audio-review/
+pr1-review.zip

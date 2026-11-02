@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="800" viewBox="0 0 1000 800" fill="none" role="img" aria-label="A hand-drawn cheeseburger overlapping a tipped carton of fries, with pepperoni pizza and a striped takeaway drink on crumpled checked tray paper">
+  <defs>
+    <linearGradient id="bun" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#ffe49a"/><stop offset=".57" stop-color="#efb735"/><stop offset="1" stop-color="#d48a2b"/></linearGradient>
+    <linearGradient id="bread" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6cd73"/><stop offset="1" stop-color="#d18a32"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2=".35"><stop stop-color="#ffe5a0"/><stop offset=".65" stop-color="#efb735"/><stop offset="1" stop-color="#d99329"/></linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#ed6349"/><stop offset=".6" stop-color="#ce3326"/><stop offset="1" stop-color="#af2d24"/></linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="1" y2=".2"><stop stop-color="#fffaec"/><stop offset=".65" stop-color="#fff3d9"/><stop offset="1" stop-color="#e1cbab"/></linearGradient>
+    <pattern id="checks" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(-9)"><rect width="64" height="64" fill="#fff3d9"/><path d="M0 0h32v32H0zM32 32h32v32H32z" fill="#ce3326" opacity=".12"/></pattern>
+  </defs>
+  <g stroke="#382218" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- The shallow tray and irregular folded liner share a low, three-quarter perspective. -->
+    <path d="M115 421Q100 399 133 388L701 312Q725 307 745 324L915 547Q938 575 905 594L346 747Q320 755 296 741L109 486Q89 457 115 421Z" fill="#755344"/>
+    <path d="m126 423 578-88q17-3 29 12l169 211q13 16-10 24L337 729q-19 5-31-10L121 468q-17-25 5-45Z" fill="#ba9773" stroke-width="4"/>
+    <path d="m107 445 78-54 117-1 120-35 142 1 125-37 69 55 71 87 53 44-12 49 31 36-105 18-86 45-133 20-121 53-96-9-54-77-90-58-41-82Z" fill="url(#checks)" stroke-width="4"/>
+    <path d="m107 445 51 26 27-80m517-72-7 54 63 1m124 131-57 4 45 45m-421 173 29-51-70 17" stroke="#cbb797" stroke-width="3"/>
+    <path d="m161 477 31 42m503-131 28 21m-20 252 68-28m-533-47 40 23" stroke="#dfcdb0" stroke-width="3"/>
+    <path d="m345 736 539-144" stroke="#d2ae86" stroke-width="4"/>
+    <!-- A leaning paper cup: the straw, lid, stripe and base follow its own axis. -->
+    <g transform="rotate(11 747 366)">
+      <path d="m734 232 4-116q0-8 8-11l52-20 7 19-46 19-3 109Z" fill="#ce3326" stroke-width="5"/>
+      <path d="m741 128 17 5m-18 21 17 5m-18 21 17 5m-18 21 17 5" stroke="#fff3d9" stroke-width="6"/>
+      <path d="M646 258 679 516Q681 538 743 539q66 0 72-24l33-258Z" fill="url(#cup)"/>
+      <path d="m657 326 12 88q79 35 163 0l12-87q-97 33-187-1Z" fill="url(#red)" stroke-width="4"/>
+      <path d="m672 343 8 55" stroke="#ffb193" stroke-width="7"/>
+      <path d="m687 470 6 32q49 20 103 0" stroke="#dcc6a3" stroke-width="4"/>
+      <path d="M639 251v20q2 26 107 27 106 0 109-27v-20Z" fill="#e7d5b4"/>
+      <ellipse cx="747" cy="249" rx="109" ry="34" fill="#fffaec"/>
+      <ellipse cx="747" cy="247" rx="88" ry="20" fill="#e5d4b5" stroke-width="4"/>
+      <path d="M726 247h36" stroke-width="7"/>
+      <path d="m738 245 1-27 19 1-1 26" fill="#ce3326" stroke-width="4"/>
+      <path d="M659 255q22 17 55 19" stroke="#fffdf4" stroke-width="5"/>
+    </g>
+    <!-- The carton opens towards the viewer; the fries fan out instead of forming a row. -->
+    <g transform="rotate(-17 303 362)">
+      <g fill="url(#gold)" stroke-width="5">
+        <path d="m220 354-57-160 25-10 66 162Z"/>
+        <path d="m250 338-21-202 27-3 31 204Z"/>
+        <path d="m292 337 17-215 28 4-9 219Z"/>
+        <path d="m324 352 57-190 27 9-48 196Z"/>
+        <path d="m350 375 80-134 24 15-72 143Z"/>
+        <path d="m220 386-27-116 26-7 38 122Z"/>
+        <path d="m271 383-4-172 27-1 13 174Z"/>
+        <path d="m313 395 28-156 27 6-19 158Z"/>
+      </g>
+      <g stroke="#fff0b7" stroke-width="5"><path d="m176 203 42 115m25-171 17 140m62-153-11 148m81-107-39 126m79-43-52 87m-98-116 5 100m66-76-17 90"/></g>
+      <path d="M190 354q22-41 99-38 81 0 109 48l-43 153-131-2Z" fill="#a72c23"/>
+      <path d="M190 354q37 18 79 6 24 55 62 40 35-11 67-36l-30 146q-8 31-73 29-58-2-71-24Z" fill="url(#red)"/>
+      <path d="m207 381 25 113q8 15 25 20" stroke="#fa9570" stroke-width="7"/>
+      <path d="m376 404-19 89" stroke="#aa2b22" stroke-width="6"/>
+      <path d="m279 447 19-18 23 20-9 24-26-2Z" fill="#efb735" stroke-width="4"/>
+    </g>
+    <!-- Ground shadows stay small and close to the paper. -->
+    <path d="M191 603q38-52 179-51 142 0 201 63 19 24-12 45-58 41-213 20-137-16-155-55Z" fill="#382218" opacity=".14" stroke="none"/>
+    <path d="m508 656 224-178 150 99-244 104Z" fill="#382218" opacity=".14" stroke="none"/>
+    <!-- The broad, slightly skewed burger is the focal point and overlaps the carton. -->
+    <g transform="rotate(-8 378 533)">
+      <path d="M197 581q11-29 170-28 148 1 174 28l-10 42q-16 44-164 42-137-1-162-39Z" fill="url(#bread)"/>
+      <path d="M222 625q130 37 279 2" stroke="#ffe3a3" stroke-width="8"/>
+      <path d="M211 561q21-19 57-9 28-14 58-3 33-13 65-4 45-11 79 2 40-6 62 14 20 13 9 31-5 21-36 20-29 14-65 4-32 13-69 2-35 11-70-1-41 9-65-5-32 3-36-16-12-23 11-35Z" fill="#633822"/>
+      <path d="m223 584 29 6m31-14 29 5m32-9 24 4m29 12 25-3m28-7 30 6m22-6 17 3" stroke="#9d6040" stroke-width="5"/>
+      <path d="m205 548 139-22 192 19-50 37-47-7-48 43-39-39-57 13-39-27Z" fill="#efb735" stroke-width="5"/>
+      <path d="m233 546 111-11 160 14-22 14-45-3-44 37-33-34-63 12-26-18Z" fill="#ffda71" stroke="none"/>
+      <path d="M211 523q65-25 161-20 98-2 157 26l-4 19q-155 29-310-4Z" fill="#ce3326" stroke-width="5"/>
+      <path d="M232 532q135 20 277 2" stroke="#f98b63" stroke-width="6"/>
+      <path d="M192 516q8-19 30-17 12-18 33-10l22-14 30 13 28-17 28 13 36-12 23 17 32-5 23 17 29-2 14 17 22 7-9 17-29-1-24 13-26-11-32 11-27-13-29 11-31-11-27 12-22-14-30 6-17-15-31 5Z" fill="#658044" stroke-width="5"/>
+      <path d="m219 511 37 9 28-10 25 9 30-9 28 13 31-9 25 10 28-7 37 14" stroke="#a4b45d" stroke-width="5"/>
+      <path d="M201 489c-3-57 38-116 113-134 90-22 184 17 218 87 8 17 14 36 7 46-11 16-65 20-113 22-77 4-158 0-204-7-13-2-21-7-21-14Z" fill="url(#bun)"/>
+      <path d="M224 465c8-43 43-79 91-91" stroke="#ffe9b0" stroke-width="9"/>
+      <path d="M221 489q140 18 295-5" stroke="#c2812b" stroke-width="5"/>
+      <g fill="#fff3d9" stroke="none">
+        <ellipse cx="267" cy="425" rx="9" ry="4" transform="rotate(-38 267 425)"/>
+        <ellipse cx="312" cy="397" rx="9" ry="4" transform="rotate(-18 312 397)"/>
+        <ellipse cx="362" cy="383" rx="9" ry="4" transform="rotate(12 362 383)"/>
+        <ellipse cx="414" cy="399" rx="9" ry="4" transform="rotate(35 414 399)"/>
+        <ellipse cx="472" cy="435" rx="9" ry="4" transform="rotate(48 472 435)"/>
+        <ellipse cx="351" cy="435" rx="9" ry="4" transform="rotate(-27 351 435)"/>
+        <ellipse cx="299" cy="462" rx="9" ry="4" transform="rotate(14 299 462)"/>
+        <ellipse cx="418" cy="467" rx="9" ry="4" transform="rotate(-13 418 467)"/>
+      </g>
+    </g>
+    <!-- A low, wide slice cuts across the arrangement, its curved crust lifting at the back. -->
+    <g transform="rotate(12 716 562)">
+      <path d="m521 666 187-238q89 5 174 101L548 688q-21 10-27-22Z" fill="#c98230"/>
+      <path d="m524 659 183-223q91 12 165 94L546 674q-15 6-22-15Z" fill="#efb735" stroke-width="5"/>
+      <path d="m545 650 169-194q78 19 135 72L551 660Z" fill="#ffda75" stroke="none"/>
+      <path d="m708 438 25 12-28 30-13-2-37 52-11-3-38 49 92-129Z" fill="#ce3326" stroke="none"/>
+      <path d="m548 661 82-36 12-18 24 2 12-22 31 1 16-17 29 1 9-17 54-11 39-14-307 140Z" fill="#ce3326" stroke="none"/>
+      <path d="M696 437q-7-16 7-24 14-7 35 0 94 25 150 107 10 17-5 27-18 10-30-10-55-70-141-82-11-2-16-18Z" fill="url(#bread)"/>
+      <path d="M719 429q89 28 148 101" stroke="#ffe4a5" stroke-width="7"/>
+      <path d="m775 451 7 9m51 34 7 9" stroke="#be7b2b" stroke-width="3"/>
+      <g fill="#ce3326" stroke-width="4">
+        <ellipse cx="718" cy="502" rx="29" ry="21" transform="rotate(20 718 502)"/>
+        <ellipse cx="780" cy="546" rx="28" ry="19" transform="rotate(-4 780 546)"/>
+        <ellipse cx="653" cy="573" rx="27" ry="18" transform="rotate(-28 653 573)"/>
+      </g>
+      <g fill="#f58c59" stroke="none"><circle cx="705" cy="497" r="4"/><circle cx="723" cy="508" r="4"/><circle cx="770" cy="542" r="4"/><circle cx="788" cy="552" r="4"/><circle cx="643" cy="575" r="4"/><circle cx="659" cy="566" r="3"/></g>
+      <g fill="#658044" stroke-width="3"><path d="M707 561q-20-7-25 13 19 9 25-13Z"/><path d="M771 486q-4 18 14 24 7-17-14-24Z"/><path d="M594 617q7-20 25-15-4 17-25 15Z"/></g>
+      <g stroke="#ba852b" stroke-width="3"><path d="m674 534 6 5m74-10 7 3m-37 71 8-2m-84 14 6 3m163-68 5 4"/></g>
+    </g>
+    <!-- A few escaped fries follow the paper's perspective and break the tray's straight edges. -->
+    <path d="m163 563 48 67-17 12-50-66Z" fill="url(#gold)" stroke-width="4"/>
+    <path d="m173 576 28 43" stroke="#ffe9a8" stroke-width="3"/>
+    <path d="m785 659 69-27 8 17-70 29Z" fill="url(#gold)" stroke-width="4"/>
+    <path d="m799 663 42-17" stroke="#ffe9a8" stroke-width="3"/>
+    <g fill="#cc943f" stroke="none"><path d="m475 703 9-7 7 8-10 6Z"/><circle cx="505" cy="711" r="4"/><path d="m251 672 7-6 8 7-8 4Z"/><circle cx="846" cy="610" r="4"/><circle cx="180" cy="547" r="3"/></g>
+  </g>
+</svg>

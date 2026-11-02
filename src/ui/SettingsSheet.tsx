@@ -1,4 +1,5 @@
 import { useId, useRef } from 'react';
+import { Settings as SettingsIcon, X } from 'lucide-react';
 import type { Settings } from '../core/settings';
 
 export interface SettingsSheetProps {
@@ -15,14 +16,14 @@ export function SettingsSheet({ settings, onChange }: SettingsSheetProps) {
 
   return <>
     <button className="icon-button settings-trigger" aria-label="设置" onClick={() => dialog.current?.showModal()}>
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Z" /><path d="m19.2 13.5 1.3 1-.9 1.6-1.6-.5a7.8 7.8 0 0 1-1.8 1.1l-.3 1.7h-1.9l-.5-1.6a7.6 7.6 0 0 1-2-.1l-1 1.3-1.7-1 .5-1.7a7.5 7.5 0 0 1-1.3-1.5l-1.7.1-.5-1.8 1.4-.9a7.5 7.5 0 0 1 0-2l-1.4-1 .9-1.6 1.6.5a7.8 7.8 0 0 1 1.8-1.1l.3-1.7h1.9l.5 1.6a7.6 7.6 0 0 1 2 .1l1-1.3 1.7 1-.5 1.7a7.5 7.5 0 0 1 1.3 1.5l1.7-.1.5 1.8-1.4.9a7.5 7.5 0 0 1 0 2Z" /></svg>
+      <SettingsIcon size={22} strokeWidth={1.8} aria-hidden="true" />
     </button>
     <dialog ref={dialog} className="settings-sheet" aria-labelledby={titleId} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
       <div className="sheet-content">
         <div className="sheet-heading">
           <h2 id={titleId}>玩得顺手</h2>
           <button className="icon-button" type="button" aria-label="关闭设置" onClick={() => dialog.current?.close()}>
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg>
+            <X size={22} strokeWidth={1.8} aria-hidden="true" />
           </button>
         </div>
         <div className="settings-fields">

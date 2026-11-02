@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { ACESFilmicToneMapping, SRGBColorSpace, BufferAttribute, BufferGeometry, Group, Points, Raycaster, Vector2, Mesh, type Material, type OrthographicCamera } from 'three';
+import { ACESFilmicToneMapping, SRGBColorSpace, BufferAttribute, BufferGeometry, Group, PMREMGenerator, Points, Raycaster, Vector2, Mesh, type Material, type PerspectiveCamera } from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type { SequenceState, SequenceEvent } from '../core/sequence';
 import type { ModelAsset } from './assets';
 import { stepMotion, type Motion } from './motion';
@@ -19,6 +20,7 @@ interface Props {
 function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: Props) {
   const rotation = useRef<Group>(null), shakeGroup = useRef<Group>(null), crumbPoints = useRef<Points>(null);
   const seenCrumbPulse = useRef(0);
+  const entrance = useRef(0);
   const incoming = useRef<Group>(null), outgoing = useRef<Group>(null);
   const { camera, size, gl } = useThree();
   const ownedMaterials = useRef(new Set<Material>());
@@ -60,8 +62,14 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
   const hitRef = useRef<HitTest | null>(null);
   useEffect(() => () => crumbData.geometry.dispose(), [crumbData]);
   useEffect(() => {
-    const cam = camera as OrthographicCamera;
-    cam.zoom = Math.min(size.width / (base.size.x * 1.63), size.height / (base.size.y * 1.8));
+    const cam = camera as PerspectiveCamera;
+    const radius = base.size.length() / 2;
+    const verticalHalfFov = cam.fov * Math.PI / 360;
+    const horizontalHalfFov = Math.atan(Math.tan(verticalHalfFov) * size.width / size.height);
+    const distance = radius * 1.16 / Math.sin(Math.min(verticalHalfFov, horizontalHalfFov));
+    cam.position.set(0, distance * 0.2, distance);
+    cam.near = Math.max(radius / 100, 0.0001);
+    cam.far = distance + radius * 10;
     cam.lookAt(0, 0, 0); cam.updateProjectionMatrix();
   }, [camera, size, base]);
   useEffect(() => {
@@ -93,7 +101,11 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
       if (outgoing.current) { outgoing.current.visible = blend < 1; outgoing.current.scale.setScalar(1 - 0.035 * blend); }
     }
     gl.domElement.dataset.stageBlend = String(blend);
-    rotation.current.rotation.set(motion.x, motion.y, 0);
+    entrance.current = motion.dragging ? 2 : Math.min(2, entrance.current + dt);
+    const reveal = reduced ? 0 : 0.38 * Math.pow(1 - entrance.current / 2, 3);
+    rotation.current.rotation.set(motion.x, motion.y + reveal, 0);
+    gl.domElement.dataset.rotationX = String(motion.x);
+    gl.domElement.dataset.rotationY = String(motion.y);
     const pose = bitePose(motion.age, motion.crumbPulse > 0 ? 0.8 : 0, reduced);
     shakeGroup.current.position.set(pose.x, pose.y, 0);
     shakeGroup.current.rotation.z = pose.roll;
@@ -153,6 +165,21 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
     </group></group>
   </group></group></group>;
 }
+function StudioReflections() {
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    const room = new RoomEnvironment();
+    const environment = new PMREMGenerator(gl).fromScene(room, 0.06);
+    room.dispose();
+    scene.environment = environment.texture;
+    scene.environmentIntensity = 0.3;
+    return () => {
+      if (scene.environment === environment.texture) scene.environment = null;
+      environment.dispose();
+    };
+  }, [gl, scene]);
+  return null;
+}
 function ContextLossWatcher({ onLost }: { onLost: () => void }) {
   const { gl } = useThree();
   useEffect(() => {
@@ -167,13 +194,14 @@ function ContextLossWatcher({ onLost }: { onLost: () => void }) {
   return null;
 }
 export function Scene(props: Props) {
-  return <Canvas orthographic camera={{ position: [0, 0.12, 0.34], near: 0.01, far: 10 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1, outputColorSpace: SRGBColorSpace }} fallback={<span>无法启动三维画面，请使用支持 WebGL 的浏览器。</span>}>
+  return <Canvas camera={{ position: [0, 0.12, 0.6], fov: 34, near: 0.001, far: 10 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1, outputColorSpace: SRGBColorSpace }} fallback={<span>无法启动三维画面，请使用支持 WebGL 的浏览器。</span>}>
     <ContextLossWatcher onLost={props.onContextLost} />
-    <ambientLight intensity={0.2} />
-    <hemisphereLight args={['#fffaf3', '#625448', 0.5]} />
-    <directionalLight color="#fff5e7" position={[-1.5, 2, 2]} intensity={2.65} />
-    <directionalLight color="#f1f5ff" position={[2, 0.5, 1]} intensity={0.5} />
-    <directionalLight color="#fff5e7" position={[0.5, 1, -2]} intensity={1.15} />
+    <StudioReflections />
+    <ambientLight intensity={0.08} />
+    <hemisphereLight args={['#fff6e8', '#665344', 0.3]} />
+    <directionalLight color="#fff0da" position={[-2.5, 3, 1.1]} intensity={2.6} />
+    <directionalLight color="#edf4ff" position={[2, 0.5, 1]} intensity={0.3} />
+    <directionalLight color="#fff5e7" position={[0.5, 1.4, -2]} intensity={1.25} />
     <Food {...props} />
   </Canvas>;
 }

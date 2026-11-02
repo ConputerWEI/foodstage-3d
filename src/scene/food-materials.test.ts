@@ -15,6 +15,18 @@ describe('food appearance', () => {
     expect(pixels[11]).toBe(200);
   });
 
+  it('adds midtone depth without clipping highlights or tinting neutral pixels', () => {
+    const pixels = new Uint8ClampedArray([180, 130, 80, 210, 235, 235, 235, 255, 255, 255, 255, 255]);
+    gradeFoodPixels(pixels);
+    expect(pixels[0]! - pixels[2]!).toBeGreaterThan(115);
+    expect(pixels[1]).toBeLessThan(128);
+    expect(pixels[4]).toBeGreaterThan(225);
+    expect(pixels[4]).toBe(pixels[5]);
+    expect(pixels[5]).toBe(pixels[6]);
+    expect(Array.from(pixels.slice(8))).toEqual([255, 255, 255, 255]);
+    expect(pixels[3]).toBe(210);
+  });
+
   it('isolates shared source materials and maps while softening imported mirror gloss', () => {
     const color = new DataTexture(new Uint8Array([214, 175, 112, 255]), 1, 1);
     color.colorSpace = SRGBColorSpace;
@@ -35,8 +47,10 @@ describe('food appearance', () => {
     expect(a.material.map?.flipY).toBe(false);
     expect(Array.from(color.image.data)).toEqual([214, 175, 112, 255]);
     expect(Array.from(packed.image.data)).toEqual([0, 12, 254, 255]);
-    expect(a.material.roughnessMap?.image.data[1]).toBeGreaterThan(85);
-    expect(a.material.roughnessMap?.image.data[1]).toBeLessThan(105);
+    expect(a.material.roughnessMap?.image.data[1]).toBeGreaterThan(64);
+    expect(a.material.roughnessMap?.image.data[1]).toBeLessThan(82);
+    expect(a.material.roughness * a.material.roughnessMap!.image.data[1] / 255).toBeGreaterThan(0.25);
+    expect(a.material.roughness * a.material.roughnessMap!.image.data[1] / 255).toBeLessThan(0.33);
     expect(a.material.roughnessMap).toBe(a.material.metalnessMap);
   });
 });

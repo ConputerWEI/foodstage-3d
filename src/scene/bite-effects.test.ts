@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { bitePose, createCrumbBurst, stageBlend } from './bite-effects';
+import { CHEW_SECONDS, bitePose, createCrumbBurst, stageBlend } from './bite-effects';
 
 describe('bite effects', () => {
   it('crossfades stages with a smooth bounded blend and bypasses motion when reduced', () => {
     expect(stageBlend(0, false)).toBe(0);
-    expect(stageBlend(0.12, false)).toBeCloseTo(0.5);
+    expect(stageBlend(0.08, false)).toBeCloseTo(0.5);
     expect(stageBlend(0.24, false)).toBe(1);
     expect(stageBlend(2, false)).toBe(1);
     expect(stageBlend(0, true)).toBe(1);
   });
   it('recoils visibly, then settles exactly at rest without moving the pivot', () => {
-    const pose = bitePose(0.12, 1, false);
+    const pose = bitePose(0.08, 1, false);
     expect(pose.scaleY).toBeLessThan(0.97);
     expect(Math.abs(pose.x)).toBeGreaterThan(0.0005);
-    expect(bitePose(0.36, 1, false).scaleY).toBeLessThan(0.99);
-    expect(bitePose(0.55, 1, false).scaleY).toBe(1);
+    expect(CHEW_SECONDS).toBe(0.32);
+    expect(bitePose(CHEW_SECONDS, 1, false).scaleY).toBe(1);
     expect(bitePose(0.75, 1, false)).toEqual({ x: 0, y: 0, roll: 0, scaleX: 1, scaleY: 1 });
     expect(bitePose(0.04, 1, true)).toEqual(bitePose(0.75, 1, false));
   });

@@ -6,11 +6,11 @@ const linear = Array.from({ length: 256 }, (_, i) => {
   return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
 });
 const encoded = Array.from({ length: 4097 }, (_, i) => {
-  const value = (i / 4096) ** 1.06;
+  const value = (i / 4096) ** 1.13;
   return Math.round(255 * (value <= 0.0031308 ? value * 12.92 : 1.055 * value ** (1 / 2.4) - 0.055));
 });
 
-/** Modest toasted-color grade: 1.08 saturation, 1.06 tonal exponent; alpha stays intact. */
+/** Toasted-color grade in linear light; preserve neutral whites and alpha. */
 export function gradeFoodPixels(pixels: Uint8ClampedArray | Uint8Array): void {
   for (let i = 0; i < pixels.length; i += 4) {
     const r = linear[pixels[i]!]!;
@@ -19,7 +19,7 @@ export function gradeFoodPixels(pixels: Uint8ClampedArray | Uint8Array): void {
     const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
     for (let c = 0; c < 3; c++) {
       const value = linear[pixels[i + c]!]!;
-      const saturated = Math.min(1, Math.max(0, luminance + 1.08 * (value - luminance)));
+      const saturated = Math.min(1, Math.max(0, luminance + 1.13 * (value - luminance)));
       pixels[i + c] = encoded[Math.round(saturated * 4096)]!;
     }
   }
@@ -78,18 +78,17 @@ export function applyFoodMaterials(scene: Object3D): void {
       if (!colors.has(source.map)) colors.set(source.map, adjustedTexture(source.map, gradeFoodPixels));
       copy.map = colors.get(source.map)!;
     }
-    // The imported atlas has median roughness 0.05–0.14. Retain its variation,
-    // but remap to 0.34–1 so bread looks soft and fillings retain broad highlights.
+    // Retain the atlas variation while lifting its near-mirror roughness into a broad highlight range.
     if (source.roughnessMap) {
       if (!roughness.has(source.roughnessMap)) {
         roughness.set(source.roughnessMap, adjustedTexture(source.roughnessMap, pixels => {
-          for (let i = 1; i < pixels.length; i += 4) pixels[i] = Math.round(0.34 * 255 + 0.66 * pixels[i]!);
+          for (let i = 1; i < pixels.length; i += 4) pixels[i] = Math.round(0.25 * 255 + 0.75 * pixels[i]!);
         }));
       }
       copy.roughnessMap = roughness.get(source.roughnessMap)!;
       if (source.metalnessMap === source.roughnessMap) copy.metalnessMap = copy.roughnessMap;
     } else {
-      copy.roughness = Math.max(0.34, copy.roughness);
+      copy.roughness = Math.max(0.32, copy.roughness);
     }
     copy.metalness = 0;
     return copy;
