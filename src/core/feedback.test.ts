@@ -18,10 +18,17 @@ const flush = () => new Promise((resolve) => { setTimeout(resolve, 0); });
 function audioBoundary(state = 'running') {
   const nodes: ReturnType<typeof node>[] = [];
   function node(kind: string) {
-    const parameter = () => ({ value: 0, setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() });
+    const parameter = () => {
+      const result = {
+        value: 0,
+        setValueAtTime: vi.fn((value: number, _time: number) => { result.value = value; }),
+        exponentialRampToValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn(),
+      };
+      return result;
+    };
     const result = {
       kind, type: '', buffer: null as unknown, frequency: parameter(), gain: parameter(), Q: parameter(), playbackRate: parameter(),
-      connect: vi.fn(), disconnect: vi.fn(), start: vi.fn(), stop: vi.fn(),
+      connect: vi.fn(), disconnect: vi.fn(), start: vi.fn((_when?: number) => {}), stop: vi.fn((_when?: number) => {}),
       addEventListener: vi.fn(),
     };
     return result;
@@ -66,7 +73,7 @@ function stubFetch(ok = true) {
 }
 
 beforeEach(() => { vi.resetModules(); });
-afterEach(() => { vi.unstubAllGlobals(); });
+afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe('biteFeedback', () => {
   it('does not create audio when muted, while allowing optional finishing vibration', async () => {
@@ -100,7 +107,8 @@ describe('biteFeedback', () => {
     const filters = nodes.filter((entry) => entry.kind === 'filter');
     expect(filters[0]!.type).toBe('highpass');
     const gains = nodes.filter((entry) => entry.kind === 'gain');
-    expect(gains[0]!.gain.value).toBeCloseTo(0.42);
+    expect(gains[0]!.gain.value).toBeGreaterThanOrEqual(0.399);
+    expect(gains[0]!.gain.value).toBeLessThanOrEqual(0.441);
     expect(source!.connect).toHaveBeenCalledWith(filters[0]);
     const ended = source!.addEventListener.mock.calls.find(([event]) => event === 'ended')!;
     ended[1]();
@@ -160,7 +168,8 @@ describe('biteFeedback', () => {
     biteFeedback(settings, { ...singleChew, level: 0.3 }, 'chew');
     await flush();
     const gains = nodes.filter((entry) => entry.kind === 'gain');
-    expect(gains[0]!.gain.value).toBeCloseTo(0.3);
+    expect(gains[0]!.gain.value).toBeGreaterThanOrEqual(0.285);
+    expect(gains[0]!.gain.value).toBeLessThanOrEqual(0.315);
   });
 
   it('falls back to the two-beat mouth tone when the samples cannot load', async () => {
@@ -239,6 +248,162 @@ describe('biteFeedback', () => {
     expect(() => biteFeedback(settings, sound, 'chew')).not.toThrow();
     await flush();
     expect(context.createBufferSource).not.toHaveBeenCalled();
+  });
+
+  it('contains an AudioContext constructor failure while priming', async () => {
+    const { Constructor } = audioBoundary();
+    Constructor.mockImplementation(() => { throw new Error('audio device unavailable'); });
+    const fetch = stubFetch();
+    const { primeBiteAudio } = await import('./feedback');
+
+    expect(() => primeBiteAudio(sound)).not.toThrow();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('falls back promptly during a slow fetch and never plays its late recording', async () => {
+    vi.useFakeTimers();
+    const { context, nodes, decoded } = audioBoundary();
+    let resolveFetch!: (response: { ok: boolean; arrayBuffer: () => Promise<ArrayBuffer> }) => void;
+    vi.stubGlobal('fetch', vi.fn(() => new Promise((resolve) => { resolveFetch = resolve; })));
+    const { biteFeedback } = await import('./feedback');
+
+    biteFeedback(settings, singleChew, 'chew');
+    await vi.advanceTimersByTimeAsync(40);
+    expect(context.createOscillator).toHaveBeenCalledTimes(2);
+    expect(nodes.filter((entry) => entry.kind === 'source')).toHaveLength(2);
+
+    resolveFetch({ ok: true, arrayBuffer: async () => new ArrayBuffer(64) });
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(context.createOscillator).toHaveBeenCalledTimes(2);
+    expect(nodes.filter((entry) => entry.kind === 'source')).toHaveLength(2);
+    expect(nodes.some((entry) => decoded.includes(entry.buffer as { duration: number }))).toBe(false);
+  });
+
+  it('cancels an active recording and disconnects its graph', async () => {
+    const { nodes } = audioBoundary();
+    stubFetch();
+    const { biteFeedback, cancelBiteAudio } = await import('./feedback');
+    biteFeedback(settings, singleChew, 'chew');
+    await flush();
+    const source = nodes.find((entry) => entry.kind === 'source')!;
+    expect(source.start).toHaveBeenCalled();
+
+    expect(cancelBiteAudio).toBeTypeOf('function');
+    cancelBiteAudio();
+    expect(source.stop.mock.calls.some((call) => call.length === 0)).toBe(true);
+    expect(nodes.every((entry) => entry.disconnect.mock.calls.length > 0)).toBe(true);
+  });
+
+  it('cancels every active and scheduled synth voice', async () => {
+    const { nodes } = audioBoundary();
+    stubFetch(false);
+    const { biteFeedback, cancelBiteAudio } = await import('./feedback');
+    biteFeedback(settings, singleChew, 'chew');
+    await flush();
+    const voices = nodes.filter((entry) => entry.kind === 'source' || entry.kind === 'oscillator');
+    expect(voices).toHaveLength(4);
+
+    cancelBiteAudio();
+    expect(voices.every((entry) => entry.stop.mock.calls.some((call) => call.length === 0))).toBe(true);
+    expect(nodes.every((entry) => entry.disconnect.mock.calls.length > 0)).toBe(true);
+  });
+
+  it('invalidates pending playback on cancellation but allows a later bite', async () => {
+    vi.useFakeTimers();
+    const { nodes } = audioBoundary();
+    let resolveFetch!: (response: { ok: boolean; arrayBuffer: () => Promise<ArrayBuffer> }) => void;
+    vi.stubGlobal('fetch', vi.fn(() => new Promise((resolve) => { resolveFetch = resolve; })));
+    const { biteFeedback, cancelBiteAudio } = await import('./feedback');
+    biteFeedback(settings, singleChew, 'chew');
+    cancelBiteAudio();
+    resolveFetch({ ok: true, arrayBuffer: async () => new ArrayBuffer(64) });
+    await vi.advanceTimersByTimeAsync(100);
+    expect(nodes).toHaveLength(0);
+
+    biteFeedback(settings, singleChew, 'chew');
+    await vi.advanceTimersByTimeAsync(40);
+    expect(nodes.filter((entry) => entry.kind === 'source')).toHaveLength(1);
+    expect(nodes.find((entry) => entry.kind === 'source')!.start).toHaveBeenCalled();
+  });
+
+  it.each(['bite', 'finish'] as const)('uses an available regular chew when the dedicated %s recording fails', async (role) => {
+    const { context, nodes, decoded } = audioBoundary();
+    const fetch = stubFetch();
+    fetch.mockImplementation(async (url) => {
+      if (url !== singleChew.chews[0]) throw new TypeError('missing dedicated recording');
+      return { ok: true, arrayBuffer: async () => new ArrayBuffer(64) };
+    });
+    const { biteFeedback } = await import('./feedback');
+    biteFeedback(settings, { ...sound, chews: singleChew.chews }, role);
+    await flush();
+
+    expect(fetch).toHaveBeenCalledWith(role === 'bite' ? sound.bite : sound.finish);
+    expect(fetch).toHaveBeenCalledWith(singleChew.chews[0]);
+    const sources = nodes.filter((entry) => entry.kind === 'source');
+    expect(sources).toHaveLength(1);
+    expect(sources[0]!.buffer).toBe(decoded[0]);
+    expect(context.createOscillator).not.toHaveBeenCalled();
+  });
+
+  it('disconnects the recorded graph if starting its source throws, then uses the synth', async () => {
+    const { context, nodes } = audioBoundary();
+    stubFetch();
+    const makeSource = context.createBufferSource.getMockImplementation()!;
+    context.createBufferSource.mockImplementationOnce(() => {
+      const source = makeSource();
+      source.start.mockImplementation(() => { throw new Error('device interrupted'); });
+      return source;
+    });
+    const { biteFeedback } = await import('./feedback');
+    expect(() => biteFeedback(settings, singleChew, 'chew')).not.toThrow();
+    await flush();
+
+    const recordedGraph = nodes.slice(0, 3);
+    expect(recordedGraph.map((entry) => entry.kind)).toEqual(['source', 'filter', 'gain']);
+    expect(recordedGraph.every((entry) => entry.disconnect.mock.calls.length > 0)).toBe(true);
+    expect(context.createOscillator).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([0.2, 2])('fades and stops a %s-second recording within the bite duration limit', async (duration) => {
+    const { context, nodes } = audioBoundary();
+    context.decodeAudioData.mockResolvedValue({ duration });
+    stubFetch();
+    const { biteFeedback } = await import('./feedback');
+    biteFeedback(settings, singleChew, 'chew');
+    await flush();
+
+    const source = nodes.find((entry) => entry.kind === 'source')!;
+    const gain = nodes.find((entry) => entry.kind === 'gain')!.gain;
+    const start = source.start.mock.calls[0]![0] as number;
+    const stop = source.stop.mock.calls[0]?.[0] as number;
+    expect(stop).toBeGreaterThan(start);
+    expect(stop - start).toBeLessThanOrEqual(0.55);
+    expect(stop - start).toBeCloseTo(Math.min(duration / source.playbackRate.value, 0.5));
+    expect(gain.setValueAtTime).toHaveBeenCalledWith(expect.any(Number), start);
+    const fade = gain.linearRampToValueAtTime.mock.calls.find(([level]) => level === 0);
+    expect(fade).toBeDefined();
+    expect(fade![1]).toBeGreaterThan(start);
+    expect(fade![1]).toBeLessThanOrEqual(stop);
+  });
+
+  it('varies the configured absolute recording level within five percent', async () => {
+    const { nodes } = audioBoundary();
+    stubFetch();
+    const random = vi.spyOn(Math, 'random').mockReturnValue(0);
+    const { biteFeedback } = await import('./feedback');
+    biteFeedback(settings, { ...singleChew, level: 0.3 }, 'chew');
+    await flush();
+    random.mockReturnValue(0.999999);
+    biteFeedback(settings, { ...singleChew, level: 0.3 }, 'chew');
+    await flush();
+
+    const levels = nodes.filter((entry) => entry.kind === 'gain').map((entry) => entry.gain.value);
+    expect(levels).toHaveLength(2);
+    for (const level of levels) {
+      expect(level).toBeGreaterThanOrEqual(0.285);
+      expect(level).toBeLessThanOrEqual(0.315);
+    }
+    expect(Math.abs(levels[1]! - levels[0]!)).toBeGreaterThan(0.02);
   });
 
   it('stays silent but stable when a food ships no sounds at all', async () => {

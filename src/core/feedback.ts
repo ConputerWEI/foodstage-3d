@@ -10,6 +10,27 @@ const DEFAULT_LEVEL = 0.42;
 let audioContext: AudioContext | undefined;
 /** Decoded one-shots keyed by URL; a failed entry is dropped so a later try can heal it. */
 const decoded = new Map<string, Promise<AudioBuffer | null>>();
+let playbackGeneration = 0;
+const active = new Map<AudioScheduledSourceNode, () => void>();
+
+/** Stop current audio and invalidate any bite still awaiting the device or network. */
+export function cancelBiteAudio(): void {
+  playbackGeneration += 1;
+  for (const [source, cleanup] of active) {
+    try { source.stop(); } catch { /* Already stopped. */ }
+    cleanup();
+  }
+}
+
+function trackSource(source: AudioScheduledSourceNode, nodes: AudioNode[]): () => void {
+  const cleanup = () => {
+    active.delete(source);
+    for (const node of nodes) node.disconnect();
+  };
+  active.set(source, cleanup);
+  source.addEventListener('ended', cleanup, { once: true });
+  return cleanup;
+}
 
 function audioContextConstructor(): typeof AudioContext | undefined {
   return globalThis.AudioContext
@@ -51,17 +72,20 @@ function soundUrls(sound: FoodSound | undefined): string[] {
  * already has a decoded sample instead of silence or the fallback synth.
  */
 export function primeBiteAudio(sound?: FoodSound): void {
-  const context = ensureContext();
-  if (!context) return;
-  if (context.state === 'suspended') void context.resume().catch(() => {});
-  for (const url of soundUrls(sound)) void decodeOnce(context, url);
+  try {
+    const context = ensureContext();
+    if (!context) return;
+    if (context.state === 'suspended') void context.resume().catch(() => {});
+    for (const url of soundUrls(sound)) void decodeOnce(context, url);
+  } catch {
+    // Optional audio initialization must never break the tasting screen.
+  }
 }
 
 /** URLs for this mouthful, most specific first. */
 function urlsFor(sound: FoodSound, role: BiteRole): string[] {
   const preferred = role === 'bite' ? sound.bite : role === 'finish' ? sound.finish : undefined;
-  if (preferred) return [preferred];
-  return [...sound.chews];
+  return [...new Set([...(preferred ? [preferred] : []), ...rotated(sound.chews)])];
 }
 
 function rotated<T>(items: readonly T[]): T[] {
@@ -71,24 +95,35 @@ function rotated<T>(items: readonly T[]): T[] {
 }
 
 function playBuffer(context: AudioContext, buffer: AudioBuffer, level: number): void {
-  const source = context.createBufferSource();
-  const highpass = context.createBiquadFilter();
-  const gain = context.createGain();
-  source.buffer = buffer;
-  // Slight random detune keeps sixteen bites from sounding like one looping sample.
-  source.playbackRate.value = 0.95 + Math.random() * 0.1;
-  highpass.type = 'highpass';
-  highpass.frequency.value = 70;
-  gain.gain.value = level;
-  source.connect(highpass);
-  highpass.connect(gain);
-  gain.connect(context.destination);
-  source.addEventListener('ended', () => {
-    source.disconnect();
-    highpass.disconnect();
-    gain.disconnect();
-  }, { once: true });
-  source.start(context.currentTime);
+  const nodes: AudioNode[] = [];
+  let source: AudioBufferSourceNode | undefined;
+  let cleanup: (() => void) | undefined;
+  try {
+    source = context.createBufferSource(); nodes.push(source);
+    const highpass = context.createBiquadFilter(); nodes.push(highpass);
+    const gain = context.createGain(); nodes.push(gain);
+    source.buffer = buffer;
+    source.playbackRate.value = 0.95 + Math.random() * 0.1;
+    highpass.type = 'highpass';
+    highpass.frequency.value = 70;
+    const start = context.currentTime;
+    const duration = Math.min(buffer.duration / source.playbackRate.value, 0.5);
+    gain.gain.value = level * (0.95 + Math.random() * 0.1);
+    gain.gain.setValueAtTime(gain.gain.value, start);
+    gain.gain.setValueAtTime(gain.gain.value, start + Math.max(0, duration - 0.06));
+    gain.gain.linearRampToValueAtTime(0, start + duration);
+    source.connect(highpass);
+    highpass.connect(gain);
+    gain.connect(context.destination);
+    cleanup = trackSource(source, nodes);
+    source.start(start);
+    source.stop(start + duration);
+  } catch (error) {
+    try { source?.stop(); } catch { /* May never have started. */ }
+    if (cleanup) cleanup();
+    else for (const node of nodes) node.disconnect();
+    throw error;
+  }
 }
 
 /** Fallback for devices that cannot load the samples: the original soft two-beat mouth tone. */
@@ -98,9 +133,7 @@ function playSynthBite(context: AudioContext, finishing: boolean): void {
   const track = <T extends AudioNode>(node: T): T => { nodes.push(node); return node; };
   const voice = (source: AudioScheduledSourceNode, chain: AudioNode[], start: number, duration: number) => {
     sources.push(source);
-    source.addEventListener('ended', () => {
-      for (const node of [source, ...chain]) node.disconnect();
-    }, { once: true });
+    trackSource(source, [source, ...chain]);
     source.start(start);
     source.stop(start + duration);
   };
@@ -154,29 +187,45 @@ function playSynthBite(context: AudioContext, finishing: boolean): void {
     for (const source of sources) {
       try { source.stop(); } catch { /* It may already have ended. */ }
     }
+    for (const source of sources) active.get(source)?.();
     for (const node of nodes) node.disconnect();
   }
 }
 
 async function playBite(sound: FoodSound | undefined, role: BiteRole): Promise<void> {
-  const context = ensureContext();
-  if (!context) return;
-  if (context.state === 'suspended') await context.resume();
-  if (context.state !== 'running') return;
-
-  if (sound) {
-    for (const url of rotated(urlsFor(sound, role))) {
-      const buffer = await decodeOnce(context, url);
-      if (!buffer) continue;
-      try {
-        playBuffer(context, buffer, sound.level ?? DEFAULT_LEVEL);
-        return;
-      } catch {
-        break;
+  const generation = playbackGeneration;
+  // A single deadline covers device resume, network and all fallback URLs.
+  // Work may finish filling the decode cache later, but cannot play a stale bite.
+  const ready = (async () => {
+    const context = ensureContext();
+    if (!context) return null;
+    if (context.state === 'suspended') await context.resume();
+    if (context.state !== 'running') return null;
+    if (sound) {
+      for (const url of urlsFor(sound, role)) {
+        const buffer = await decodeOnce(context, url);
+        if (buffer) return { context, buffer };
       }
     }
+    return { context, buffer: null };
+  })();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const result = await Promise.race([
+      ready,
+      new Promise<null>(resolve => { timer = setTimeout(() => resolve(null), 35); }),
+    ]);
+    if (generation !== playbackGeneration) return;
+    const context = result?.context ?? audioContext;
+    if (!context || context.state !== 'running') return;
+    if (result?.buffer) {
+      try { playBuffer(context, result.buffer, sound?.level ?? DEFAULT_LEVEL); return; }
+      catch { /* A failed recording graph is released before synthesizing. */ }
+    }
+    playSynthBite(context, role === 'finish');
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
   }
-  playSynthBite(context, role === 'finish');
 }
 
 export function biteFeedback(settings: Settings, sound?: FoodSound, role: BiteRole = 'chew'): void {

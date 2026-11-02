@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalSt
 import { foods, type FoodDefinition } from './data/foods';
 import { createSequenceState, sequenceReducer, type SequenceEvent } from './core/sequence';
 import { readSettings, saveSettings, type Settings } from './core/settings';
-import { biteFeedback, primeBiteAudio } from './core/feedback';
+import { biteFeedback, cancelBiteAudio, primeBiteAudio } from './core/feedback';
 import { createModelStore } from './scene/assets';
 import { createMotion, impulse } from './scene/motion';
 import { CHEW_SECONDS } from './scene/bite-effects';
@@ -59,7 +59,11 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
   const handleContextLost = useCallback(() => { setContextLost(true); setHit(null); }, [setHit]);
 
   useEffect(() => { void store.load(0); }, [store]);
-  useEffect(() => { primeBiteAudio(food.sound); }, [food.sound]);
+  useEffect(() => {
+    if (settings.sound) primeBiteAudio(food.sound);
+    else cancelBiteAudio();
+    return cancelBiteAudio;
+  }, [food.sound, settings.sound]);
   useEffect(() => {
     entries.forEach((entry, stage) => { if (entry.status === 'ready') dispatch({ type: 'READY', stage, run: state.run }); });
   }, [entries, state.run]);

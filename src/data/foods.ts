@@ -19,7 +19,7 @@ export interface FoodSound {
   readonly chews: readonly string[];
   /** Closing mouthful of a stage: heavier and longer. Falls back to `chews`. */
   readonly finish?: string;
-  /** Playback gain relative to the app default, for louder or quieter foods. */
+  /** Absolute playback gain (default 0.42), for louder or quieter foods. */
   readonly level?: number;
 }
 export interface FoodDefinition {
