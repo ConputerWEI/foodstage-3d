@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalSt
 import { foods, type FoodDefinition } from './data/foods';
 import { createSequenceState, sequenceReducer, type SequenceEvent } from './core/sequence';
 import { readSettings, saveSettings, type Settings } from './core/settings';
-import { biteFeedback } from './core/feedback';
+import { biteFeedback, primeBiteAudio } from './core/feedback';
 import { createModelStore } from './scene/assets';
 import { createMotion, impulse } from './scene/motion';
 import { CHEW_SECONDS } from './scene/bite-effects';
@@ -59,15 +59,18 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
   const handleContextLost = useCallback(() => { setContextLost(true); setHit(null); }, [setHit]);
 
   useEffect(() => { void store.load(0); }, [store]);
+  useEffect(() => { primeBiteAudio(food.sound); }, [food.sound]);
   useEffect(() => {
     entries.forEach((entry, stage) => { if (entry.status === 'ready') dispatch({ type: 'READY', stage, run: state.run }); });
   }, [entries, state.run]);
 
   const bite = useCallback(() => {
     if (chewTimer.current || state.phase !== 'idle' || contextLost || !hitReady || !hit.current) return;
-    const finishing = state.bites === food.stages[state.stage]!.bites - 1;
+    const total = food.stages[state.stage]!.bites;
+    const finishing = state.bites === total - 1;
+    const role = finishing ? 'finish' : state.bites === 0 ? 'bite' : 'chew';
     impulse(motion, finishing ? 1 : 0.65);
-    biteFeedback(settings, finishing);
+    biteFeedback(settings, food.sound, role);
     setChewing(true);
     if (!finishing) dispatch({ type: 'BITE' });
     chewTimer.current = setTimeout(() => {
