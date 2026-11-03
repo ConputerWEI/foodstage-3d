@@ -58,7 +58,7 @@
 
 - [x] **Step 1: Update docs to explain `/?table=A01`, demo-only orders, sample menu, and the 3D tasting path.**
 - [x] **Step 2: Run `pnpm test`, `pnpm build`, `pnpm test:browser`, `git diff --check`.** Investigate any failures; test desktop and mobile first viewport visually when tooling allows.
-- [ ] **Step 3: Check clean staged scope, commit, and push only `ybh_add`; verify remote SHA and leave `main` unchanged.**
+- [x] **Step 3: Check clean staged scope, commit, and push only `ybh_add`; verify remote SHA and leave `main` unchanged.** Implementation commit `2a50546` verified on remote `ybh_add`; `main` remains `6c7203248c39992fefdc564297e3d6b8980b9ab5`.
 
 ## Execution record
 
