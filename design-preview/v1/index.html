@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f2e7" />
+  <title>食刻 · V1 设计预览</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="review-bar"><span><i></i> FOODSTAGE 3D</span><strong>V1 设计提案 · 仅供评审</strong><span>DESIGN CONCEPT 01</span></div>
+  <header class="masthead">
+    <button class="brand" data-screen="home" aria-label="食刻首页"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 14c0-6 5-10 11-10s11 4 11 10H5ZM5 24h22c0 3-5 5-11 5S5 27 5 24Z" fill="currentColor"/><path d="m5 19 5 2 6-2 6 2 5-2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><span>食刻<small>FOODSTAGE 3D</small></span></button>
+    <div class="header-center"><span class="status-dot"></span> 今日营业中 <b>·</b> 慢慢吃，刚刚好</div>
+    <div class="tools"><button class="sound" aria-label="声音预览" aria-pressed="false">♪ <span>声音</span></button><button class="round" aria-label="设置">↗</button></div>
+  </header>
+
+  <main id="app">
+    <section class="screen home-screen active" id="home">
+      <div class="home-copy">
+        <div class="eyebrow"><span class="spark">✳</span> 千禧回忆，数字新滋味 <span class="edition">VOL. 001</span></div>
+        <h1>转着看，<br /><span>点着吃<i>。</i></span></h1>
+        <p class="lead">把熟悉的食物，变成一座<br class="desktop-break" />可以探索的小游乐场。</p>
+        <button class="cta" data-screen="menu">进入食物柜 <span>↗</span></button>
+        <div class="now-playing"><span class="mini-burger">☰</span><div><small>NOW SERVING / 目前可试玩</small><strong>经典汉堡 <i>01</i></strong></div></div>
+      </div>
+      <div class="hero-art" aria-label="千禧奶茶封口机插画">
+        <span class="art-word word-one">PLAY</span><span class="art-word word-two">YOUR</span><span class="art-word word-three">FOOD!</span>
+        <div class="sunburst"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="machine-wrap"><img src="../../public/foods/sealing-machine.png" alt="复古奶茶杯封装机" /></div>
+        <span class="float-icon noodle">✳</span><span class="float-icon sparkle">✦</span>
+        <span class="art-tag tag-rotate">↻ 可旋转</span><span class="art-tag tag-taste">● 可品尝</span><span class="art-tag tag-3d">3D</span>
+        <div class="art-caption"><span>食物不是模型</span><strong>是游乐场。</strong><i>✦</i></div>
+      </div>
+      <div class="ticker"><div>转一转 <b>✳</b> 点一点 <b>✳</b> 慢慢吃 <b>✳</b> 刚刚好 <b>✳</b> 转一转 <b>✳</b> 点一点 <b>✳</b> 慢慢吃 <b>✳</b> 刚刚好 <b>✳</b></div></div>
+    </section>
+
+    <section class="screen menu-screen" id="menu">
+      <div class="section-top"><span>THE FOOD CABINET / 食物柜</span><span>01 款食物 · 16 口快乐</span></div>
+      <div class="menu-heading"><h2>今天，想玩<br /><span>哪一份？</span></h2><div class="menu-note"><i>✳</i><p>选一份喜欢的食物。<br />转着看，点着吃。</p></div></div>
+      <article class="food-card">
+        <div class="food-number">01<span>/ 01</span></div>
+        <div class="food-visual"><span class="plate"></span><span class="food-sticker">今日<br />现做!</span><img src="../../public/foods/classic-burger.svg" alt="经典汉堡插画" /><span class="visual-caption">THE CLASSIC, REIMAGINED.</span></div>
+        <div class="food-info"><span class="category">THE ORIGINALS / 经典系列</span><h3>经典汉堡<span>Classic Burger</span></h3><p>面包、肉饼、芝士，一层一层的满足。<br />每一口，都是熟悉的快乐。</p><div class="food-specs"><span><b>04</b> 阶段</span><span><b>16</b> 小口</span><span><b>360°</b> 探索</span></div><button class="cta" data-screen="play">开始品尝 <span>↗</span></button></div>
+      </article>
+      <p class="menu-footnote">✦ 更多好滋味，正在准备中。</p>
+    </section>
+
+    <section class="screen play-screen" id="play">
+      <div class="play-top"><button class="text-button" data-screen="menu">← 返回食物柜</button><div class="play-title"><small>NOW TASTING / 正在品尝</small><h2>经典汉堡</h2></div><span class="play-live"><i></i> LIVE IN 3D</span></div>
+      <div class="play-layout">
+        <div class="progress-panel"><span class="panel-label"> tasting journey / 品尝进度</span><div class="journey"><button class="journey-step current" data-stage="0"><b>01</b><span>初次见面<small>0 / 4 口</small></span><i>● ● ● ●</i></button><button class="journey-step" data-stage="1"><b>02</b><span>渐入佳境<small>0 / 4 口</small></span><i>● ● ● ●</i></button><button class="journey-step" data-stage="2"><b>03</b><span>意犹未尽<small>0 / 4 口</small></span><i>● ● ● ●</i></button><button class="journey-step" data-stage="3"><b>04</b><span>刚刚好<small>0 / 4 口</small></span><i>● ● ● ●</i></button></div><span class="journey-note">四个阶段，十六口满足。</span></div>
+        <div class="food-stage"><div class="stage-bg-word">YUM!</div><div class="stage-grid"></div><div class="stage-shadow"></div><img class="stage-burger" src="../../public/foods/classic-burger.svg" alt="可点击、拖动的经典汉堡预览" /><span class="stage-tag">CLASSIC BURGER<br /><b>STAGE 01 / 04</b></span><span class="stage-spark">✦</span><button class="finish-demo" data-screen="finish">查看完成状态 ↗</button></div>
+        <div class="interaction-panel"><span class="tap-orbit">↻</span><h3>和食物，<br />玩一会儿。</h3><p>轻点食物吃一口<br />拖动食物换个角度</p><div class="interaction-keys"><span>轻点 <b>品尝</b></span><span>拖动 <b>旋转</b></span></div><span class="slow-note">不必着急，慢慢吃。</span></div>
+      </div>
+      <div class="play-bottom"><span>食刻小提示</span><p id="bite-status">每一口，都值得认真对待。</p><span>01 — 04</span></div>
+    </section>
+
+    <section class="screen finish-screen" id="finish">
+      <div class="confetti" aria-hidden="true">✦ <i>✳</i> <b>●</b> <em>✦</em> <span>✳</span></div>
+      <div class="finish-ticket"><div class="ticket-top"><span>FOODSTAGE 3D</span><span>NO. 000016</span></div><div class="ticket-stamp">吃光了</div><span class="finish-eyebrow">A LITTLE MOMENT OF JOY</span><h2>刚刚好<span>。</span></h2><p>十六口满足，一刻小小的快乐。</p><div class="ticket-food"><img src="../../public/foods/classic-burger.svg" alt="" /><div><small>本次品尝 / YOUR TASTING</small><strong>经典汉堡</strong><span>4 阶段 · 16 口 · 全部完成</span></div><b>✓</b></div><div class="ticket-actions"><button class="cta" data-screen="play">再吃一次 <span>↻</span></button><button class="text-button" data-screen="menu">返回食物柜 →</button></div></div><p class="finish-note">这一刻，值得再来一次。</p>
+    </section>
+  </main>
+  <footer class="preview-footer"><span>食刻 / FOODSTAGE 3D</span><span>食物是主角，快乐很简单。</span><span>© 2026 DESIGN PREVIEW</span></footer>
+  <script src="./script.js"></script>
+</body>
+</html>

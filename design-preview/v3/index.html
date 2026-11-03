@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f0eee7" />
+  <title>食刻 · V3 点单设计预览</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="nav">
+    <button class="wordmark" data-page="menu">食刻<span>®</span></button>
+    <div class="nav-description">GOOD FOOD,<br />A LITTLE MORE PLAY.</div>
+    <span class="table"><i></i> A01 桌 <b>·</b> 堂食</span>
+    <button class="bag" data-page="cart" aria-label="查看购物车"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span id="bag-count">0</span></button>
+  </header>
+
+  <main>
+    <section class="page menu active" id="menu">
+      <div class="menu-intro"><div><span class="overline">FOODSTAGE KITCHEN · NO. 001</span><h1>今天，吃点<br />好的<span>。</span></h1></div><p>熟悉的好味道，也值得多看一眼。<br />转一转，选一份，慢慢享用。</p></div>
+      <nav class="categories" aria-label="菜品分类"><button class="selected" data-category="all">全部 <span>03</span></button><button data-category="main">主食 <span>01</span></button><button data-category="side">小食 <span>01</span></button><button data-category="drink">饮品 <span>01</span></button></nav>
+      <div class="menu-grid">
+        <article class="dish burger-card" data-category="main">
+          <button class="dish-open" data-dish="burger" aria-label="查看经典汉堡">
+            <div class="dish-art"><span class="dish-index">01 / SIGNATURE</span><span class="dish-3d">3D<br /><i>↻</i></span><div class="dish-halo"></div><div class="model-mount" id="menu-model"></div><img class="model-fallback" src="../../public/foods/classic-burger.svg" alt="经典汉堡" /><span class="rotate-note">拖动，看看每一面</span></div>
+            <div class="dish-copy"><span class="dish-type">主厨推荐</span><h2>经典汉堡</h2><p>牛肉饼、切达芝士与脆生菜，<br />层层都是熟悉的好味道。</p><div class="dish-price"><strong>¥32<span>.00</span></strong><span class="add-circle">↗</span></div></div>
+          </button>
+        </article>
+        <article class="dish" data-category="side">
+          <button class="dish-open" data-dish="fries" aria-label="查看迷迭香薯条"><div class="dish-art fries-art"><span class="dish-index">02 / SIDES</span><div class="dish-halo"></div><img src="../../public/foods/rosemary-fries.svg" alt="迷迭香薯条" /></div><div class="dish-copy"><span class="dish-type">现炸小食</span><h2>迷迭香薯条</h2><p>金黄粗薯，海盐与迷迭香。</p><div class="dish-price"><strong>¥18<span>.00</span></strong><span class="add-circle">↗</span></div></div></button>
+        </article>
+        <article class="dish" data-category="drink">
+          <button class="dish-open" data-dish="soda" aria-label="查看鲜柠气泡饮"><div class="dish-art soda-art"><span class="dish-index">03 / DRINKS</span><div class="dish-halo"></div><img src="../../public/foods/lemon-soda.svg" alt="鲜柠气泡饮" /></div><div class="dish-copy"><span class="dish-type">清爽特调</span><h2>鲜柠气泡饮</h2><p>鲜柠、薄荷，一口清爽。</p><div class="dish-price"><strong>¥16<span>.00</span></strong><span class="add-circle">↗</span></div></div></button>
+        </article>
+      </div>
+      <footer class="menu-note"><span>好好吃饭，是今天最重要的小事。</span><span>MADE FRESH · SERVED WITH JOY</span></footer>
+    </section>
+
+    <section class="page detail" id="detail">
+      <button class="back" data-page="menu">← 返回菜单</button>
+      <div class="detail-layout">
+        <div class="detail-art"><span class="detail-object" id="detail-object">OBJECT 01 / 03</span><div class="detail-halo"></div><div class="model-mount" id="detail-model"></div><img id="detail-image" src="../../public/foods/classic-burger.svg" alt="菜品展示" /><span class="detail-3d-note" id="detail-3d-note">↻ 拖动旋转 · 360° 查看</span><span class="detail-art-caption">FOOD, IN EVERY ANGLE.</span></div>
+        <div class="detail-content"><span class="overline" id="detail-category">THE SIGNATURE / 主厨推荐</span><h1 id="detail-name">经典汉堡</h1><p id="detail-description">炙烤牛肉饼、切达芝士与脆生菜，夹进松软芝麻面包。</p><strong class="detail-price" id="detail-price">¥32.00</strong><div id="detail-options"></div><div class="quantity"><span>数量</span><div><button id="minus" aria-label="减少数量">−</button><output id="quantity">1</output><button id="plus" aria-label="增加数量">+</button></div></div><label class="note">备注 <span>选填</span><textarea maxlength="200" placeholder="例如：不要洋葱" id="order-note"></textarea></label><div class="detail-actions"><button class="taste" id="taste">先虚拟试吃 <span>↗</span></button><button class="add-order" id="add-order">加入点单 · <span id="add-total">¥32.00</span><i>→</i></button></div></div>
+      </div>
+    </section>
+
+    <section class="page tasting" id="tasting">
+      <div class="tasting-top"><button class="back" data-page="detail">← 返回菜品</button><span>VIRTUAL TASTING / 虚拟试吃</span><span>A01 桌</span></div>
+      <div class="tasting-layout"><div class="tasting-model"><span class="tasting-title">经典<br />汉堡</span><div class="tasting-halo"></div><div class="model-mount" id="taste-model"></div><span class="tasting-hint">轻点吃一口 · 拖动转一转</span></div><div class="tasting-info"><span class="overline">TAKE YOUR TIME</span><h1>好吃，<br />不必着急<span>。</span></h1><p id="taste-status">第一口，从这里开始。</p><div class="taste-progress"><span id="taste-stage">阶段 01 / 04</span><span><b id="taste-count">0</b> / 16 口</span></div><div class="taste-bars"><i></i><i></i><i></i><i></i></div><button class="add-order" data-page="detail">选好了，加入点单 <span>→</span></button></div></div>
+    </section>
+
+    <section class="page cart" id="cart">
+      <button class="back" data-page="menu">← 继续点菜</button><div class="cart-heading"><span class="overline">YOUR ORDER / 当前点单</span><h1>这一餐，<br />刚刚好<span>。</span></h1><span class="cart-table">A01 桌 · 堂食</span></div>
+      <div id="cart-content"></div>
+    </section>
+
+    <section class="page result" id="result">
+      <div class="result-mark">✓</div><span class="overline">ORDER RECEIVED</span><h1>好味道，<br />马上来<span>。</span></h1><p>你的演示订单已收到。<br />接下来，就安心等待这一餐吧。</p><div class="result-ticket"><span>食刻 · A01 桌</span><strong id="result-number">FS 0001</strong><small>演示订单 · 不会扣款或发送到后厨</small></div><button class="add-order" data-page="menu">返回菜单 <span>→</span></button>
+    </section>
+  </main>
+  <div class="cart-dock" id="cart-dock"><button data-page="cart"><span class="dock-label">已选 <b id="dock-count">0</b> 件</span><strong id="dock-total">¥0.00</strong><span>查看点单 <i>→</i></span></button></div>
+  <div class="toast" id="toast" role="status">已加入点单</div>
+  <script type="importmap">{"imports":{"three":"../../node_modules/three/build/three.module.js","three/addons/":"../../node_modules/three/examples/jsm/"}}</script>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
