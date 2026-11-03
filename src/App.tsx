@@ -186,8 +186,7 @@ export default function App() {
   if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.foodId} food={foodById(selected.foodId)} settings={settings} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
   return <main className="ordering-app">
     {screen === 'menu' && <>
-      <div className="ordering-tools"><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></div>
-      <MenuHome table={table} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
+      <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
     </>}
     {screen === 'detail' && selected && <MenuItemDetail item={selected} draft={draft} onDraftChange={setDraft} onClose={() => setScreen('menu')} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
       setCart(current => addLine(current, selected, Object.entries(choices).map(([groupId, choiceId]) => ({ groupId, choiceId })), quantity, note));
