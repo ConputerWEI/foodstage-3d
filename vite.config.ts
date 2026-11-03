@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  build: { rollupOptions: { input: { main: 'index.html', neighbor: 'neighbor.html' } } },
   server: { watch: { ignored: ['**/*.tmpdir/**'] } },
   test: {
     environment: 'node',

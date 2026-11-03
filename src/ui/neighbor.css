@@ -1,0 +1,109 @@
+/* 食刻 / 街角食堂 — separate edition, all rules scoped to its entry. */
+html.neighbor-edition {
+ --n-red:#b8090d;--n-paper:#fffde9;--n-ink:#30241c;--n-yellow:#ffc33c;--n-blue:#0033b8;--n-rule:#d9cfb4;
+ --refined-ground:var(--n-paper);--refined-surface:var(--n-paper);--refined-soft:#f5edce;--refined-ink:var(--n-ink);--refined-green:var(--n-red);--refined-muted:#776558;--refined-line:var(--n-rule);--refined-control:#a9987e;
+ background:var(--n-paper);color:var(--n-ink);
+}
+.neighbor-edition body{background:var(--n-paper)}
+.neighbor-edition :is(h1,h2,h3,.ordering-wordmark,.start-brand){font-family:'Arial Black','PingFang SC','Microsoft YaHei',sans-serif;font-weight:900!important;letter-spacing:-.035em}
+.neighbor-edition :is(button,a):focus-visible{outline:3px solid var(--n-blue);outline-offset:4px}
+/* The start screen behaves like a neighbourhood storefront. */
+.neighbor-edition .start-page{--start-bg:var(--n-red);--start-ink:var(--n-paper);--start-muted:var(--n-paper);--start-line:#d94c46;--start-green:var(--n-paper);background:var(--n-red);color:var(--n-paper);padding-inline:40px}
+.neighbor-edition .start-header{height:100px;color:var(--n-paper);border-bottom:2px solid var(--n-paper);max-width:1200px}
+.neighbor-edition .start-brand{font-size:48px;color:var(--n-paper);letter-spacing:-3px}
+.neighbor-edition .start-header>span:last-child{border:1px solid var(--n-paper);border-radius:50%;padding:7px 22px;font-size:13px}
+.neighbor-edition .start-content{max-width:1200px;width:100%;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;padding:40px 0}
+.neighbor-edition .start-art{min-height:440px;background:var(--n-yellow);border-radius:0;position:relative;transform:rotate(-3deg);border:10px solid var(--n-paper)}
+.neighbor-edition .start-art::before{content:'FRESH OFF THE MENU';position:absolute;top:18px;left:20px;right:20px;color:var(--n-red);font-weight:900;font-size:18px;text-align:center;border-block:2px solid var(--n-red);padding:8px 0;letter-spacing:.01em}
+.neighbor-edition .start-art::after{content:'食刻招牌 / CLASSIC BURGER';position:absolute;bottom:14px;left:0;right:0;color:var(--n-red);font-size:13px;font-weight:700;text-align:center}
+.neighbor-edition .start-art .ordering-cover{margin-top:30px;max-height:340px}
+.neighbor-edition .start-welcome h1{font-size:66px;line-height:1.13;color:var(--n-paper)}
+.neighbor-edition .start-welcome>p{color:var(--n-paper);font-size:17px}
+.neighbor-edition .start-choices{gap:0;border-top:2px solid var(--n-paper)}
+.neighbor-edition .start-choices button,.neighbor-edition .start-choices button+button{background:transparent;color:var(--n-paper);border:0;border-bottom:2px solid var(--n-paper);border-radius:0;min-height:92px;padding:15px 5px}
+.neighbor-edition .start-choices button:hover{background:#a0060b;filter:none}
+.neighbor-edition .start-choices strong{font-size:25px;font-weight:800}
+.neighbor-edition .start-welcome .start-disclaimer{font-size:12px;opacity:.8;max-width:38em}
+.neighbor-edition .start-footer{color:var(--n-paper);padding:18px 0 24px;border-top:6px double var(--n-paper);letter-spacing:.1em}
+/* Menu: red shop sign, cream menu, yellow product poster. */
+.neighbor-edition .ordering-app .ordering-topbar{width:100%;max-width:none;margin:0;padding-inline:max(24px,calc((100% - 1200px)/2));background:var(--n-red);height:84px;color:var(--n-paper);border:0}
+.neighbor-edition .ordering-app .ordering-wordmark{color:var(--n-paper);font-size:36px}
+.neighbor-edition .ordering-app :is(.ordering-brand-caption,.ordering-table){color:var(--n-paper)}
+.neighbor-edition .ordering-app .ordering-bag-top{border-color:var(--n-paper);color:var(--n-paper);border-radius:0}
+.neighbor-edition .ordering-app .ordering-bag-top b{background:var(--n-paper);color:var(--n-red)}
+.neighbor-edition .menu-mode-switch{border-color:#e9a7a0;color:var(--n-paper);border-radius:0}
+.neighbor-edition .ordering-app .ordering-menu-inner{padding-top:28px}
+.neighbor-edition .ordering-app .ordering-hero{padding-block:8px 24px;border-bottom:3px solid var(--n-red)}
+.neighbor-edition .ordering-app .ordering-hero h1{font-size:46px;color:var(--n-red);line-height:1.3;letter-spacing:-.04em}
+.neighbor-edition .ordering-app .ordering-categories{margin-block:0 22px;border-bottom:1px solid var(--n-rule);gap:30px}
+.neighbor-edition .ordering-app .ordering-categories button{font-size:15px;min-height:54px}
+.neighbor-edition .ordering-app .ordering-categories button[aria-pressed=true]{color:var(--n-red);border-color:var(--n-red);font-weight:800}
+.neighbor-edition .ordering-app .ordering-food-card{border:0;border-radius:0;border-bottom:1px solid var(--n-rule);background:transparent;overflow:hidden}
+.neighbor-edition .ordering-app .ordering-food-card.is-featured{background:var(--n-yellow);border:0;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.neighbor-edition .ordering-app .is-featured .ordering-food-art{background:var(--n-yellow);height:320px;position:relative}
+.neighbor-edition .ordering-app .is-featured .ordering-food-art::after{display:block;content:'THE HOUSE CLASSIC';position:absolute;left:22px;top:18px;border:1px solid var(--n-red);border-radius:50%;padding:6px 18px;font-size:12px;font-weight:800;color:var(--n-red);transform:rotate(-8deg)}
+.neighbor-edition .ordering-app .is-featured .menu-tasting-copy{padding:30px 36px}
+.neighbor-edition .ordering-app .is-featured .menu-tasting-copy h3{font-size:38px;color:var(--n-red)}
+.neighbor-edition .ordering-app .menu-tasting-copy>p{color:var(--n-ink);max-width:32em}
+.neighbor-edition .ordering-app .ordering-price{color:var(--n-red);font-weight:800;font-size:26px}
+.neighbor-edition .menu-tasting-actions .menu-taste-primary{background:var(--n-red);border-color:var(--n-red);color:var(--n-paper);border-radius:0;font-weight:700}
+.neighbor-edition .menu-tasting-actions .menu-spec-secondary{border-color:var(--n-red);color:var(--n-red);border-radius:0;background:transparent}
+.neighbor-edition .ordering-app .ordering-food-art.is-fries{background:#f6e9be}
+.neighbor-edition .ordering-app .ordering-food-art.is-soda{background:#d8ebea}
+.neighbor-edition .ordering-app .ordering-food-copy h3{font-size:23px}
+.neighbor-edition .ordering-app .ordering-card-action{background:var(--n-red);color:var(--n-paper);border-radius:50%}
+.neighbor-edition .ordering-app .ordering-menu-note{border-top:6px double var(--n-red);padding-block:20px;color:var(--n-red);font-weight:700}
+/* Shared ordering screens retain all established control geometry. */
+.neighbor-edition .ordering-app .ordering-detail-art{background:var(--n-yellow);border-radius:0}
+.neighbor-edition .ordering-app .ordering-detail-title{color:var(--n-red)}
+.neighbor-edition .ordering-app :is(.order-page,.ordering-detail-content){color:var(--n-ink)}
+.neighbor-edition .ordering-app .order-page>h1{font-size:34px;color:var(--n-red);padding-bottom:18px;border-bottom:3px solid var(--n-red)}
+.neighbor-edition .ordering-app :is(.ordering-add-button,.order-primary,.ordering-cart-dock button){background:var(--n-red);color:var(--n-paper);border-color:var(--n-red);border-radius:0}
+.neighbor-edition .ordering-app :is(.order-total strong,.order-dock-total strong){color:var(--n-red)}
+.neighbor-edition .ordering-app :is(.order-checkout-dock,.ordering-detail-dock){border-color:var(--n-red);background:var(--n-paper)}
+.neighbor-edition .ordering-app .cart-line-cover{background:#f5edce;border-radius:0}
+.neighbor-edition .ordering-app :is(.order-ticket,.order-table,.order-summary){border-radius:0;background:transparent}
+.neighbor-edition .ordering-app .order-success{background:var(--n-red);color:var(--n-paper)}
+.neighbor-edition .ordering-app input:checked+span{border-color:var(--n-red);color:var(--n-red);background:#fff4dd}
+/* Food stays in a quiet studio; the red frame identifies the edition. */
+.neighbor-edition .experience.experience{background:var(--n-paper);border-top:8px solid var(--n-red)}
+.neighbor-edition .experience.experience .stage{background:transparent}
+.neighbor-edition .experience.experience .food-title{color:var(--n-red);font-weight:900}
+.neighbor-edition .experience.experience .action-dock{border-top:3px solid var(--n-red);border-radius:0;background:var(--n-paper)}
+.neighbor-edition .experience.experience .progress-fill{background:var(--n-red)}
+@media(max-width:760px){
+ .neighbor-edition .start-page{padding-inline:22px}.neighbor-edition .start-header{height:76px}.neighbor-edition .start-brand{font-size:36px}.neighbor-edition .start-header>span:last-child{padding:5px 12px;font-size:11px}
+ .neighbor-edition .start-content{display:flex;gap:24px;padding:26px 0}.neighbor-edition .start-art{width:calc(100% - 16px);height:230px;min-height:230px;border-width:7px;transform:rotate(-2deg)}.neighbor-edition .start-art::before{font-size:13px;top:10px;padding:5px}.neighbor-edition .start-art::after{font-size:10px;bottom:8px}.neighbor-edition .start-art .ordering-cover{height:190px;margin-top:24px}.neighbor-edition .start-welcome h1{font-size:38px}.neighbor-edition .start-welcome h1 br{display:none}.neighbor-edition .start-welcome>p{font-size:14px;margin:12px 0 20px}.neighbor-edition .start-choices button{min-height:82px}.neighbor-edition .start-choices strong{font-size:23px}.neighbor-edition .start-welcome .start-disclaimer{font-size:11px}.neighbor-edition .start-footer{font-size:11px;padding-block:16px}
+ .neighbor-edition .ordering-app .ordering-topbar{height:74px;padding-inline:18px}.neighbor-edition .ordering-app .ordering-wordmark{font-size:30px}.neighbor-edition .ordering-app .ordering-hero h1{font-size:29px;letter-spacing:-.04em}.neighbor-edition .ordering-app .ordering-hero{padding-block:4px 20px}.neighbor-edition .ordering-app .ordering-menu-inner{padding-top:20px}
+ .neighbor-edition .ordering-app .ordering-categories{gap:24px;margin-bottom:16px}.neighbor-edition .ordering-app .ordering-categories button{font-size:14px;min-height:48px}
+ .neighbor-edition .ordering-app .is-featured .ordering-food-art{height:210px;min-height:210px}.neighbor-edition .ordering-app .is-featured .ordering-food-art::after{top:12px;left:14px;font-size:10px;padding:4px 10px}.neighbor-edition .ordering-app .is-featured .menu-tasting-copy{padding:10px 20px 22px}.neighbor-edition .ordering-app .is-featured .menu-tasting-copy h3{font-size:29px}.neighbor-edition .ordering-app .ordering-food-copy h3{font-size:21px}.neighbor-edition .ordering-app .order-page>h1{font-size:28px}
+}
+
+/* Street-print revision: worn display type and the food symbol family. */
+.neighbor-edition :is(.start-brand,.start-welcome h1,.ordering-wordmark,.menu-brand-headline,.menu-tasting-copy h3){
+ font-weight:900; -webkit-text-stroke:.6px currentColor;
+ -webkit-mask-image:url('/neighbor/worn-mask.svg');mask-image:url('/neighbor/worn-mask.svg');
+ -webkit-mask-size:460px 92px;mask-size:460px 92px;mask-repeat:repeat;
+}
+.neighbor-edition .start-art{background:var(--n-blue);border:8px solid var(--n-paper);transform:rotate(-3deg)}
+.neighbor-edition .start-art::before,.neighbor-edition .start-art::after{color:var(--n-paper);border-color:var(--n-paper)}
+.neighbor-edition .start-art .ordering-cover img,.neighbor-edition .is-featured .ordering-food-art .ordering-cover img,.neighbor-edition .ordering-detail-art .ordering-cover img[src*="burger"]{content:url('/neighbor/burger.svg')}
+.neighbor-edition .ordering-cover img[src*="rosemary-fries"]{content:url('/neighbor/fries.svg')}
+.neighbor-edition .ordering-cover img[src*="lemon-soda"]{content:url('/neighbor/soda.svg')}
+.neighbor-edition .ordering-app .is-featured .ordering-food-art{background:var(--n-blue)}
+.neighbor-edition .ordering-app .is-featured .ordering-food-art::after{border:2px solid var(--n-paper);color:var(--n-paper);transform:rotate(-7deg);font-size:11px;font-weight:900}
+.neighbor-edition .ordering-app .ordering-food-art.is-fries{background:var(--n-red)}
+.neighbor-edition .ordering-app .ordering-food-art.is-soda{background:var(--n-blue)}
+.neighbor-edition .ordering-app .ordering-detail-art{background:var(--n-blue)}
+.neighbor-edition .ordering-app .ordering-categories button[aria-pressed=true]{color:var(--n-blue);border-color:var(--n-blue)}
+.neighbor-edition .start-choices{border-top:0;gap:12px}
+.neighbor-edition .start-choices button{background:var(--n-yellow);color:var(--n-red);padding:17px 20px;border:3px solid var(--n-paper);transform:rotate(-1deg)}
+.neighbor-edition .start-choices button+button{background:var(--n-blue);color:var(--n-paper);padding:17px 20px;border:3px solid var(--n-paper);transform:rotate(1deg)}
+.neighbor-edition .start-choices button:hover{background:var(--n-paper);color:var(--n-red)}
+.neighbor-edition .start-choices button>svg:first-child{width:38px;height:38px;stroke-width:2.5}
+.neighbor-edition .start-choices strong{font-weight:900;letter-spacing:-.03em}
+.neighbor-edition .start-footer{border-top:0;position:relative;padding-top:22px}
+.neighbor-edition .start-footer::before{content:'';position:absolute;inset:0 0 auto;height:10px;background:linear-gradient(to bottom,var(--n-blue) 0 35%,var(--n-yellow) 35% 70%,var(--n-paper) 70%)}
+.neighbor-edition .ordering-app .ordering-hero{border-bottom:4px solid var(--n-blue)}
+.neighbor-edition .ordering-app .ordering-menu-note{border-color:var(--n-blue);color:var(--n-blue)}
+@media(max-width:760px){.neighbor-edition .start-art{height:230px}.neighbor-edition .start-welcome h1{font-size:38px}.neighbor-edition .start-choices button,.neighbor-edition .start-choices button+button{min-height:84px;padding:13px 17px}.neighbor-edition .ordering-app .menu-tasting-copy h3{font-size:29px}}
