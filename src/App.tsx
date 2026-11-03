@@ -11,6 +11,12 @@ import { OrderReview } from './ui/OrderReview';
 import { OrderResult } from './ui/OrderResult';
 import './ui/ordering.css';
 import './ui/checkout.css';
+import './ui/v31.css';
+import './ui/tasting.css';
+import './ui/menu-tasting.css';
+import './ui/start.css';
+import './ui/refined.css';
+import { StartPage } from './ui/StartPage';
 import { createSequenceState, sequenceReducer, type SequenceEvent } from './core/sequence';
 import { readSettings, saveSettings, type Settings } from './core/settings';
 import { biteFeedback, cancelBiteAudio, primeBiteAudio, primeMilestoneAudio, milestoneFeedback } from './core/feedback';
@@ -140,7 +146,7 @@ function browserStorage(): Storage | null {
   try { return window.localStorage; } catch { return null; }
 }
 
-type OrderScreen = 'menu' | 'detail' | 'tasting' | 'cart' | 'review' | 'result';
+type OrderScreen = 'start' | 'menu' | 'detail' | 'tasting' | 'cart' | 'review' | 'result';
 const emptyDraft = (): MenuItemDraft => ({ choices: {}, quantity: 1, note: '' });
 
 export default function App() {
@@ -150,10 +156,11 @@ export default function App() {
   const [order, setOrder] = useState(() => readOrder(browserStorage()));
   const [screen, setScreen] = useState<OrderScreen>(() => {
     const restored = readOrder(browserStorage());
-    return restored && restored.table === parseTable(window.location.search) && readCart(browserStorage()).length === 0 ? 'result' : 'menu';
+    return restored && restored.table === parseTable(window.location.search) && readCart(browserStorage()).length === 0 ? 'result' : 'start';
   });
   const [selected, setSelected] = useState<MenuItem | null>(null);
   const [draft, setDraft] = useState<MenuItemDraft>(emptyDraft);
+  const [mode, setMode] = useState<'dine-in' | 'delivery'>('dine-in');
   const [category, setCategory] = useState('全部');
   const menuScroll = useRef(0);
   const leaveMenu = (next: OrderScreen) => { menuScroll.current = window.scrollY; setScreen(next); };
@@ -175,8 +182,9 @@ export default function App() {
   };
   const openItem = (item: MenuItem) => { setSelected(item); setDraft(emptyDraft()); leaveMenu('detail'); };
   const submit = () => {
-    if (!table || !cart.length) return;
-    const next = createDemoOrder(table, cart);
+    if ((mode === 'dine-in' && !table) || !cart.length) return;
+    const next = createDemoOrder(mode === 'delivery' ? 'DELIVERY' : table!, cart);
+    if (mode === 'delivery') next.mode = 'delivery';
     if (!saveOrder(browserStorage(), next)) {
       setError('订单未保存，请允许浏览器存储后重试。你的购物车已保留。');
       return;
@@ -185,15 +193,16 @@ export default function App() {
   };
   if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.foodId} food={foodById(selected.foodId)} settings={settings} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
   return <main className="ordering-app">
+    {screen === 'start' && <StartPage table={table} onChoose={next => { setMode(next); setScreen('menu'); }} />}
     {screen === 'menu' && <>
-      <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
+      <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} mode={mode} onStart={() => setScreen('start')} items={menuItems} onTaste={item => { setSelected(item); setDraft(emptyDraft()); leaveMenu('tasting'); }} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
     </>}
     {screen === 'detail' && selected && <MenuItemDetail item={selected} draft={draft} onDraftChange={setDraft} onClose={() => setScreen('menu')} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
       setCart(current => addLine(current, selected, Object.entries(choices).map(([groupId, choiceId]) => ({ groupId, choiceId })), quantity, note));
       setScreen('menu');
     }} />}
     {screen === 'cart' && <CartSheet lines={cart} onClose={() => setScreen('menu')} onQuantity={(id, quantity) => setCart(current => setLineQuantity(current, id, quantity))} onReview={() => { setError(''); setScreen('review'); }} />}
-    {screen === 'review' && <OrderReview table={table} lines={cart} onBack={() => setScreen('cart')} onSubmit={submit} onDemoTable={demoTable} error={error} />}
+    {screen === 'review' && <OrderReview mode={mode} table={table} lines={cart} onBack={() => setScreen('cart')} onSubmit={submit} onDemoTable={demoTable} error={error} />}
     {screen === 'result' && order && <OrderResult order={order} onMenu={() => setScreen('menu')} />}
     {error && screen !== 'review' && <p className="order-storage-error" role="alert">{error}</p>}
   </main>;

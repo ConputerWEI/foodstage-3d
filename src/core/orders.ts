@@ -2,6 +2,7 @@ import { CART_STORAGE_KEY, cartTotal, restoreCartLines, type CartLine, type Read
 import { parseTable } from './table';
 
 export interface DemoOrder {
+  mode?: 'delivery';
   id: string;
   table: string;
   lines: CartLine[];
@@ -64,7 +65,7 @@ function validatedOrder(value: unknown): DemoOrder {
     || !Number.isFinite(Date.parse(order.createdAt)) || new Date(order.createdAt).toISOString() !== order.createdAt) throw new Error('Invalid order metadata');
   const lines = snapshotLines(order.lines);
   if (!Number.isSafeInteger(order.total) || order.total !== cartTotal(lines)) throw new Error('Invalid order total');
-  return { id: order.id, table: order.table, lines, total: cartTotal(lines), createdAt: order.createdAt, status: 'received' };
+  return { ...(order.mode === 'delivery' ? { mode: 'delivery' as const } : {}), id: order.id, table: order.table, lines, total: cartTotal(lines), createdAt: order.createdAt, status: 'received' };
 }
 export function readOrder(storage: ReadStorage): DemoOrder | null {
   try {

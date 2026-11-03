@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" fill="none">
+<title>经典汉堡手绘展示</title>
+<defs>
+<linearGradient id="bun" x1="300" y1="90" x2="350" y2="260" gradientUnits="userSpaceOnUse"><stop stop-color="#ffce75"/><stop offset=".45" stop-color="#e99a3d"/><stop offset="1" stop-color="#a84c20"/></linearGradient>
+<linearGradient id="base" x1="300" y1="369" x2="300" y2="444" gradientUnits="userSpaceOnUse"><stop stop-color="#f6bd61"/><stop offset="1" stop-color="#bf672d"/></linearGradient>
+<linearGradient id="beef" x1="320" y1="291" x2="320" y2="377" gradientUnits="userSpaceOnUse"><stop stop-color="#825037"/><stop offset=".5" stop-color="#4c2b22"/><stop offset="1" stop-color="#6f3d29"/></linearGradient>
+<linearGradient id="cheese" x1="320" y1="273" x2="320" y2="351" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe07c"/><stop offset="1" stop-color="#e99b26"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#fff6c8" stop-opacity=".7"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<ellipse cx="323" cy="450" rx="201" ry="16" fill="#453521" opacity=".2" filter="url(#shadow)"/>
+<path d="M119 375c0 44 45 68 201 68s201-24 201-68c-46-18-351-20-402 0Z" fill="url(#base)"/>
+<path d="M137 396c57 25 292 31 360-2" stroke="#ffdb91" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+<path d="M115 345c-12-21 5-39 31-40 38-20 306-21 349-1 31 2 45 18 35 40-9 21-57 40-207 41-144 0-199-18-208-40Z" fill="url(#beef)"/>
+<g stroke="#b27648" stroke-width="5" stroke-linecap="round" opacity=".65"><path d="m151 336 24 5m19-17 18 5m33 16 23-2m29-20 22 6m30 20 21-6m30-16 22 6m31-13 21 6m-272 29 14 3m268-9 16-4"/></g>
+<path d="m119 291 98-20 194 3 109 19-57 35-67-13-63 44-67-36-77 12-70-44Z" fill="url(#cheese)" stroke="#f5b948" stroke-width="2"/>
+<path d="M123 274c19-21 52-25 79-14 31-19 67-20 95-7 36-15 74-12 102 2 31-14 67-10 88 5 26-9 44 3 46 18-6 25-45 28-69 16-23 15-50 14-74 2-32 16-62 15-91 0-31 15-65 15-91-1-34 16-62 8-85-4-21 2-31-7-30-17Z" fill="#608b39"/>
+<path d="M139 278c22-10 41 14 63 0s37-3 54-5 30-12 51 0 41-5 57-3 37 12 56 2 34-3 55 4 32-2 40-3" stroke="#a0b957" stroke-width="6" stroke-linecap="round"/>
+<path d="M143 245c45-22 311-26 359-1l-4 17c-54 16-299 20-351 0Z" fill="#c84f34"/>
+<path d="M162 247c66-11 246-16 315-1" stroke="#f17a51" stroke-width="8" stroke-linecap="round"/>
+<path d="M112 230C119 145 198 86 318 86c125 0 204 62 211 144 3 23-73 39-208 39-139 0-210-14-209-39Z" fill="url(#bun)"/>
+<ellipse cx="274" cy="155" rx="137" ry="68" fill="url(#glow)"/>
+<path d="M148 194c20-45 73-74 131-80" stroke="#ffe4a4" stroke-width="10" opacity=".6" stroke-linecap="round"/>
+<path d="M131 237c93 23 293 24 378-1" stroke="#ffd285" stroke-width="5" opacity=".7" stroke-linecap="round"/>
+<g fill="#fff0bd"><ellipse cx="233" cy="139" rx="4" ry="10" transform="rotate(-42 233 139)"/><ellipse cx="287" cy="117" rx="4" ry="10" transform="rotate(19 287 117)"/><ellipse cx="345" cy="130" rx="4" ry="10" transform="rotate(38 345 130)"/><ellipse cx="401" cy="149" rx="4" ry="10" transform="rotate(-32 401 149)"/><ellipse cx="187" cy="180" rx="4" ry="10" transform="rotate(37 187 180)"/><ellipse cx="267" cy="186" rx="4" ry="10" transform="rotate(-24 267 186)"/><ellipse cx="325" cy="168" rx="4" ry="10" transform="rotate(60 325 168)"/><ellipse cx="376" cy="203" rx="4" ry="10" transform="rotate(24 376 203)"/><ellipse cx="448" cy="198" rx="4" ry="10" transform="rotate(-34 448 198)"/></g>
+</svg>

@@ -16,7 +16,7 @@ export const menuItems: readonly MenuItem[] = [
   {
     id: 'classic-burger', name: '经典汉堡', category: '主食',
     description: '炙烤牛肉饼、切达芝士与脆生菜，夹进松软芝麻面包。',
-    price: 3200, cover: '/foods/classic-burger.svg', foodId: 'classic-burger', available: true,
+    price: 3200, cover: '/foods/burger-illustration.svg', foodId: 'classic-burger', available: true,
     options: [
       { id: 'spice', name: '辣度', choices: [{ id: 'mild', label: '不辣', priceDelta: 0 }, { id: 'hot', label: '微辣', priceDelta: 0 }] },
       { id: 'cheese', name: '芝士', choices: [{ id: 'regular', label: '标准芝士', priceDelta: 0 }, { id: 'extra', label: '双份芝士', priceDelta: 300 }] },

@@ -1,0 +1,531 @@
+/* Import after the existing UI styles. Keep ordering and model interaction geometry. */
+:root {
+  color-scheme: light;
+  --refined-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --refined-ground: #f7f7f2;
+  --refined-surface: #ffffff;
+  --refined-soft: #eeefea;
+  --refined-ink: #202922;
+  --refined-green: #304c38;
+  --refined-muted: #626960;
+  --refined-line: #e1e4dc;
+  --refined-control: #aeb6ab;
+  --ink: var(--refined-ink);
+  --paper: var(--refined-ground);
+  --muted: var(--refined-muted);
+  --accent: var(--refined-green);
+  --line: var(--refined-line);
+  --cream: var(--refined-soft);
+  --headline-font: var(--refined-font);
+  --headline-ink: var(--refined-ink);
+  --headline-accent: var(--refined-ink);
+  --headline-divider: var(--refined-ink);
+  font-family: var(--refined-font);
+  color: var(--refined-ink);
+  background: var(--refined-ground);
+}
+
+body,
+.ordering-app,
+.experience.experience {
+  font-family: var(--refined-font);
+  color: var(--refined-ink);
+  background: var(--refined-ground);
+}
+
+.ordering-app {
+  --order-ink: var(--refined-ink);
+  --order-paper: var(--refined-ground);
+  /* Existing selectors use this name for the action and selected states. */
+  --order-orange: var(--refined-green);
+  --order-muted: var(--refined-muted);
+  --order-line: var(--refined-line);
+}
+
+.experience.experience {
+  --ink: var(--refined-ink);
+  --paper: var(--refined-ground);
+  --muted: var(--refined-muted);
+  --accent: var(--refined-green);
+  --line: var(--refined-line);
+}
+
+.ordering-app :is(button, input, select, textarea),
+.experience :is(button, input, select, textarea),
+:is(.help-sheet, .settings-sheet) :is(button, input, select, textarea) {
+  font-family: var(--refined-font);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ordering-app :is(h1, h2, h3, h4),
+.experience :is(h1, h2, h3, h4),
+:is(.help-sheet, .settings-sheet) h2,
+.ordering-hero .menu-brand-headline,
+.menu-brand-headline :is(span, .headline-divider, .headline-flavor) {
+  font-family: var(--refined-font);
+  color: var(--refined-ink);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-shadow: none;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.ordering-app :is(button, a, input, select, textarea):focus-visible,
+.experience :is(button, a, input, select, textarea):focus-visible,
+:is(.help-sheet, .settings-sheet) :is(button, input, select):focus-visible,
+.ordering-app .ordering-option input:focus-visible + span {
+  outline: 2px solid var(--refined-green);
+  outline-offset: 3px;
+}
+
+/* Keep the input's inset focus ring inside the interactive 3D stage. */
+.experience.experience .food-input:focus-visible {
+  outline: 2px solid var(--refined-green);
+  outline-offset: -5px;
+}
+
+.ordering-app :is(button, a),
+.experience button,
+:is(.help-sheet, .settings-sheet) button {
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.ordering-app button:disabled,
+.experience button:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+  color: var(--refined-muted);
+}
+
+/* Shared desktop frame: 1200px content, equal 24px gutters below that. */
+.ordering-app :is(.ordering-topbar, .ordering-menu-inner, .ordering-detail-top) {
+  width: min(1200px, calc(100% - 48px));
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.ordering-app .ordering-topbar {
+  height: 72px;
+  border-color: var(--refined-line);
+}
+
+.ordering-app .ordering-wordmark {
+  color: var(--refined-ink);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.ordering-app :is(.ordering-brand-caption, .ordering-table) {
+  color: var(--refined-muted);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.ordering-app .ordering-table i,
+.ordering-app .ordering-bag-top b {
+  background: var(--refined-green);
+}
+
+.ordering-app .ordering-bag-top b { color: var(--refined-surface); }
+.ordering-app .ordering-bag-top { border-color: var(--refined-line); }
+.ordering-app .ordering-menu-inner { padding-top: 24px; }
+
+.ordering-app .ordering-hero h1 {
+  font-size: 30px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.menu-brand-headline .headline-divider {
+  margin-inline: .12em;
+  letter-spacing: -.12em;
+  font-weight: 400;
+}
+
+/* These repeat the food identity or advertise the same tasting action below. */
+.menu-tasting-kicker,
+.menu-tasting-badge,
+.ordering-food-category,
+.ordering-detail-category,
+.ordering-food-index,
+.ordering-3d-label,
+.ordering-rotate-note {
+  display: none;
+}
+
+.ordering-app .ordering-categories {
+  background: var(--refined-ground);
+  border-color: var(--refined-line);
+  gap: 28px;
+  margin-block: 20px 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.ordering-app .ordering-categories button {
+  min-height: 44px;
+  flex-shrink: 0;
+  color: var(--refined-muted);
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.ordering-app .ordering-categories button[aria-pressed="true"] {
+  color: var(--refined-ink);
+  border-color: var(--refined-green);
+  font-weight: 600;
+}
+
+.ordering-app .ordering-food-card,
+.ordering-app .ordering-food-card.is-featured {
+  background: var(--refined-surface);
+  border: 1px solid var(--refined-line);
+  border-radius: 8px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.ordering-app .ordering-food-art,
+.ordering-app .ordering-food-art.is-fries,
+.ordering-app .ordering-food-art.is-soda,
+.ordering-app .ordering-detail-art,
+.ordering-app .cart-line-cover {
+  background: var(--refined-soft);
+}
+
+.ordering-app :is(.ordering-food-halo, .ordering-detail-halo),
+.ordering-app .ordering-food-art::before,
+.ordering-app .ordering-food-art::after {
+  display: none;
+}
+
+/* Artwork and WebGL colours remain untouched. Only remove CSS drop shadows. */
+.ordering-app .ordering-cover img { filter: none; }
+.ordering-app .ordering-cover-fallback {
+  color: var(--refined-muted);
+  border-color: var(--refined-line);
+  background: var(--refined-soft);
+  font-family: var(--refined-font);
+}
+
+.ordering-app .ordering-food-copy h3,
+.ordering-app .is-featured .menu-tasting-copy h3 {
+  font-size: 22px;
+  line-height: 1.4;
+  margin-block: 0 8px;
+}
+
+.ordering-app .ordering-food-copy p {
+  color: var(--refined-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.ordering-app .ordering-price {
+  color: var(--refined-ink);
+  font-size: 24px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ordering-app .ordering-card-action {
+  color: var(--refined-ink);
+  background: var(--refined-soft);
+  border: 0;
+  border-radius: 6px;
+}
+
+.ordering-app :is(.ordering-table-hint, .order-notice) {
+  background: var(--refined-soft);
+  color: var(--refined-ink);
+  border-color: var(--refined-line);
+  border-radius: 6px;
+}
+
+.ordering-app :is(.ordering-menu-note, .ordering-local-note, .order-footnote),
+.ordering-app .order-empty p { color: var(--refined-muted); }
+
+/* One primary treatment throughout ordering, receipts, dialogs and tasting. */
+.ordering-app .order-primary,
+.ordering-app .ordering-add-button,
+.ordering-app .menu-tasting-actions .menu-taste-primary,
+.ordering-app .ordering-cart-dock > button,
+.experience.experience .action-dock .primary-button,
+:is(.help-sheet, .settings-sheet) .primary-button {
+  min-height: 48px;
+  border: 1px solid var(--refined-green);
+  border-radius: 6px;
+  background: var(--refined-green);
+  color: var(--refined-surface);
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.ordering-app .ordering-cart-dock > button { min-height: 58px; }
+.ordering-app .ordering-cart-dock :is(span, strong, b) { color: inherit; }
+
+.ordering-app .order-primary:hover:enabled,
+.ordering-app .ordering-add-button:hover:enabled,
+.ordering-app .menu-tasting-actions .menu-taste-primary:hover:enabled,
+.ordering-app .ordering-cart-dock > button:hover:enabled,
+.experience.experience .action-dock .primary-button:hover:enabled,
+:is(.help-sheet, .settings-sheet) .primary-button:hover:enabled {
+  background: var(--refined-ink);
+  border-color: var(--refined-ink);
+}
+
+.ordering-app :is(.order-primary, .ordering-add-button, .menu-taste-primary):disabled {
+  color: var(--refined-muted);
+  background: var(--refined-soft);
+  border-color: var(--refined-line);
+}
+
+.ordering-app .menu-tasting-actions .menu-spec-secondary,
+.ordering-app .ordering-taste-button,
+.experience.experience .tasting-finished-actions .back-button,
+.experience .render-error button {
+  min-height: 48px;
+  padding: 10px 16px;
+  color: var(--refined-ink);
+  background: var(--refined-surface);
+  border: 1px solid var(--refined-control);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+.ordering-app .menu-spec-secondary:hover:enabled,
+.ordering-app .ordering-taste-button:hover:enabled,
+.experience.experience .tasting-finished-actions .back-button:hover:enabled {
+  background: var(--refined-soft);
+  border-color: var(--refined-green);
+}
+
+.ordering-app :is(.ordering-table-hint, .order-notice) button {
+  color: var(--refined-green);
+  min-height: 44px;
+}
+
+/* Do not change fixed/sticky dock positioning or the space reserved for it. */
+.ordering-app :is(.ordering-detail-dock, .order-checkout-dock) {
+  background: var(--refined-ground);
+  border-color: var(--refined-line);
+  box-shadow: none;
+}
+
+.ordering-app .ordering-detail-layout {
+  width: min(1248px, 100%);
+  margin-inline: auto;
+  padding-inline: 24px;
+  gap: 40px;
+}
+
+.ordering-app .ordering-detail-heading h1 {
+  margin-top: 0;
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+.ordering-app .ordering-detail-heading p { color: var(--refined-muted); }
+.ordering-app .ordering-detail-top > span { color: var(--refined-ink); }
+.ordering-app .ordering-option > span {
+  background: var(--refined-surface);
+  border: 1px solid var(--refined-control);
+  border-radius: 6px;
+  color: var(--refined-ink);
+  font-size: 14px;
+}
+
+.ordering-app .ordering-option input:checked + span {
+  color: var(--refined-ink);
+  background: var(--refined-soft);
+  border-color: var(--refined-green);
+  box-shadow: inset 0 0 0 1px var(--refined-green);
+}
+
+.ordering-app .ordering-option small { color: inherit; }
+.ordering-app .ordering-note textarea {
+  font-size: 14px;
+  line-height: 1.6;
+  background: var(--refined-surface);
+  color: var(--refined-ink);
+  border: 1px solid var(--refined-control);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.ordering-app .ordering-note textarea::placeholder { color: var(--refined-muted); }
+.ordering-app :is(.ordering-stepper, .order-stepper) button {
+  min-width: 36px;
+  min-height: 36px;
+  color: var(--refined-ink);
+  background: var(--refined-surface);
+  border: 1px solid var(--refined-control);
+  border-radius: 6px;
+}
+
+.ordering-app :is(.ordering-stepper, .order-stepper) button:hover:enabled { background: var(--refined-soft); }
+.ordering-app :is(.ordering-stepper, .order-stepper) button:disabled {
+  color: var(--refined-muted);
+  background: var(--refined-soft);
+  border-color: var(--refined-line);
+}
+
+.ordering-app :is(.ordering-stepper, .order-stepper) output,
+.ordering-app :is(.order-total, .cart-line-actions, .order-lines, .order-ticket) {
+  font-variant-numeric: tabular-nums;
+}
+
+.ordering-app .order-page {
+  width: min(880px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.ordering-app :is(.order-page-heading h1, .order-receipt > h1) {
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+.ordering-app :is(.cart-line-info h2, .order-lines strong) { font-weight: 600; }
+.ordering-app :is(.order-success, .order-empty svg) { color: var(--refined-green); }
+.ordering-app .order-success { background: var(--refined-soft); border-color: var(--refined-line); }
+.ordering-app .order-ticket { background: var(--refined-soft); border-color: var(--refined-line); }
+.ordering-app .order-ticket strong { font-family: var(--refined-font); overflow-wrap: anywhere; }
+.ordering-app :is(.ordering-sold-out, .ordering-unavailable, .order-error, .order-storage-error) {
+  color: var(--refined-ink);
+  background: var(--refined-soft);
+  border-color: var(--refined-control);
+}
+
+/* Preserve the tasting grid, canvas, hit target and pointer/touch handling. */
+.experience.experience > .masthead,
+.experience.experience > .stage { max-width: 1200px; width: 100%; margin-inline: auto; }
+.experience.experience .stage::before,
+.experience.experience .stage::after { display: none; }
+.experience.experience .brand h1 { font-size: 24px; }
+.experience.experience .food-detail h2 { font-size: 26px; }
+.experience.experience .progress-track { background: var(--refined-line); }
+.experience.experience .progress-track > span { background: var(--refined-green); }
+.experience.experience > .action-dock { border-color: var(--refined-line); }
+.experience.experience .finished-stamp {
+  background: transparent;
+  color: var(--refined-green);
+  border-color: var(--refined-control);
+  border-radius: 6px;
+}
+.experience.experience .finished-state h2 { font-size: 30px; }
+.experience.experience .error-message { color: var(--refined-ink); }
+
+/* Shared utility dialogs are also present on the menu. */
+.help-sheet,
+.settings-sheet {
+  font-family: var(--refined-font);
+  color: var(--refined-ink);
+  background: var(--refined-ground);
+  border: 1px solid var(--refined-line);
+  border-radius: 8px;
+  box-shadow: 0 12px 40px #20292226;
+}
+.help-sheet::backdrop,
+.settings-sheet::backdrop { background: #20292266; }
+.sheet-heading h2 { font-size: 22px; line-height: 1.4; }
+.setting-control select {
+  min-height: 44px;
+  background: var(--refined-surface);
+  color: var(--refined-ink);
+  border-color: var(--refined-control);
+  border-radius: 6px;
+}
+.setting-control output { color: var(--refined-ink); }
+:is(.setting-switch, .setting-control) input { accent-color: var(--refined-green); }
+.ordering-app .icon-button,
+.experience.experience .icon-button { color: var(--refined-ink); border-radius: 6px; }
+.ordering-app .icon-button:hover,
+.experience.experience .icon-button:hover { background: var(--refined-soft); border-color: transparent; }
+
+@media (max-width: 680px) {
+  .ordering-app :is(.ordering-topbar, .ordering-menu-inner, .ordering-detail-top) {
+    width: calc(100% - 32px);
+    margin-inline: auto;
+  }
+  .ordering-app .ordering-topbar { height: 64px; gap: 8px; }
+  .ordering-app .ordering-wordmark { font-size: 26px; }
+  .ordering-app .ordering-header-actions { gap: 6px; }
+  .ordering-app .ordering-bag-top { min-width: 40px; min-height: 40px; }
+  .ordering-app .ordering-menu-inner { padding-top: 20px; }
+  .ordering-app .ordering-hero h1 { font-size: 24px; line-height: 1.45; }
+  .ordering-app .ordering-categories { gap: 24px; margin-block: 14px; }
+  .ordering-app .ordering-food-copy h3,
+  .ordering-app .is-featured .menu-tasting-copy h3 { font-size: 20px; margin-block: 0 6px; }
+  .ordering-app .ordering-food-card:not(.is-featured) .ordering-food-copy h3 { font-size: 18px; }
+  .ordering-app .ordering-food-copy p { font-size: 13px; }
+  .ordering-app .ordering-food-card:not(.is-featured) .ordering-food-copy { padding: 14px; }
+  .ordering-app .ordering-food-card:not(.is-featured) .ordering-card-action { width: 32px; height: 32px; }
+  .ordering-app .ordering-food-card:not(.is-featured) .ordering-price { font-size: 21px; }
+  .ordering-app .menu-tasting-actions { gap: 8px; }
+  .ordering-app .menu-tasting-actions button { padding-inline: 16px; }
+  .ordering-app .ordering-detail-layout { padding-inline: 16px; gap: 0; }
+  .ordering-app .ordering-detail-heading h1 { font-size: 26px; }
+  .ordering-app .ordering-detail-top { padding-inline: 0; }
+  .ordering-app .ordering-detail-dock { padding-inline: 16px; gap: 10px; }
+  .ordering-app .ordering-taste-button { padding-inline: 12px; white-space: nowrap; }
+  .ordering-app .order-page { width: calc(100% - 32px); margin-inline: auto; }
+  .ordering-app :is(.order-page-heading h1, .order-receipt > h1) { font-size: 26px; }
+  .ordering-app .order-checkout-dock { padding-inline: 16px; }
+  .ordering-app .cart-line-info h2 { font-size: 16px; }
+  .ordering-app .cart-lines > li { gap: 10px; }
+  .ordering-app .order-stepper { gap: 4px; }
+  .ordering-app .order-stepper output { min-width: 20px; }
+  .ordering-app .cart-line-actions > button { min-width: 36px; min-height: 36px; }
+  .ordering-app .order-total strong { font-size: 26px; }
+  .experience.experience { padding-inline: 16px; }
+  .experience.experience .food-detail h2 { font-size: 24px; }
+  .experience.experience .finished-state h2 { font-size: 26px; }
+  .help-sheet,
+  .settings-sheet { border-radius: 8px 8px 0 0; }
+}
+
+/* The mode switch is a utility action in the same header, not a second primary. */
+.ordering-app .menu-mode-switch {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--refined-control);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--refined-ink);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.ordering-app .menu-mode-switch:hover { background: var(--refined-soft); }
+@media (max-width: 680px) {
+  .ordering-app .ordering-brand-caption { display: none; }
+  .ordering-app .menu-mode-switch { font-size: 12px; padding-inline: 6px; }
+  .ordering-app .ordering-tools .icon-button { width: 36px; }
+  .ordering-app .ordering-header-actions { gap: 4px; }
+}
+@media (max-width: 400px) {
+  .ordering-app .ordering-table { max-width: 66px; white-space: normal; font-size: 12px; line-height: 1.4; }
+  .ordering-app .ordering-tools .icon-button { width: 32px; }
+}
+
+@media (max-width: 360px) {
+  .ordering-app .ordering-header-actions { gap: 2px; }
+  .ordering-app .ordering-table { font-size: 12px; }
+  .ordering-app .ordering-tools .icon-button { width: 36px; }
+  .ordering-app .ordering-detail-dock { gap: 8px; }
+  .ordering-app .ordering-taste-button { align-self: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ordering-app *,
+  .experience *,
+  .help-sheet *,
+  .settings-sheet * { transition: none !important; scroll-behavior: auto !important; }
+}

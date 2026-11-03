@@ -11,6 +11,12 @@ function memoryStorage() {
 }
 
 describe('local demo orders', () => {
+  it('preserves delivery demo mode when restoring a receipt', () => {
+    const storage = memoryStorage();
+    const order = { ...createDemoOrder('DELIVERY', lines(), now), mode: 'delivery' as const };
+    expect(saveOrder(storage, order)).toBe(true);
+    expect(readOrder(storage)).toEqual(order);
+  });
   it('creates independent snapshots with normalized table, integer total and demo ID', () => {
     const cart = lines();
     const order = createDemoOrder('a01', cart, now);

@@ -199,9 +199,9 @@ export function Scene(props: Props) {
     <StudioReflections />
     <ambientLight intensity={0.08} />
     <hemisphereLight args={['#fff6e8', '#665344', 0.3]} />
-    <directionalLight color="#fff0da" position={[-2.5, 3, 1.1]} intensity={2.6} />
-    <directionalLight color="#edf4ff" position={[2, 0.5, 1]} intensity={0.3} />
-    <directionalLight color="#fff5e7" position={[0.5, 1.4, -2]} intensity={1.25} />
+    <spotLight color="#fff0da" position={[-1.2, 1.8, 1.4]} intensity={18} distance={0} angle={0.5} penumbra={1} decay={2} />
+    <directionalLight color="#edf4ff" position={[2, 0.5, 1]} intensity={0.55} />
+    <directionalLight color="#fff5e7" position={[0.5, 1.4, -2]} intensity={1.8} />
     <Food {...props} />
   </Canvas>;
 }

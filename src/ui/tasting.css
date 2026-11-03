@@ -1,0 +1,58 @@
+/* Food-first tasting studio. Ordering artwork remains independent of the GLB assets. */
+.experience.experience {
+  --ink:#17231e; --paper:#f0eee7; --muted:#636e61; --accent:#e9633d; --line:#cdd0c4;
+  display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:76px minmax(0,1fr) 42px auto;
+  height:100svh; min-height:560px; padding:0 40px 18px; gap:0; overflow:hidden;
+  background:radial-gradient(ellipse at 45% 37%,#f5f1e6 0%,#e4e6da 48%,#cbd4c5 100%);
+  color:var(--ink);
+}
+.experience.experience > .masthead {position:relative;inset:auto;grid-column:1;grid-row:1;min-height:0;border:0;padding:0;}
+.experience.experience .masthead .brand,.experience.experience .masthead .back-button,.experience.experience .masthead .header-tools{background:transparent;border-radius:0;padding:0;}
+.experience.experience .masthead .brand{position:absolute;left:50%;transform:translateX(-50%);color:var(--ink);gap:8px;}
+.experience.experience .brand-mark{width:30px;height:30px;}
+.experience.experience .brand h1{font-size:25px;letter-spacing:-1px;font-weight:600;}
+.experience.experience .back-button{display:flex;align-items:center;font-size:14px;font-weight:500;}
+.experience.experience .header-tools{margin-left:auto;}
+.experience.experience .icon-button:hover{background:#f0eee780;border-color:#b7c0ae;}
+.experience.experience > .stage{grid-column:1;grid-row:2;border:0;background:transparent;box-shadow:none;max-width:1250px;justify-self:center;}
+.experience.experience .stage::before{display:block;inset:8% 8% 10%;background:radial-gradient(ellipse,#fff8e7a0,transparent 68%);z-index:-1;}
+.experience.experience .stage::after{inset:auto 25% 6%;height:6%;background:#3b49322a;border-radius:50%;filter:blur(18px);mask-image:none;z-index:-1;}
+.experience.experience .stage.empty::after{display:none;}
+.experience.experience .food-input{inset:0;}
+.experience.experience > .play-meta{grid-column:1;grid-row:3;margin:0;justify-self:center;width:min(100%,520px);padding:8px 0;border:0;background:none;box-shadow:none;}
+.experience.experience .progress{gap:16px;}
+.experience.experience .progress-count{font-size:20px;min-width:60px;font-weight:500;}
+.experience.experience .progress-track{height:5px;border:0;border-radius:10px;background:#aab79e66;}
+.experience.experience .progress-track>span{background:#4c6742;}
+.experience.experience > .action-dock{grid-column:1;grid-row:4;justify-self:center;width:min(100%,840px);padding:20px 0 0;border:0;border-top:1px solid #a8b49d;box-shadow:none;background:transparent;}
+.experience.experience .food-detail{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:24px;}
+.experience.experience .food-caption{font-size:13px;color:var(--muted);font-weight:400;margin:0 0 7px;}
+.experience.experience .food-detail h2{font-size:30px;font-weight:600;letter-spacing:-1px;}
+.experience.experience .interaction-hint{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:10px 20px;padding:0;margin:0;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:14px;color:var(--muted);}
+.experience.experience .interaction-hint span:first-child{font-size:14px;font-weight:500;}
+.experience.experience .action-dock .primary-button{border:1px solid var(--ink);border-radius:4px;background:var(--ink);box-shadow:none;font-size:15px;font-weight:500;min-height:48px;}
+.experience.experience .action-dock .primary-button:hover{background:#304435;}
+.experience.experience .tasting-finished-actions{justify-content:space-between;gap:16px;}
+.experience.experience .loading-status,.experience.experience .error-message{font-size:14px;line-height:1.6;margin:12px 0 0;}
+.experience.experience .finished-stamp{border:1px solid #759567;color:#4c6742;width:84px;height:84px;font-size:17px;font-weight:500;transform:none;}
+.experience.experience .finished-state h2{font-weight:500;font-size:36px;}
+.experience.experience .finished-state p{font-size:15px;}
+@media(max-width:760px){
+  .experience.experience{grid-template-rows:66px minmax(0,1fr) 36px auto;min-height:480px;padding:0 20px max(18px,env(safe-area-inset-bottom));}
+  .experience.experience .masthead{inset:auto;min-height:0;}
+  .experience.experience .masthead .brand{display:none;}
+  .experience.experience .header-tools{gap:2px;}
+  .experience.experience > .stage{margin:0;width:100%;border:0;}
+  .experience.experience .stage::before{inset:0 -15% 0;}
+  .experience.experience .stage::after{left:20%;right:20%;bottom:9%;filter:blur(12px);}
+  .experience.experience > .play-meta{margin:0;width:100%;padding:5px 0;}
+  .experience.experience > .action-dock{margin:0;padding:15px 0 0;box-shadow:none;}
+  .experience.experience .food-detail{align-items:flex-start;gap:15px;}
+  .experience.experience .food-detail h2{font-size:26px;white-space:nowrap;}
+  .experience.experience .food-caption{font-size:13px;margin-bottom:6px;}
+  .experience.experience .interaction-hint{flex-direction:column;gap:6px;font-size:13px;align-items:flex-end;padding-top:3px;}
+  .experience.experience .interaction-hint span:first-child{font-size:14px;}
+  .experience.experience .progress-count{font-size:18px;}
+  .experience.experience .tasting-finished-actions{flex-wrap:wrap;}
+}
+@media(prefers-reduced-motion:reduce){.experience.experience .progress-track>span{transition:none;}}

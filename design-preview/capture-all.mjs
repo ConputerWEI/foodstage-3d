@@ -1,0 +1,13 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const out='public/preview-all';await mkdir(out,{recursive:true});
+const browser=await chromium.launch();
+const pages=[['start','开始页'],['menu','菜单'],['detail','菜品详情'],['tasting','虚拟试吃'],['cart','购物车'],['review','确认订单'],['result','订单结果']];
+for(const [device,viewport] of [['mobile',{width:390,height:844}],['desktop',{width:1440,height:1000}]]){
+ const page=await browser.newPage({viewport});await page.goto('http://127.0.0.1:5173/?table=A01');await page.evaluate(()=>localStorage.clear());await page.reload();await page.evaluate(()=>document.fonts.ready);
+ const shot=async name=>{await page.screenshot({path:`${out}/${device}-${name}.png`,fullPage:true});};
+ await shot('start');await page.getByRole('button',{name:'堂食点餐',exact:false}).click();await shot('menu');await page.getByRole('button',{name:'选规格',exact:true}).click();await shot('detail');await page.getByRole('button',{name:'先虚拟试吃',exact:false}).click();await page.locator('[data-hit-ready="true"]').first().waitFor({timeout:30000});await shot('tasting');await page.getByRole('button',{name:'返回菜品'}).click();await page.locator('.ordering-add-button').click();await page.locator('.ordering-bag-top').click();await shot('cart');await page.getByRole('button',{name:'确认点单',exact:false}).click();await shot('review');await page.getByRole('button',{name:'提交演示订单'}).click();await shot('result');await page.close();
+}
+await browser.close();
+await writeFile(`${out}/index.html`,`<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>食刻全页面预览</title><style>body{margin:0;background:#f0eee7;color:#17231e;font:16px/1.6 system-ui}header,main{max-width:1500px;margin:auto;padding:24px}h1{font-size:30px;margin:0}nav{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}a{color:#385736}section{margin:28px 0 60px}h2{font-size:23px}.pair{display:grid;grid-template-columns:390px minmax(0,1fr);gap:24px;align-items:start}img{max-width:100%;display:block;border:1px solid #cdd0c4}p{color:#53644b}@media(max-width:800px){.pair{grid-template-columns:1fr}header,main{padding:18px}}</style><header><h1>食刻 · 全页面预览</h1><p>手机与桌面页面汇总。截图展示示例点单数据。</p><a href="/?table=A01">打开可交互版本</a><nav>${pages.map(([id,label])=>`<a href="#${id}">${label}</a>`).join('')}</nav></header><main>${pages.map(([id,label])=>`<section id="${id}"><h2>${label}</h2><div class="pair"><a href="mobile-${id}.png" target="_blank"><img src="mobile-${id}.png" alt="${label}手机预览"></a><a href="desktop-${id}.png" target="_blank"><img src="desktop-${id}.png" alt="${label}桌面预览"></a></div></section>`).join('')}</main></html>`);
+console.log('Captured six pages at two sizes.');
