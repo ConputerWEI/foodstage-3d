@@ -27,12 +27,12 @@ export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDem
   return <main className="ordering-menu">
     <header className="ordering-topbar">
       <a className="ordering-wordmark" href="#restaurant-menu" aria-label="食刻菜单"><UtensilsCrossed aria-hidden="true" size={24} /><span>食刻</span></a>
-      <div className="ordering-header-actions"><span className="ordering-table"><MapPin size={22} strokeWidth={1.8} aria-hidden="true" />{table ? <><strong>{table}</strong> 桌</> : '未选桌号'}</span><div className="ordering-tools">{tools}</div></div>
+      <div className="ordering-header-actions"><span className="ordering-table"><MapPin size={22} strokeWidth={1.8} aria-hidden="true" /><span className="ordering-table-label">{table ? `${table} 桌` : '未选桌号'}</span></span><div className="ordering-tools">{tools}</div></div>
     </header>
     <div className="ordering-menu-inner">
       <section className="ordering-hero" aria-label="食刻餐厅">
-        <div className="ordering-hero-copy"><h1>食刻开饭！</h1></div>
-        {featured && <button className="ordering-hero-food" onClick={() => onOpen(featured)} aria-label={`招牌推荐：${featured.name}`}><MenuCover src={featured.cover} name={featured.name} /></button>}
+        <div className="ordering-hero-copy"><span className="ordering-sign-caption">好好吃饭 · 快乐加倍</span><h1>食刻开饭！</h1><p>现做的好滋味，<br />从这一口开始。</p><span className="ordering-sign-note">汉堡 / 小食 / 清爽饮品</span></div>
+        {featured && <button className="ordering-hero-food" onClick={() => onOpen(featured)} aria-label={`招牌推荐：${featured.name}`}><MenuCover src={featured.cover} name={featured.name} /><span>招牌推荐 <ArrowUpRight size={16} aria-hidden="true" /></span></button>}
       </section>
       {!table && <div className="ordering-table-hint"><span>扫描桌码，即可为本桌点单</span><button onClick={onDemoTable}>使用演示桌号 A01</button></div>}
       <section className="ordering-catalog" id="restaurant-menu" aria-labelledby="ordering-menu-heading">
