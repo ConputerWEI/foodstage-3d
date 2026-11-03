@@ -19,8 +19,8 @@ test('real milestone assets decode, three transitions and one victory play per m
   await page.getByRole('button', { name: '设置' }).click();
   await page.getByRole('checkbox', { name: '声音' }).check();
   await page.getByRole('button', { name: '完成', exact: true }).click();
-  await page.getByRole('button', { name: '翻开菜单' }).click();
-  await page.getByRole('button', { name: '开始品尝' }).click();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: '虚拟试吃' }).click();
   const area = page.getByRole('button', { name: '经典汉堡' });
   for (let stage = 0; stage < 4; stage++) {
     await expect(page.getByTestId('experience')).toHaveAttribute('data-stage', String(stage));

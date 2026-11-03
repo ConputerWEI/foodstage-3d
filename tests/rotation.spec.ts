@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test('food remains interactive after vertical and horizontal flips', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: '翻开菜单' }).click();
-  await page.getByRole('button', { name: '开始品尝' }).click();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: '虚拟试吃' }).click();
   const food = page.getByRole('button', { name: '经典汉堡' });
   await expect(food).toHaveAttribute('data-hit-ready', 'true');
   await expect(food).toHaveAttribute('aria-disabled', 'false');
