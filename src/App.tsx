@@ -1,5 +1,16 @@
 import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalStore } from 'react';
-import { foods, type FoodDefinition } from './data/foods';
+import { foodById, type FoodDefinition } from './data/foods';
+import { menuItems, type MenuItem } from './data/menu';
+import { addLine, cartTotal, readCart, saveCart, setLineQuantity } from './core/cart';
+import { createDemoOrder, readOrder, saveOrder } from './core/orders';
+import { parseTable } from './core/table';
+import { MenuHome } from './ui/MenuHome';
+import { MenuItemDetail, type MenuItemDraft } from './ui/MenuItemDetail';
+import { CartSheet } from './ui/CartSheet';
+import { OrderReview } from './ui/OrderReview';
+import { OrderResult } from './ui/OrderResult';
+import './ui/ordering.css';
+import './ui/checkout.css';
 import { createSequenceState, sequenceReducer, type SequenceEvent } from './core/sequence';
 import { readSettings, saveSettings, type Settings } from './core/settings';
 import { biteFeedback, cancelBiteAudio, primeBiteAudio, primeMilestoneAudio, milestoneFeedback } from './core/feedback';
@@ -11,7 +22,7 @@ import { useFoodInput } from './ui/useFoodInput';
 import { SceneBoundary } from './ui/SceneBoundary';
 import { HelpSheet } from './ui/HelpSheet';
 import { SettingsSheet } from './ui/SettingsSheet';
-import { FoodPicker } from './ui/FoodPicker';
+
 import { Progress } from './ui/Progress';
 import { FoodMark } from './ui/FoodMark';
 import { ArrowLeft } from 'lucide-react';
@@ -33,7 +44,7 @@ function Brand() {
 
 function AppHeader({ settings, onSettingsChange, onBack }: { settings: Settings; onSettingsChange: (settings: Settings) => void; onBack?: () => void }) {
   return <header className="masthead">
-    {onBack ? <button className="back-button" type="button" onClick={onBack}><ArrowLeft size={20} strokeWidth={1.8} style={{ verticalAlign: 'middle', marginRight: 7 }} aria-hidden="true" /> 食物柜</button> : <Brand />}
+    {onBack ? <button className="back-button" type="button" onClick={onBack}><ArrowLeft size={20} strokeWidth={1.8} style={{ verticalAlign: 'middle', marginRight: 7 }} aria-hidden="true" /> 返回菜品</button> : <Brand />}
     {onBack && <Brand />}
     <nav className="header-tools" aria-label="工具"><HelpSheet /><SettingsSheet settings={settings} onChange={onSettingsChange} /></nav>
   </header>;
@@ -119,17 +130,72 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
       {(error || contextLost) && <p className="error-message" role="status" aria-live="polite">{status}</p>}
       {error ? <button className="primary-button" type="button" onClick={() => { void store.retry(needed); }}>重试加载</button>
         : contextLost ? <button className="primary-button" type="button" onClick={() => setContextLost(false)}>重试画面</button>
-        : state.phase === 'finished' ? <button className="primary-button" type="button" onClick={() => { Object.assign(motion, createMotion()); dispatch({ type: 'RESTART' }); }}>再吃一次</button>
+        : state.phase === 'finished' ? <div className="tasting-finished-actions"><button className="primary-button" type="button" onClick={onBack}>选规格，加入点单</button><button className="back-button" type="button" onClick={() => { Object.assign(motion, createMotion()); dispatch({ type: 'RESTART' }); }}>再吃一次</button></div>
         : (state.phase === 'loading' || state.phase === 'waiting') && <p className="loading-status" role="status">{status}</p>}
     </footer>
   </main>;
 }
 
+function browserStorage(): Storage | null {
+  try { return window.localStorage; } catch { return null; }
+}
+
+type OrderScreen = 'menu' | 'detail' | 'tasting' | 'cart' | 'review' | 'result';
+const emptyDraft = (): MenuItemDraft => ({ choices: {}, quantity: 1, note: '' });
+
 export default function App() {
   const [settings, setSettings] = useState<Settings>(() => readSettings());
-  const [selected, setSelected] = useState<FoodDefinition | null>(null);
+  const [table, setTable] = useState(() => parseTable(window.location.search));
+  const [cart, setCart] = useState(() => readCart(browserStorage()));
+  const [order, setOrder] = useState(() => readOrder(browserStorage()));
+  const [screen, setScreen] = useState<OrderScreen>(() => {
+    const restored = readOrder(browserStorage());
+    return restored && restored.table === parseTable(window.location.search) && readCart(browserStorage()).length === 0 ? 'result' : 'menu';
+  });
+  const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [draft, setDraft] = useState<MenuItemDraft>(emptyDraft);
+  const [category, setCategory] = useState('全部');
+  const menuScroll = useRef(0);
+  const leaveMenu = (next: OrderScreen) => { menuScroll.current = window.scrollY; setScreen(next); };
+  const [error, setError] = useState('');
   const updateSettings = useCallback((next: Settings) => { setSettings(next); saveSettings(next); }, []);
-  return selected
-    ? <PlayScreen key={selected.id} food={selected} settings={settings} onSettingsChange={updateSettings} onBack={() => setSelected(null)} />
-    : <main className="shell"><AppHeader settings={settings} onSettingsChange={updateSettings} /><FoodPicker foods={foods} onStart={setSelected} /></main>;
+  useEffect(() => {
+    if (!saveCart(browserStorage(), cart)) setError('无法保存点单，请检查浏览器存储权限。当前选择仍保留在此页面。');
+  }, [cart]);
+  useEffect(() => {
+    window.scrollTo(0, screen === 'menu' ? menuScroll.current : 0);
+    const heading = document.querySelector<HTMLElement>('.ordering-app h1, .ordering-app h2');
+    if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
+  }, [screen]);
+  const demoTable = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('table', 'A01');
+    window.history.replaceState(null, '', url);
+    setTable('A01');
+  };
+  const openItem = (item: MenuItem) => { setSelected(item); setDraft(emptyDraft()); leaveMenu('detail'); };
+  const submit = () => {
+    if (!table || !cart.length) return;
+    const next = createDemoOrder(table, cart);
+    if (!saveOrder(browserStorage(), next)) {
+      setError('订单未保存，请允许浏览器存储后重试。你的购物车已保留。');
+      return;
+    }
+    setOrder(next); setCart([]); setError(''); setScreen('result');
+  };
+  if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.foodId} food={foodById(selected.foodId)} settings={settings} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
+  return <main className="ordering-app">
+    {screen === 'menu' && <>
+      <div className="ordering-tools"><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></div>
+      <MenuHome table={table} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
+    </>}
+    {screen === 'detail' && selected && <MenuItemDetail item={selected} draft={draft} onDraftChange={setDraft} onClose={() => setScreen('menu')} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
+      setCart(current => addLine(current, selected, Object.entries(choices).map(([groupId, choiceId]) => ({ groupId, choiceId })), quantity, note));
+      setScreen('menu');
+    }} />}
+    {screen === 'cart' && <CartSheet lines={cart} onClose={() => setScreen('menu')} onQuantity={(id, quantity) => setCart(current => setLineQuantity(current, id, quantity))} onReview={() => { setError(''); setScreen('review'); }} />}
+    {screen === 'review' && <OrderReview table={table} lines={cart} onBack={() => setScreen('cart')} onSubmit={submit} onDemoTable={demoTable} error={error} />}
+    {screen === 'result' && order && <OrderResult order={order} onMenu={() => setScreen('menu')} />}
+    {error && screen !== 'review' && <p className="order-storage-error" role="alert">{error}</p>}
+  </main>;
 }

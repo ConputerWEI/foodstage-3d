@@ -4,8 +4,8 @@ test('first parser failure retries and gesture cancellation never bites', async 
   let corrupt = true;
   await page.route('**/burger-0.glb', route => corrupt ? route.fulfill({ status: 200, body: 'invalid GLB' }) : route.continue());
   await page.goto('/');
-  await page.getByRole('button', { name: '翻开菜单' }).click();
-  await page.getByRole('button', { name: '开始品尝' }).click();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByRole('button', { name: '重试加载' })).toBeVisible();
   await expect(page.getByTestId('experience')).toHaveAttribute('data-phase', 'loading');
   corrupt = false; await page.getByRole('button', { name: '重试加载' }).click();
@@ -47,8 +47,8 @@ test('renderer fallback retry remains clickable inside food input', async ({ pag
     };
   });
   await page.goto('/');
-  await page.getByRole('button', { name: '翻开菜单' }).click();
-  await page.getByRole('button', { name: '开始品尝' }).click();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByRole('button', { name: '重试画面' })).toBeVisible();
   await page.getByRole('button', { name: '重试画面' }).click();
   await expect(page.getByTestId('experience')).toHaveAttribute('data-phase', 'idle');
@@ -69,8 +69,8 @@ test('renderer fallback retry remains clickable inside food input', async ({ pag
 
 test('WebGL context loss provides a recovery action', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: '翻开菜单' }).click();
-  await page.getByRole('button', { name: '开始品尝' }).click();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByTestId('experience')).toHaveAttribute('data-phase', 'idle');
   await page.locator('canvas').evaluate(canvas => canvas.dispatchEvent(new Event('webglcontextlost', { cancelable: true })));
   await expect(page.getByRole('button', { name: '重试画面' })).toBeVisible();
