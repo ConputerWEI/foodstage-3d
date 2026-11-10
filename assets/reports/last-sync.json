@@ -1,0 +1,245 @@
+{
+  "syncedAt": "2026-11-08T15:58:52.007989+00:00",
+  "files": [
+    {
+      "path": "public/models-mobile/pepperoni-pizza-0.glb",
+      "sha256": "b53522d8737c403e316a67eec44584840a85933afb8a615778b1bedfc77a552d",
+      "bytes": 9941532
+    },
+    {
+      "path": "public/models-desktop/pepperoni-pizza-0.glb",
+      "sha256": "b53522d8737c403e316a67eec44584840a85933afb8a615778b1bedfc77a552d",
+      "bytes": 9941532
+    },
+    {
+      "path": "public/models-mobile/pepperoni-pizza-1.glb",
+      "sha256": "98c34d7e3ac43a3d11d1dde47c4b437e21181c4e1706cfaad97b9b1e42a036cb",
+      "bytes": 24238104
+    },
+    {
+      "path": "public/models-desktop/pepperoni-pizza-1.glb",
+      "sha256": "98c34d7e3ac43a3d11d1dde47c4b437e21181c4e1706cfaad97b9b1e42a036cb",
+      "bytes": 24238104
+    },
+    {
+      "path": "public/models-mobile/pepperoni-pizza-2.glb",
+      "sha256": "7ea99c257b4bbd49681c809739a5ae11b2384c92a8fadd72829d3e2dbe91d6a4",
+      "bytes": 29215500
+    },
+    {
+      "path": "public/models-desktop/pepperoni-pizza-2.glb",
+      "sha256": "7ea99c257b4bbd49681c809739a5ae11b2384c92a8fadd72829d3e2dbe91d6a4",
+      "bytes": 29215500
+    },
+    {
+      "path": "public/models-mobile/pepperoni-pizza-3.glb",
+      "sha256": "2aca07bc5a60407e70367db916ad72e880d40b4b4bea6a26de3b827f088aab97",
+      "bytes": 9554944
+    },
+    {
+      "path": "public/models-desktop/pepperoni-pizza-3.glb",
+      "sha256": "2aca07bc5a60407e70367db916ad72e880d40b4b4bea6a26de3b827f088aab97",
+      "bytes": 9554944
+    },
+    {
+      "path": "public/models-mobile/rosemary-fries-0.glb",
+      "sha256": "8780ba9fd39f065a8303649457f3a9a9084eab5cd6ec8d2accddc656b499d317",
+      "bytes": 8276556
+    },
+    {
+      "path": "public/models-desktop/rosemary-fries-0.glb",
+      "sha256": "8780ba9fd39f065a8303649457f3a9a9084eab5cd6ec8d2accddc656b499d317",
+      "bytes": 8276556
+    },
+    {
+      "path": "public/models-mobile/rosemary-fries-1.glb",
+      "sha256": "0ecbf16877334b9a73453ea70eb4c8a699cf6705dce24e30e1ee1dadbc286186",
+      "bytes": 9125812
+    },
+    {
+      "path": "public/models-desktop/rosemary-fries-1.glb",
+      "sha256": "0ecbf16877334b9a73453ea70eb4c8a699cf6705dce24e30e1ee1dadbc286186",
+      "bytes": 9125812
+    },
+    {
+      "path": "public/models-mobile/rosemary-fries-2.glb",
+      "sha256": "6bc1d67539e46416137982dbb95b18e154972296ef951984edaaac948eccc8b0",
+      "bytes": 7966768
+    },
+    {
+      "path": "public/models-desktop/rosemary-fries-2.glb",
+      "sha256": "6bc1d67539e46416137982dbb95b18e154972296ef951984edaaac948eccc8b0",
+      "bytes": 7966768
+    },
+    {
+      "path": "public/models-mobile/rosemary-fries-3.glb",
+      "sha256": "92f33843c7f0072c0d58469e04945653f351aff02250f07438808c696e57f305",
+      "bytes": 6540208
+    },
+    {
+      "path": "public/models-desktop/rosemary-fries-3.glb",
+      "sha256": "92f33843c7f0072c0d58469e04945653f351aff02250f07438808c696e57f305",
+      "bytes": 6540208
+    },
+    {
+      "path": "public/models-mobile/burger-0.glb",
+      "sha256": "32e224aa794983354e0b8f8bfc732c4a6e1609a63cc1b092ff5b81024ffba1f4",
+      "bytes": 5065344
+    },
+    {
+      "path": "public/models-desktop/burger-0.glb",
+      "sha256": "ce9e097e74cd9ff5168d481a44dfc28d058d167b3471ea2ea9cc0ed706dcf41c",
+      "bytes": 9810556
+    },
+    {
+      "path": "public/models-mobile/burger-1.glb",
+      "sha256": "e02532ce46911f1ecc185a6e6499171c2672e548b1367d7c377ac158b398ca07",
+      "bytes": 4482220
+    },
+    {
+      "path": "public/models-desktop/burger-1.glb",
+      "sha256": "d9aebd964c26f11bc4b93aebeae51be078f01100a5780e28169af36dda368e44",
+      "bytes": 9115644
+    },
+    {
+      "path": "public/models-mobile/burger-2.glb",
+      "sha256": "1845dca6e3f82d2b64fe74aadf8a5121f93452b532ac3481fc31b05a876262ee",
+      "bytes": 5392628
+    },
+    {
+      "path": "public/models-desktop/burger-2.glb",
+      "sha256": "bd3ed46263e36ab6d1cedfd79eadf3dd80a53ab28d1298466dff1a59798bda78",
+      "bytes": 10455344
+    },
+    {
+      "path": "public/models-mobile/burger-3.glb",
+      "sha256": "69fb3db472e8e3491d378675b044dd0a1605e986a86858fd26e579d8deae378a",
+      "bytes": 6118680
+    },
+    {
+      "path": "public/models-desktop/burger-3.glb",
+      "sha256": "94dce022d00131b9e9335871945a626fd8690773c4762c737f7bd59a5308d342",
+      "bytes": 11317460
+    },
+    {
+      "path": "public/models-mobile/crispy-chicken-0.glb",
+      "sha256": "abd5684c4d0a1ee47fd2cbb71e9d381b87887f36aa3791f4877d5892da46c4be",
+      "bytes": 21696
+    },
+    {
+      "path": "public/models-desktop/crispy-chicken-0.glb",
+      "sha256": "abd5684c4d0a1ee47fd2cbb71e9d381b87887f36aa3791f4877d5892da46c4be",
+      "bytes": 21696
+    },
+    {
+      "path": "public/models-mobile/crispy-chicken-1.glb",
+      "sha256": "124310ea7dcc090879889df380071cc97435aa29c9b30583269e0d9ed6c35ede",
+      "bytes": 14572
+    },
+    {
+      "path": "public/models-desktop/crispy-chicken-1.glb",
+      "sha256": "124310ea7dcc090879889df380071cc97435aa29c9b30583269e0d9ed6c35ede",
+      "bytes": 14572
+    },
+    {
+      "path": "public/models-mobile/crispy-chicken-2.glb",
+      "sha256": "e2f5d3996e2ecb0364b144cd20e88044c3b0f932407833980646036511b45176",
+      "bytes": 7460
+    },
+    {
+      "path": "public/models-desktop/crispy-chicken-2.glb",
+      "sha256": "e2f5d3996e2ecb0364b144cd20e88044c3b0f932407833980646036511b45176",
+      "bytes": 7460
+    },
+    {
+      "path": "public/models-mobile/crispy-chicken-3.glb",
+      "sha256": "19cecdac83c99173ebca806911107ad790f1293a9a7c8b8d7f07b76e1572d748",
+      "bytes": 3896
+    },
+    {
+      "path": "public/models-desktop/crispy-chicken-3.glb",
+      "sha256": "19cecdac83c99173ebca806911107ad790f1293a9a7c8b8d7f07b76e1572d748",
+      "bytes": 3896
+    },
+    {
+      "path": "public/models-mobile/lemon-soda-0.glb",
+      "sha256": "57147a2ae208d69f4855f212e3c661efd5acfc18b59c7c96e412e480af2899fd",
+      "bytes": 12540
+    },
+    {
+      "path": "public/models-desktop/lemon-soda-0.glb",
+      "sha256": "57147a2ae208d69f4855f212e3c661efd5acfc18b59c7c96e412e480af2899fd",
+      "bytes": 12540
+    },
+    {
+      "path": "public/models-mobile/lemon-soda-1.glb",
+      "sha256": "58432d172dca518f67676f4a0494647e7e25184be9768fb42e4f642ae9af0a07",
+      "bytes": 12540
+    },
+    {
+      "path": "public/models-desktop/lemon-soda-1.glb",
+      "sha256": "58432d172dca518f67676f4a0494647e7e25184be9768fb42e4f642ae9af0a07",
+      "bytes": 12540
+    },
+    {
+      "path": "public/models-mobile/lemon-soda-2.glb",
+      "sha256": "8ef98a9d082eff2e836340a3088ac58fa33bf9a312a047059b918cf001014672",
+      "bytes": 12556
+    },
+    {
+      "path": "public/models-desktop/lemon-soda-2.glb",
+      "sha256": "8ef98a9d082eff2e836340a3088ac58fa33bf9a312a047059b918cf001014672",
+      "bytes": 12556
+    },
+    {
+      "path": "public/models-mobile/lemon-soda-3.glb",
+      "sha256": "cad85c7126fc683a4f67d97c97f8f096666443307ccddcb122c7c7793205b55a",
+      "bytes": 12572
+    },
+    {
+      "path": "public/models-desktop/lemon-soda-3.glb",
+      "sha256": "cad85c7126fc683a4f67d97c97f8f096666443307ccddcb122c7c7793205b55a",
+      "bytes": 12572
+    },
+    {
+      "path": "public/models-mobile/chocolate-brownie-0.glb",
+      "sha256": "f30589ee46094c7725d5def5efb87c13ee6f3d1e57a0d78753c5a6ed674a516f",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-desktop/chocolate-brownie-0.glb",
+      "sha256": "f30589ee46094c7725d5def5efb87c13ee6f3d1e57a0d78753c5a6ed674a516f",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-mobile/chocolate-brownie-1.glb",
+      "sha256": "30b9ba1877fcca472c5b6d3101229ae67149712da2aebe40a5b429e855a3ba83",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-desktop/chocolate-brownie-1.glb",
+      "sha256": "30b9ba1877fcca472c5b6d3101229ae67149712da2aebe40a5b429e855a3ba83",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-mobile/chocolate-brownie-2.glb",
+      "sha256": "6ff1ea131274ac3e35c48922a911798835590d09d633d57911128eff0dfe7d03",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-desktop/chocolate-brownie-2.glb",
+      "sha256": "6ff1ea131274ac3e35c48922a911798835590d09d633d57911128eff0dfe7d03",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-mobile/chocolate-brownie-3.glb",
+      "sha256": "39c389b9b84c3a1f523bfdf07ac9e96e722abe2ec0b206922ccbd8a007763b18",
+      "bytes": 4524
+    },
+    {
+      "path": "public/models-desktop/chocolate-brownie-3.glb",
+      "sha256": "39c389b9b84c3a1f523bfdf07ac9e96e722abe2ec0b206922ccbd8a007763b18",
+      "bytes": 4524
+    }
+  ]
+}

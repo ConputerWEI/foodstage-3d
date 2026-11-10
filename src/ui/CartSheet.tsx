@@ -21,7 +21,6 @@ export function CartSheet({ lines, onClose, onQuantity, onReview }: {
       </li>)}</ul>
       <div className="order-total"><span>菜品合计</span><strong>{formatPrice(cartTotal(lines))}</strong></div>
       <button className="order-primary order-wide" onClick={onReview}>确认点单</button>
-      <p className="order-footnote">这是点单演示，提交后不会向餐厅发送订单。</p>
     </>}
   </section>;
 }

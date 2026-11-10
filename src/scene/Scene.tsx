@@ -5,19 +5,21 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import type { SequenceState, SequenceEvent } from '../core/sequence';
 import type { ModelAsset } from './assets';
 import { stepMotion, type Motion } from './motion';
-import type { FoodStage } from '../data/foods';
+import type { FoodInteraction, FoodStage } from '../data/foods';
+import { cloneFadeMaterial, applyMaterialFade } from './material-fade';
 import { modelPlacement, modelPivot } from './presentation';
 import { compactCrumbs } from './crumbs';
 import { bitePose, createCrumbBurst, stageBlend, STAGE_BLEND_SECONDS } from './bite-effects';
 
 export type HitTest = (x: number, y: number) => boolean;
 interface Props {
+  interaction?: FoodInteraction;
   asset: ModelAsset; base: ModelAsset; state: SequenceState; motion: Motion; stage: FoodStage;
   reduced: boolean; dispatch: (event: SequenceEvent) => void;
   setHit: (hit: HitTest | null, owner?: HitTest) => void;
   onContextLost: () => void;
 }
-function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: Props) {
+function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, interaction = 'solid' }: Props) {
   const rotation = useRef<Group>(null), shakeGroup = useRef<Group>(null), crumbPoints = useRef<Points>(null);
   const seenCrumbPulse = useRef(0);
   const entrance = useRef(0);
@@ -26,20 +28,19 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
   const ownedMaterials = useRef(new Set<Material>());
   const layer = useMemo(() => {
     const scene = asset.scene.clone(true);
-    const materials: Material[] = [];
+    const materials: ReturnType<typeof cloneFadeMaterial>[] = [];
     scene.traverse(object => {
       if (!(object instanceof Mesh)) return;
       const clone = (material: Material) => {
-        const copy = material.clone();
-        copy.transparent = true;
-        materials.push(copy); ownedMaterials.current.add(copy);
-        return copy;
+        const fade = cloneFadeMaterial(material);
+        materials.push(fade); ownedMaterials.current.add(fade.material);
+        return fade.material;
       };
       object.material = Array.isArray(object.material) ? object.material.map(clone) : clone(object.material);
     });
-    const placement = modelPlacement(base.size, asset.size, asset.center, state.stage);
+    const placement = modelPlacement(base.size, asset.size, asset.center, state.stage, stage.presentation, base.center);
     const scale = placement.scale * stage.calibration.scale;
-    const pivotY = modelPivot(base.size, asset.size, scale)[1] + stage.calibration.position[1];
+    const pivotY = modelPivot(base.size, asset.size, scale, stage.presentation)[1] + stage.calibration.position[1];
     return { scene, materials, placement, scale, pivotY, calibration: stage.calibration };
   }, [asset, base, stage, state.stage]);
   const visibleLayer = useRef(layer);
@@ -93,12 +94,12 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
     if (!rotation.current || !shakeGroup.current) return;
     blendAge.current += dt;
     const blend = stageBlend(blendAge.current, reduced);
-    for (const material of layer.materials) { material.opacity = blend; material.depthWrite = blend === 1; }
-    if (incoming.current) incoming.current.scale.setScalar(0.97 + 0.03 * blend);
+    for (const material of layer.materials) applyMaterialFade(material, blend);
+    if (incoming.current) incoming.current.scale.setScalar(interaction === 'drink' || stage.presentation === 'physical-size-stable' ? 1 : 0.97 + 0.03 * blend);
     const previous = previousLayer.current;
     if (previous) {
-      for (const material of previous.materials) { material.opacity = 1 - blend; material.depthWrite = false; }
-      if (outgoing.current) { outgoing.current.visible = blend < 1; outgoing.current.scale.setScalar(1 - 0.035 * blend); }
+      for (const material of previous.materials) applyMaterialFade(material, 1 - blend);
+      if (outgoing.current) { outgoing.current.visible = blend < 1; outgoing.current.scale.setScalar(interaction === 'drink' || stage.presentation === 'physical-size-stable' ? 1 : 1 - 0.035 * blend); }
     }
     gl.domElement.dataset.stageBlend = String(blend);
     entrance.current = motion.dragging ? 2 : Math.min(2, entrance.current + dt);
@@ -106,7 +107,7 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
     rotation.current.rotation.set(motion.x, motion.y + reveal, 0);
     gl.domElement.dataset.rotationX = String(motion.x);
     gl.domElement.dataset.rotationY = String(motion.y);
-    const pose = bitePose(motion.age, motion.crumbPulse > 0 ? 0.8 : 0, reduced);
+    const pose = bitePose(motion.age, motion.crumbPulse > 0 ? 0.8 : 0, reduced, interaction);
     shakeGroup.current.position.set(pose.x, pose.y, 0);
     shakeGroup.current.rotation.z = pose.roll;
     shakeGroup.current.scale.set(pose.scaleX, pose.scaleY, 1);
@@ -116,7 +117,7 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit }: 
       const count = motion.crumbPulse - seenCrumbPulse.current;
       seenCrumbPulse.current = motion.crumbPulse;
       const alive = compactCrumbs(crumbData.positions, crumbData.velocities, crumbData.ages, 0.65);
-      const burst = reduced ? [] : Array.from({ length: Math.min(count, 3) }, () => createCrumbBurst(asset.size, finishingBurst)).flat();
+      const burst = reduced ? [] : Array.from({ length: Math.min(count, 3) }, () => createCrumbBurst(asset.size, finishingBurst, Math.random, interaction)).flat();
       const emitted = burst.slice(0, crumbData.ages.length - alive);
       emitted.forEach((crumb, n) => {
         crumbData.positions.set(crumb.position, (alive + n) * 3);

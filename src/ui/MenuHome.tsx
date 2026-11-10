@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { lazy, Suspense, useState, type ReactNode } from 'react';
 import { ArrowUpRight, MapPin, ShoppingBag, UtensilsCrossed } from 'lucide-react';
 import { menuCategories, type MenuItem } from '../data/menu';
 import { MenuCover } from './MenuCover';
@@ -16,11 +16,14 @@ export interface MenuHomeProps {
   onCategoryChange?: (category: string) => void;
 }
 const price = (cents: number) => `¥${(cents / 100).toFixed(2)}`;
+const MenuModelPreview = lazy(() => import('./MenuModelPreview'));
 
 export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDemoTable, tools, category: selectedCategory, onCategoryChange }: MenuHomeProps) {
   const [localCategory, setLocalCategory] = useState('全部');
   const category = selectedCategory ?? localCategory;
-  const setCategory = onCategoryChange ?? setLocalCategory;
+  const setCategory = (value: string) => {
+    (onCategoryChange ?? setLocalCategory)(value);
+  };
   const categories = ['全部', ...menuCategories];
   const shown = category === '全部' ? items : items.filter(item => item.category === category || (category === '推荐' && Boolean(item.foodId)));
   const featured = items.find(item => item.foodId && item.available) ?? items.find(item => item.available);
@@ -39,8 +42,10 @@ export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDem
         <div className="ordering-section-title"><h2 id="ordering-menu-heading">菜单</h2></div>
         <nav className="ordering-categories" aria-label="菜品分类">{categories.map(value => <button key={value} aria-pressed={category === value} onClick={() => setCategory(value)}>{value}</button>)}</nav>
         <div className="ordering-food-grid">{shown.map(item => <article className={`ordering-food-card${item.available ? '' : ' is-sold-out'}`} key={item.id}>
+          <div className="ordering-food-thumbnail">
+            {item.foodId ? <Suspense fallback={<span className="ordering-preview-status" role="status">加载中…</span>}><MenuModelPreview foodId={item.foodId} name={item.name} onClose={() => {}} showClose={false} /></Suspense> : <MenuCover src={item.cover} name={item.name} />}
+          </div>
           <button className="ordering-food-open" onClick={() => onOpen(item)} aria-label={`查看${item.name}`}>
-            <MenuCover src={item.cover} name={item.name} />
             <div className="ordering-food-copy"><div className="ordering-food-heading"><h3>{item.name}</h3>{!item.available && <span className="ordering-sold-out">暂时售罄</span>}</div><p>{item.description}</p><div className="ordering-food-bottom"><strong className="ordering-price">{price(item.price)}</strong>{item.foodId && <span className="ordering-taste-tag">可虚拟试吃</span>}<span className="ordering-card-action" aria-hidden="true">{item.available ? '+' : '看详情'}</span></div></div>
           </button>
         </article>)}</div>

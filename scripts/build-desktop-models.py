@@ -37,9 +37,9 @@ def image_bytes(data, binary, image_index):
     return binary[offset:offset + view['byteLength']]
 
 
-def build(stage):
-    source, source_bin = read_glb(ROOT / 'models' / f'burger-{stage}.glb')
-    desktop, binary = read_glb(ROOT / 'models-mobile' / f'burger-{stage}.glb')
+def build(stage, food='burger'):
+    source, source_bin = read_glb(ROOT / 'models' / f'{food}-{stage}.glb')
+    desktop, binary = read_glb(ROOT / 'models-mobile' / f'{food}-{stage}.glb')
     with Image.open(io.BytesIO(image_bytes(source, source_bin, 0))) as image:
         if image.size != (2048, 2048):
             raise ValueError(f'Expected 2K source image for stage {stage}, got {image.size}')
@@ -54,7 +54,7 @@ def build(stage):
     desktop['buffers'][0]['byteLength'] = len(padded_binary)
     encoded_json = json.dumps(desktop, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
     encoded_json += b' ' * (-len(encoded_json) % 4)
-    output = ROOT / 'models-desktop' / f'burger-{stage}.glb'
+    output = ROOT / 'models-desktop' / f'{food}-{stage}.glb'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(
         struct.pack('<4sII', b'glTF', 2, 12 + 8 + len(encoded_json) + 8 + len(padded_binary))

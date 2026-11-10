@@ -1,4 +1,4 @@
-import type { FoodSound } from '../data/foods';
+import type { FoodInteraction, FoodSound } from '../data/foods';
 import type { Settings } from './settings';
 
 /** Which mouthful of a stage is being taken. */
@@ -329,8 +329,8 @@ async function playBite(sound: FoodSound | undefined, role: BiteRole): Promise<v
   }
 }
 
-export function biteFeedback(settings: Settings, sound?: FoodSound, role: BiteRole = 'chew'): void {
-  if (settings.sound) {
+export function biteFeedback(settings: Settings, sound?: FoodSound, role: BiteRole = 'chew', interaction: FoodInteraction = 'solid'): void {
+  if (settings.sound && interaction !== 'drink') {
     // Browser policy and device failures must never interrupt the interaction.
     void playBite(sound, role).catch(() => {});
   }

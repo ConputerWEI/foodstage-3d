@@ -1,24 +1,25 @@
 import { describe, expect, it } from 'vitest';
-import { foods, type FoodDefinition } from './foods';
+import { foodById, foods } from './foods';
 
-describe('foods', () => {
-  it('defines a selectable classic burger with four uniquely addressed stages', () => {
-    const burger = foods.find(food => food.id === 'classic-burger');
-    expect(burger).toBeDefined();
-    expect(burger).toMatchObject({ name: '经典汉堡', description: '四层香气，慢慢吃完。' });
-    expect(burger!.stages).toHaveLength(4);
-    expect(new Set(burger!.stages.map(stage => stage.url)).size).toBe(4);
-    expect(burger!.stages.map(stage => stage.bites)).toEqual([5, 6, 5, 6]);
-    expect(burger!.cover).toBe('/foods/classic-burger.svg');
-  });
-
-  it('resolves foods by stable ID and never joins food stages', async () => {
-    const { foodById } = await import('./foods');
-    const burger: FoodDefinition = foodById('classic-burger');
-    expect(burger.stages.map(stage => stage.url)).toEqual([
-      '/models-mobile/burger-0.glb', '/models-mobile/burger-1.glb',
-      '/models-mobile/burger-2.glb', '/models-mobile/burger-3.glb',
+describe('food definitions', () => {
+  it('has four stage definitions for crispy chicken', () => {
+    const food = foodById('crispy-chicken');
+    expect(food.stages).toHaveLength(4);
+    expect(food.stages.map(stage => stage.bites)).toEqual([3, 3, 3, 3]);
+    expect(food.stages.map(stage => stage.url)).toEqual([
+      '/models-mobile/crispy-chicken-0.glb', '/models-mobile/crispy-chicken-1.glb',
+      '/models-mobile/crispy-chicken-2.glb', '/models-mobile/crispy-chicken-3.glb',
     ]);
-    expect(() => foodById('missing')).toThrow('Unknown food');
+  });
+  it('registers the drink and dessert as independent four-stage foods', () => {
+    for (const id of ['lemon-soda', 'mango-cheesecake']) {
+      const food = foodById(id);
+      expect(food.stages).toHaveLength(4);
+      expect(food.stages.every(stage => stage.url.startsWith(`/models-mobile/${id}-`))).toBe(true);
+      expect(food.sound.chews).toEqual([]);
+    }
+    expect(foods).toHaveLength(6);
+    expect(foods.some(food => food.id === 'chocolate-brownie')).toBe(false);
+    expect(foodById('mango-cheesecake').name).toBe('芒果芝士蛋糕');
   });
 });

@@ -1,8 +1,33 @@
 import { describe, expect, it } from 'vitest';
-import { DataTexture, Group, Mesh, MeshStandardMaterial, BoxGeometry, SRGBColorSpace } from 'three';
+import { DataTexture, Group, Mesh, MeshStandardMaterial, MeshPhysicalMaterial, BoxGeometry, SRGBColorSpace } from 'three';
 import { applyFoodMaterials, gradeFoodPixels } from './food-materials';
 
 describe('food appearance', () => {
+  it('leaves finalized drink glass PBR and texture pixels untouched on repeated loads', () => {
+    const color = new DataTexture(new Uint8Array([214, 175, 112, 93]), 1, 1);
+    color.colorSpace = SRGBColorSpace;
+    const glass = new MeshPhysicalMaterial({ map: color, transparent: true, opacity: 0.24, depthWrite: false, transmission: 0.8, thickness: 0.003, ior: 1.45, roughness: 0.08, metalness: 0.12 });
+    const scene = new Group();
+    scene.userData.foodMaterialsBaked = true;
+    const mesh = new Mesh(new BoxGeometry(), glass);
+    scene.add(mesh);
+    applyFoodMaterials(scene);
+    applyFoodMaterials(scene);
+    expect(mesh.material).toBe(glass);
+    expect(mesh.material).toMatchObject({ transparent: true, opacity: 0.24, depthWrite: false, transmission: 0.8, thickness: 0.003, ior: 1.45, roughness: 0.08, metalness: 0.12 });
+    expect(mesh.material.map).toBe(color);
+    expect(Array.from(color.image.data)).toEqual([214, 175, 112, 93]);
+  });
+  it('preserves material identity and pixels for models with baked appearance', () => {
+    const material = new MeshStandardMaterial({ metalness: 0, roughness: 0.32 });
+    const scene = new Group();
+    scene.userData.foodMaterialsBaked = true;
+    const mesh = new Mesh(new BoxGeometry(), material);
+    scene.add(mesh);
+    applyFoodMaterials(scene);
+    expect(mesh.material).toBe(material);
+    expect(mesh.material.roughness).toBe(0.32);
+  });
   it('deepens toasted colors while retaining neutral whites and alpha', () => {
     const pixels = new Uint8ClampedArray([214, 175, 112, 93, 255, 255, 255, 255, 100, 100, 100, 200]);
     gradeFoodPixels(pixels);

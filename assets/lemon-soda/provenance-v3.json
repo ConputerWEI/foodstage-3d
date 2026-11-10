@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T13:51:01.004050+00:00",
+  "foodId": "lemon-soda",
+  "sourceKind": "locally-authored-geometry",
+  "notableLimits": [
+    "This is locally authored geometry, not Lux3D output and not recovered transparency from its failed opaque output.",
+    "Same80mm diameter150mm glass body; independent liquid, lemon,ice. Fill85/58/28/5percent of135mm innerfill range.",
+    "Final material uses alpha transparency, transmission0; not physically accurate refractive glass. Lemon/ice/liquid retain procedural appearance."
+  ],
+  "stagingMetadata": {
+    "path": "artifacts/food-redo-v3/lemonade-authored/metadata.json",
+    "sha256": "616061c52a0019b9a68f1f68bfa6deb3190ef89d518d3c6e8d65cfd5bdc11ebf",
+    "bytes": 244121
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "provider": null,
+      "reference": null,
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lemonade-authored\\0.glb",
+        "sha256": "eca5eea7ac9a771a03872a8a37e8ffec3da1b9c5351dbf5566438d28dc29fb91",
+        "bytes": 847160
+      },
+      "transform": {
+        "scale": 1,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.07999999821186066,
+          0.15000000596046448,
+          0.07999999821186066
+        ],
+        "center": [
+          0,
+          0.07500000298023224,
+          0
+        ],
+        "bounds": [
+          [
+            -0.03999999910593033,
+            0,
+            -0.03999999910593033
+          ],
+          [
+            0.03999999910593033,
+            0.15000000596046448,
+            0.03999999910593033
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/lemon-soda/source/0.glb",
+          "sha256": "c2f513ae102a4eabbfb611dcad0df55343965210712835035ed1d61dcd2da85e",
+          "bytes": 847268,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/mobile/0.glb",
+          "sha256": "202739d6030a5f23a8b3f11f8afb6711ebed70dcf3d0e872475e87c53d3436c9",
+          "bytes": 84304,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/lemon-soda-0.glb",
+          "sha256": "202739d6030a5f23a8b3f11f8afb6711ebed70dcf3d0e872475e87c53d3436c9",
+          "bytes": 84304,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/desktop/0.glb",
+          "sha256": "202739d6030a5f23a8b3f11f8afb6711ebed70dcf3d0e872475e87c53d3436c9",
+          "bytes": 84304,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/lemon-soda-0.glb",
+          "sha256": "202739d6030a5f23a8b3f11f8afb6711ebed70dcf3d0e872475e87c53d3436c9",
+          "bytes": 84304,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "provider": null,
+      "reference": null,
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lemonade-authored\\1.glb",
+        "sha256": "645549227de4090842e3fc00469da0b1d7700f203e0fed107bba0d156fb5f302",
+        "bytes": 847376
+      },
+      "transform": {
+        "scale": 1,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.07999999821186066,
+          0.15000000596046448,
+          0.07999999821186066
+        ],
+        "center": [
+          0,
+          0.07500000298023224,
+          0
+        ],
+        "bounds": [
+          [
+            -0.03999999910593033,
+            0,
+            -0.03999999910593033
+          ],
+          [
+            0.03999999910593033,
+            0.15000000596046448,
+            0.03999999910593033
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/lemon-soda/source/1.glb",
+          "sha256": "37694a2f2f225f7a06e02fc4bb429a05fe6174975f5c05ed05227937aa72729b",
+          "bytes": 847484,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/mobile/1.glb",
+          "sha256": "773bc796cb7dd43873554c6ff46c390e65b505bbbb64426dad8ce406d044f00f",
+          "bytes": 84524,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/lemon-soda-1.glb",
+          "sha256": "773bc796cb7dd43873554c6ff46c390e65b505bbbb64426dad8ce406d044f00f",
+          "bytes": 84524,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/desktop/1.glb",
+          "sha256": "773bc796cb7dd43873554c6ff46c390e65b505bbbb64426dad8ce406d044f00f",
+          "bytes": 84524,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/lemon-soda-1.glb",
+          "sha256": "773bc796cb7dd43873554c6ff46c390e65b505bbbb64426dad8ce406d044f00f",
+          "bytes": 84524,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "provider": null,
+      "reference": null,
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lemonade-authored\\2.glb",
+        "sha256": "a540cadba333e453be6f67024fbfb1e8fc53e375302544505e63e259fa119350",
+        "bytes": 847452
+      },
+      "transform": {
+        "scale": 1,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.07999999821186066,
+          0.15000000596046448,
+          0.07999999821186066
+        ],
+        "center": [
+          0,
+          0.07500000298023224,
+          0
+        ],
+        "bounds": [
+          [
+            -0.03999999910593033,
+            0,
+            -0.03999999910593033
+          ],
+          [
+            0.03999999910593033,
+            0.15000000596046448,
+            0.03999999910593033
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/lemon-soda/source/2.glb",
+          "sha256": "db84856a6f6b41754025f52f9ad397cb0591c33cb6b3279d04da9f510a503c9b",
+          "bytes": 847560,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/mobile/2.glb",
+          "sha256": "b18c7f9f34b35c9b831102c894ba77b419ab8ca27f0e0ff27ffad3f83fcad7c6",
+          "bytes": 84880,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/lemon-soda-2.glb",
+          "sha256": "b18c7f9f34b35c9b831102c894ba77b419ab8ca27f0e0ff27ffad3f83fcad7c6",
+          "bytes": 84880,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/desktop/2.glb",
+          "sha256": "b18c7f9f34b35c9b831102c894ba77b419ab8ca27f0e0ff27ffad3f83fcad7c6",
+          "bytes": 84880,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/lemon-soda-2.glb",
+          "sha256": "b18c7f9f34b35c9b831102c894ba77b419ab8ca27f0e0ff27ffad3f83fcad7c6",
+          "bytes": 84880,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "provider": null,
+      "reference": null,
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lemonade-authored\\3.glb",
+        "sha256": "b2be612f430b31f263257b94009ace3ef88cab3bd3a580b078188be2e13f7449",
+        "bytes": 580408
+      },
+      "transform": {
+        "scale": 1,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.07999999821186066,
+          0.15000000596046448,
+          0.07999999821186066
+        ],
+        "center": [
+          0,
+          0.07500000298023224,
+          0
+        ],
+        "bounds": [
+          [
+            -0.03999999910593033,
+            0,
+            -0.03999999910593033
+          ],
+          [
+            0.03999999910593033,
+            0.15000000596046448,
+            0.03999999910593033
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/lemon-soda/source/3.glb",
+          "sha256": "ae65b53f16037a9765b504d39f2ca91c76c6c964e0c658175833bf61d6cb1ad3",
+          "bytes": 580516,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/mobile/3.glb",
+          "sha256": "45fe8b09238a432a3cf8e560ff0f1357b0b740dadcf37216d83c94a9f453f245",
+          "bytes": 65724,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/lemon-soda-3.glb",
+          "sha256": "45fe8b09238a432a3cf8e560ff0f1357b0b740dadcf37216d83c94a9f453f245",
+          "bytes": 65724,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/lemon-soda/processed/desktop/3.glb",
+          "sha256": "45fe8b09238a432a3cf8e560ff0f1357b0b740dadcf37216d83c94a9f453f245",
+          "bytes": 65724,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/lemon-soda-3.glb",
+          "sha256": "45fe8b09238a432a3cf8e560ff0f1357b0b740dadcf37216d83c94a9f453f245",
+          "bytes": 65724,
+          "foodMaterialsBaked": true
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "stageCount": 4,
+    "promotedFileCount": 20,
+    "allHashesMatchStaging": true,
+    "allSceneBakedFlags": true
+  }
+}

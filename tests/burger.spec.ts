@@ -115,16 +115,21 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   const menu = page.locator('.ordering-menu');
   await expect(menu).toBeVisible();
   await expect(page.getByRole('heading', { name: '食刻开饭！', exact: true })).toBeVisible();
-  await expect(page.locator('canvas')).toHaveCount(0);
-  expect(modelRequests).toEqual([]);
+  await expect(page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
+  expect(modelRequests).toHaveLength(5);
+  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
+    '/models-mobile/burger-0.glb',
+    '/models-mobile/rosemary-fries-0.glb',
+    '/models-mobile/pepperoni-pizza-0.glb',
+    '/models-mobile/crispy-chicken-0.glb',
+    '/models-mobile/mango-cheesecake-0.glb',
+  ]));
   await page.screenshot({ path: 'docs/screenshots/menu-desktop.png' });
   await page.setViewportSize({ width: 320, height: 740 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.getByRole('button', { name: '查看经典汉堡', exact: true })).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
-  const illustration = page.getByRole('button', { name: '查看经典汉堡', exact: true }).getByRole('img');
-  await expect(illustration).toBeVisible();
-  expect(await illustration.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  await expect(page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).getByTestId('menu-model-preview')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'docs/screenshots/menu-mobile.png', fullPage: true });
   await page.getByRole('button', { name: '使用演示桌号 A01' }).click();
@@ -150,7 +155,14 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await page.keyboard.press('Escape');
   await expect(retained).not.toBeVisible();
   await expect(settingsTrigger).toBeFocused();
-  expect(modelRequests).toEqual([]);
+  expect(modelRequests).toHaveLength(5);
+  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
+    '/models-mobile/burger-0.glb',
+    '/models-mobile/rosemary-fries-0.glb',
+    '/models-mobile/pepperoni-pizza-0.glb',
+    '/models-mobile/crispy-chicken-0.glb',
+    '/models-mobile/mango-cheesecake-0.glb',
+  ]));
 
   await page.getByRole('button', { name: '查看经典汉堡', exact: true }).focus();
   await page.keyboard.press('Enter');
@@ -162,7 +174,14 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await page.getByRole('button', { name: '增加数量' }).click();
   await page.getByRole('textbox', { name: '备注', exact: true }).fill('不要洋葱');
   await expect(page.locator('canvas')).toHaveCount(0);
-  expect(modelRequests).toEqual([]);
+  expect(modelRequests).toHaveLength(5);
+  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
+    '/models-mobile/burger-0.glb',
+    '/models-mobile/rosemary-fries-0.glb',
+    '/models-mobile/pepperoni-pizza-0.glb',
+    '/models-mobile/crispy-chicken-0.glb',
+    '/models-mobile/mango-cheesecake-0.glb',
+  ]));
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'docs/screenshots/detail-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1000 });

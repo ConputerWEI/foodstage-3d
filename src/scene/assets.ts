@@ -9,7 +9,7 @@ export interface ModelAsset { scene: Group; center: Vector3; size: Vector3 }
 
 /** Pick an asset variant once when the play screen mounts, keeping the cache stable. */
 export function modelUrlForViewport(url: string, viewportWidth: number): string {
-  return viewportWidth >= 768 && url.startsWith('/models-mobile/burger-')
+  return viewportWidth >= 768 && /^\/models-mobile\/[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]+\.glb$/.test(url)
     ? url.replace('/models-mobile/', '/models-desktop/')
     : url;
 }

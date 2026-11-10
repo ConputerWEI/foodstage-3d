@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "foodId": "crispy-chicken",
+  "sourceKind": "lux3d-stage-models-with-recorded-local-bite-edit",
+  "taskIds": [
+    "5009771",
+    "5032024",
+    "5009800",
+    "5009814"
+  ],
+  "stagingMetadata": {
+    "path": "artifacts/food-redo-v2/integration/runs/v3-chicken-local-bite-FINAL-v1/staging-report.json",
+    "sha256": "1ddda11c67a1cc1a6aba4063c753604f7c098a77c2f131f8ac56fd765ddbb3c2",
+    "bytes": 37663
+  },
+  "localBiteReport": {
+    "path": "artifacts/food-redo-v2/integration/v3-chicken-review/local-bite-report.json",
+    "sha256": "0c200056867367faff8442b3016a999c6adb75bc3ab37b123301ca1ab0180d4b",
+    "bytes": 944,
+    "details": {
+      "raw": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d-chicken-repair\\models\\stage1-repair_glb.glb",
+      "mainBefore": {
+        "faces": 187242,
+        "watertight": false,
+        "winding": true
+      },
+      "mainAfterRepairVolume": false,
+      "booleanWatertight": true,
+      "booleanVolume": true,
+      "booleanFaces": 174004,
+      "capFaces": 2463,
+      "outerFaces": 171541,
+      "cutter": {
+        "center": [
+          -0.045,
+          0.06,
+          0.027
+        ],
+        "radii": [
+          0.052,
+          0.047,
+          0.052
+        ]
+      },
+      "detachedComponentsNotCarried": 27,
+      "texture": "approved reference1.png crop[210,260,370,380]",
+      "output": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\v3-chicken-review\\stage1-local-bite.glb",
+      "limitations": "Local ellipsoid bite; cap smoother than natural torn fibers. Outer texture per-face barycentric remap. Combined shell watertight before material split; original raw unchanged."
+    }
+  },
+  "limitations": [
+    "Stage1 is a local ellipsoid Manifold bite edit of repair task5032024, not unmodified provider output.",
+    "Cap texture uses approved reference1 crop[210,260,370,380]; cap smoother than natural torn meat fibers.",
+    "27 tiny detached components not carried into stage1; raw provider originals preserved.",
+    "Independent stages may change surviving shape/texture; physical alignment does not prove exact identity."
+  ],
+  "stages": [
+    {
+      "stage": 0,
+      "taskId": "5009771",
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\crispy-chicken-stage-0\\crispy-chicken-stage-0_glb.glb",
+        "sha256": "4ccef9eb7797c68a273e89b639a066fb2acbc2496c9641512ba83eb8eceedee8",
+        "bytes": 16536704
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\references\\crispy-chicken\\0.png",
+        "sha256": "01825ceee083fa542d38efd5dc42b500ef14b7f6212bb245cb3777442d440e24",
+        "bytes": 1199155
+      },
+      "transform": {
+        "scale": 0.7563855279287464,
+        "yaw": 0,
+        "quaternion": [
+          0.4172878117515224,
+          -0.6508551717912985,
+          -0.55638374900203,
+          0.3044594412439714
+        ],
+        "translation": [
+          -0.005953553503496064,
+          0.003011753742606828,
+          0.01299761839591787
+        ]
+      },
+      "worldBounds": {
+        "size": [
+          0.18147089782205061,
+          0.15314201112311865,
+          0.1278745925299518
+        ],
+        "center": [
+          -0.005953553503496065,
+          0.003011753742606829,
+          0.01299761839591787
+        ],
+        "bounds": [
+          [
+            -0.09668900241452137,
+            -0.0735592518189525,
+            -0.050939677869058037
+          ],
+          [
+            0.08478189540752924,
+            0.07958275930416615,
+            0.07693491466089378
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/crispy-chicken/source/0.glb",
+          "sha256": "cd3a40b6e5ccf72f2905208906ff6372759dd3660cfb59908afbab2d462c90c8",
+          "bytes": 16537004,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/mobile/0.glb",
+          "sha256": "f5501a3ef4b977c17627c375ed1155887512c9d4060cdbaf73dc1c96dadbca05",
+          "bytes": 1960232,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/crispy-chicken-0.glb",
+          "sha256": "f5501a3ef4b977c17627c375ed1155887512c9d4060cdbaf73dc1c96dadbca05",
+          "bytes": 1960232,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/desktop/0.glb",
+          "sha256": "5e45c6794600f393929a5945eee7bf35515fe46ac49ba9ba990e50203119a987",
+          "bytes": 2259620,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/crispy-chicken-0.glb",
+          "sha256": "5e45c6794600f393929a5945eee7bf35515fe46ac49ba9ba990e50203119a987",
+          "bytes": 2259620,
+          "foodMaterialsBaked": true
+        }
+      ],
+      "processing": "Actual independent Lux stage with recorded rigid/uniform alignment."
+    },
+    {
+      "stage": 1,
+      "taskId": "5032024",
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\v3-chicken-review\\stage1-local-bite.glb",
+        "sha256": "cde35aa73155be9da1230bca8de2232aa4ac29a1ad87cfab0d8e27e11ffaea2a",
+        "bytes": 22447388
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\references\\crispy-chicken\\1.png",
+        "sha256": "a0e07dbab67db3678e2b720ee7393ac8c1618c32ca6d839ed1997a36a4af4675",
+        "bytes": 914270
+      },
+      "transform": {
+        "scale": 0.8089300278313589,
+        "yaw": 0,
+        "quaternion": [
+          -0.17072389674625305,
+          0.0674372625632512,
+          0.2276318623283374,
+          0.9562893400800213
+        ],
+        "translation": [
+          -0.002636256419246128,
+          0.0013387138970323903,
+          0.0012073221927624347
+        ]
+      },
+      "worldBounds": {
+        "size": [
+          0.15898288770012559,
+          0.1842027735741142,
+          0.1654517714646268
+        ],
+        "center": [
+          -0.0026362564192461274,
+          0.0013387138970323842,
+          0.0012073221927624278
+        ],
+        "bounds": [
+          [
+            -0.08212770026930892,
+            -0.09076267289002471,
+            -0.08151856353955098
+          ],
+          [
+            0.07685518743081667,
+            0.09344010068408948,
+            0.08393320792507583
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/crispy-chicken/source/1.glb",
+          "sha256": "ee742ff64a52c7e5ac52409a5c093dc3b0b8c781375d99afe27cb54b2b691dfd",
+          "bytes": 22447680,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/mobile/1.glb",
+          "sha256": "18d13bfbaf52d18eaf63c2ae1b0b2d73d12f1d4dd141c1f8adffcb2654c7bcb2",
+          "bytes": 1340308,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/crispy-chicken-1.glb",
+          "sha256": "18d13bfbaf52d18eaf63c2ae1b0b2d73d12f1d4dd141c1f8adffcb2654c7bcb2",
+          "bytes": 1340308,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/desktop/1.glb",
+          "sha256": "47946fd0f91674d7c3493b05149fcd50d08d81736c181562642fc04756a359d5",
+          "bytes": 1621580,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/crispy-chicken-1.glb",
+          "sha256": "47946fd0f91674d7c3493b05149fcd50d08d81736c181562642fc04756a359d5",
+          "bytes": 1621580,
+          "foodMaterialsBaked": true
+        }
+      ],
+      "processing": "Local Manifold bite geometry on Lux repair task5032024; reference1 texture crop;27 tiny detached components omitted."
+    },
+    {
+      "stage": 2,
+      "taskId": "5009800",
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\crispy-chicken-stage-2\\crispy-chicken-stage-2_glb.glb",
+        "sha256": "4d364fa0e7fa34020aa8bc46af124f0f875620ad69485bdb4aa5381bd99e5c5a",
+        "bytes": 14475668
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\references\\crispy-chicken\\2.png",
+        "sha256": "f49785efbc1ea9d4bf37fc4b753c881d880db0d4e9877ec63bca7a266a080b23",
+        "bytes": 820675
+      },
+      "transform": {
+        "scale": 0.7804415389760908,
+        "yaw": 0,
+        "quaternion": [
+          -0.169955988014156,
+          0.0873996531626472,
+          0.2266079840188747,
+          0.9550523987426462
+        ],
+        "translation": [
+          0.00816681898475962,
+          -0.00588958351737978,
+          0.010635760120478567
+        ]
+      },
+      "worldBounds": {
+        "size": [
+          0.15565290954455505,
+          0.17441995677739053,
+          0.16192351969682106
+        ],
+        "center": [
+          0.008166818984759613,
+          -0.005889583517379782,
+          0.010635760120478566
+        ],
+        "bounds": [
+          [
+            -0.06965963578751791,
+            -0.09309956190607505,
+            -0.07032599972793196
+          ],
+          [
+            0.08599327375703714,
+            0.08132039487131548,
+            0.0915975199688891
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/crispy-chicken/source/2.glb",
+          "sha256": "bfeaf399b316700d787211f71cea40955a340df3058829c787e5cf08a544e8f7",
+          "bytes": 14475964,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/mobile/2.glb",
+          "sha256": "a8f3795ccd99c2c824857fbb3d5dc58cf4c699f4aa0cde0fd56dc80edd7c0f58",
+          "bytes": 1695004,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/crispy-chicken-2.glb",
+          "sha256": "a8f3795ccd99c2c824857fbb3d5dc58cf4c699f4aa0cde0fd56dc80edd7c0f58",
+          "bytes": 1695004,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/desktop/2.glb",
+          "sha256": "4fad43d18168b309985cbb4780cb958c202e9666b8cfbbe92ee3bd5470958324",
+          "bytes": 1930940,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/crispy-chicken-2.glb",
+          "sha256": "4fad43d18168b309985cbb4780cb958c202e9666b8cfbbe92ee3bd5470958324",
+          "bytes": 1930940,
+          "foodMaterialsBaked": true
+        }
+      ],
+      "processing": "Actual independent Lux stage with recorded rigid/uniform alignment."
+    },
+    {
+      "stage": 3,
+      "taskId": "5009814",
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\crispy-chicken-stage-3\\crispy-chicken-stage-3_glb.glb",
+        "sha256": "68c89c43725e98b0a8da3aa32eb0aac231960e0ad326acdf1a61d00dc0b677f6",
+        "bytes": 14667864
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\references\\crispy-chicken\\3.png",
+        "sha256": "76c3bef192fd8b06fac8c648c00c8b2ade4699e3f8171ba134d99908d3ee78ec",
+        "bytes": 746605
+      },
+      "transform": {
+        "scale": 0.5862972712974311,
+        "yaw": 0,
+        "quaternion": [
+          -0.16421187859840042,
+          0.30370229343177774,
+          0.21894917146453385,
+          0.9126119855702404
+        ],
+        "translation": [
+          0.0006141952836226558,
+          -0.0075435485512626976,
+          0.016243232604838967
+        ]
+      },
+      "worldBounds": {
+        "size": [
+          0.15510344739350465,
+          0.1546745167178374,
+          0.15350273182918545
+        ],
+        "center": [
+          0.0006141952836226511,
+          -0.007543548551262699,
+          0.016243232604838967
+        ],
+        "bounds": [
+          [
+            -0.07693752841312967,
+            -0.0848808069101814,
+            -0.060508133309753756
+          ],
+          [
+            0.07816591898037498,
+            0.06979370980765601,
+            0.09299459851943169
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/crispy-chicken/source/3.glb",
+          "sha256": "0644a4a9b6424100c1ba0caacb5c0ee1927b1bb163da6114e4e11e1ebc1cf46f",
+          "bytes": 14668156,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/mobile/3.glb",
+          "sha256": "70e8a2b5eed72f4af44dcae107faa0cbc0fe1c5e4e31bef5cefe6b51dfb04c16",
+          "bytes": 1413300,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/crispy-chicken-3.glb",
+          "sha256": "70e8a2b5eed72f4af44dcae107faa0cbc0fe1c5e4e31bef5cefe6b51dfb04c16",
+          "bytes": 1413300,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/crispy-chicken/processed/desktop/3.glb",
+          "sha256": "733b69b318ca7efa11112e37f679b54faf3f4c09422462d31f4a2849c50388bc",
+          "bytes": 1679096,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/crispy-chicken-3.glb",
+          "sha256": "733b69b318ca7efa11112e37f679b54faf3f4c09422462d31f4a2849c50388bc",
+          "bytes": 1679096,
+          "foodMaterialsBaked": true
+        }
+      ],
+      "processing": "Actual independent Lux stage with recorded rigid/uniform alignment."
+    }
+  ],
+  "verification": {
+    "promotedFileCount": 20,
+    "allHashesMatchStaging": true,
+    "allSceneBakedFlags": true
+  }
+}

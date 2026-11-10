@@ -1,0 +1,32 @@
+[
+  {
+    "stage": 2,
+    "sha256": "82776f6891ff378dc33fcc31d1abcfce2e9a803be417689e9a88140d66bb6653",
+    "sizeMm": [
+      300.0,
+      30.065631866455078,
+      289.0179748535156
+    ],
+    "bottomHeightRangeMm": [
+      -15.032815746963024,
+      -15.032815746963024
+    ],
+    "bottomPlanar": true,
+    "exact60DegreeSeamsVerified": false
+  },
+  {
+    "stage": 3,
+    "sha256": "2719b94bb493c6e1ad0ef533be1539399277b4691d7ee14f55e98ec18efff5e7",
+    "sizeMm": [
+      298.144287109375,
+      30.065631866455078,
+      144.5089874267578
+    ],
+    "bottomHeightRangeMm": [
+      -15.032815746963024,
+      -15.032815746963024
+    ],
+    "bottomPlanar": true,
+    "exact60DegreeSeamsVerified": false
+  }
+]

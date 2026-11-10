@@ -13,7 +13,10 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "optimize:models": "node scripts/optimize-models.mjs",
-    "optimize:sample": "node scripts/optimize-models.mjs --sample"
+    "optimize:sample": "node scripts/optimize-models.mjs --sample",
+    "assets:inventory": "python tools/assets.py inventory",
+    "assets:verify": "python tools/assets.py verify",
+    "assets:sync": "python tools/assets.py sync"
   },
   "dependencies": {
     "@react-three/fiber": "^9.4.0",
