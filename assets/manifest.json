@@ -1,0 +1,1667 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-09T15:08:24.485664+00:00",
+  "runtimeRoots": {
+    "mobile": "public/models-mobile",
+    "desktop": "public/models-desktop",
+    "buildSourceReference": "public/models (legacy source references; not loaded by current scene)"
+  },
+  "foods": [
+    {
+      "id": "pepperoni-pizza",
+      "runtimePrefix": "pepperoni-pizza",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        }
+      ]
+    },
+    {
+      "id": "rosemary-fries",
+      "runtimePrefix": "rosemary-fries",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 0.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 0.65,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "classic-burger",
+      "runtimePrefix": "burger",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "crispy-chicken",
+      "runtimePrefix": "crispy-chicken",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        }
+      ]
+    },
+    {
+      "id": "lemon-soda",
+      "runtimePrefix": "lemon-soda",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        }
+      ]
+    },
+    {
+      "id": "mango-cheesecake",
+      "runtimePrefix": "mango-cheesecake",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "foodId": "pepperoni-pizza",
+      "stage": 0,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/pepperoni-pizza/source/0.glb",
+        "sha256": "718d81c1881cb811529fa99185763b6555a56d9e3ec3ad84d9cfb3d10052070d",
+        "bytes": 9687540
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/pepperoni-pizza/processed/mobile/0.glb",
+          "sha256": "b53522d8737c403e316a67eec44584840a85933afb8a615778b1bedfc77a552d",
+          "bytes": 9941532,
+          "dimensionsMm": [
+            300.0,
+            48.8671,
+            300.2507
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/pepperoni-pizza/processed/desktop/0.glb",
+          "sha256": "b53522d8737c403e316a67eec44584840a85933afb8a615778b1bedfc77a552d",
+          "bytes": 9941532,
+          "dimensionsMm": [
+            300.0,
+            48.8671,
+            300.2507
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "pepperoni-pizza",
+      "stage": 1,
+      "sourceKind": "locally-processed",
+      "processing": [
+        "Pizza underside material repair, lower crust flatten, normal reconstruction; stage 3 clipped and capped from stage 2.",
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "See artifacts/pizza-back-front-fix-20261107 for repair and clipping pipeline. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/pepperoni-pizza/source/1.glb",
+        "sha256": "82776f6891ff378dc33fcc31d1abcfce2e9a803be417689e9a88140d66bb6653",
+        "bytes": 23688960
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/pepperoni-pizza/processed/mobile/1.glb",
+          "sha256": "98c34d7e3ac43a3d11d1dde47c4b437e21181c4e1706cfaad97b9b1e42a036cb",
+          "bytes": 24238104,
+          "dimensionsMm": [
+            300.0,
+            30.0656,
+            289.018
+          ],
+          "meshCount": 1,
+          "materialCount": 2,
+          "imageCount": 3
+        },
+        "desktop": {
+          "path": "assets/pepperoni-pizza/processed/desktop/1.glb",
+          "sha256": "98c34d7e3ac43a3d11d1dde47c4b437e21181c4e1706cfaad97b9b1e42a036cb",
+          "bytes": 24238104,
+          "dimensionsMm": [
+            300.0,
+            30.0656,
+            289.018
+          ],
+          "meshCount": 1,
+          "materialCount": 2,
+          "imageCount": 3
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "pepperoni-pizza",
+      "stage": 2,
+      "sourceKind": "locally-processed",
+      "processing": [
+        "Pizza underside material repair, lower crust flatten, normal reconstruction; stage 3 clipped and capped from stage 2.",
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "See artifacts/pizza-back-front-fix-20261107 for repair and clipping pipeline. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/pepperoni-pizza/source/2.glb",
+        "sha256": "2719b94bb493c6e1ad0ef533be1539399277b4691d7ee14f55e98ec18efff5e7",
+        "bytes": 28666356
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/pepperoni-pizza/processed/mobile/2.glb",
+          "sha256": "7ea99c257b4bbd49681c809739a5ae11b2384c92a8fadd72829d3e2dbe91d6a4",
+          "bytes": 29215500,
+          "dimensionsMm": [
+            298.1443,
+            30.0656,
+            144.509
+          ],
+          "meshCount": 1,
+          "materialCount": 2,
+          "imageCount": 3
+        },
+        "desktop": {
+          "path": "assets/pepperoni-pizza/processed/desktop/2.glb",
+          "sha256": "7ea99c257b4bbd49681c809739a5ae11b2384c92a8fadd72829d3e2dbe91d6a4",
+          "bytes": 29215500,
+          "dimensionsMm": [
+            298.1443,
+            30.0656,
+            144.509
+          ],
+          "meshCount": 1,
+          "materialCount": 2,
+          "imageCount": 3
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "pepperoni-pizza",
+      "stage": 3,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/pepperoni-pizza/source/3.glb",
+        "sha256": "3e696bf8f451214967802fa9837cfc100f654d4e06f7f7d13708a57ad0203d06",
+        "bytes": 9879648
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/pepperoni-pizza/processed/mobile/3.glb",
+          "sha256": "2aca07bc5a60407e70367db916ad72e880d40b4b4bea6a26de3b827f088aab97",
+          "bytes": 9554944,
+          "dimensionsMm": [
+            280.0,
+            101.3996,
+            248.3498
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/pepperoni-pizza/processed/desktop/3.glb",
+          "sha256": "2aca07bc5a60407e70367db916ad72e880d40b4b4bea6a26de3b827f088aab97",
+          "bytes": 9554944,
+          "dimensionsMm": [
+            280.0,
+            101.3996,
+            248.3498
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "rosemary-fries",
+      "stage": 0,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/rosemary-fries/source/0.glb",
+        "sha256": "591ab05f82af31fef211f21b038e18679c573bb3129db312ff8855280cd6c7a0",
+        "bytes": 8889572
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/rosemary-fries/processed/mobile/0.glb",
+          "sha256": "8780ba9fd39f065a8303649457f3a9a9084eab5cd6ec8d2accddc656b499d317",
+          "bytes": 8276556,
+          "dimensionsMm": [
+            100.0,
+            53.3015,
+            99.8678
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/rosemary-fries/processed/desktop/0.glb",
+          "sha256": "8780ba9fd39f065a8303649457f3a9a9084eab5cd6ec8d2accddc656b499d317",
+          "bytes": 8276556,
+          "dimensionsMm": [
+            100.0,
+            53.3015,
+            99.8678
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 5,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "rosemary-fries",
+      "stage": 1,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/rosemary-fries/source/1.glb",
+        "sha256": "06d0e94e1f954134f937863a3a7983d894291878a36318d3cf44dfe8c8b76b07",
+        "bytes": 9695484
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/rosemary-fries/processed/mobile/1.glb",
+          "sha256": "0ecbf16877334b9a73453ea70eb4c8a699cf6705dce24e30e1ee1dadbc286186",
+          "bytes": 9125812,
+          "dimensionsMm": [
+            70.0,
+            39.9101,
+            70.1404
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/rosemary-fries/processed/desktop/1.glb",
+          "sha256": "0ecbf16877334b9a73453ea70eb4c8a699cf6705dce24e30e1ee1dadbc286186",
+          "bytes": 9125812,
+          "dimensionsMm": [
+            70.0,
+            39.9101,
+            70.1404
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 6,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "rosemary-fries",
+      "stage": 2,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/rosemary-fries/source/2.glb",
+        "sha256": "f0a15d52db1df6ae7e603fae78f59372090b6ec6e606349533513a7cf10d355a",
+        "bytes": 8671920
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/rosemary-fries/processed/mobile/2.glb",
+          "sha256": "6bc1d67539e46416137982dbb95b18e154972296ef951984edaaac948eccc8b0",
+          "bytes": 7966768,
+          "dimensionsMm": [
+            75.0,
+            35.0803,
+            74.9435
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/rosemary-fries/processed/desktop/2.glb",
+          "sha256": "6bc1d67539e46416137982dbb95b18e154972296ef951984edaaac948eccc8b0",
+          "bytes": 7966768,
+          "dimensionsMm": [
+            75.0,
+            35.0803,
+            74.9435
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 5,
+      "calibration": {
+        "scale": 0.8,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "rosemary-fries",
+      "stage": 3,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/rosemary-fries/source/3.glb",
+        "sha256": "816426c0a3a6b8836419361dc0948bb22f779ff58dc7f6d9e21b5b6d9b3f4a36",
+        "bytes": 7286392
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/rosemary-fries/processed/mobile/3.glb",
+          "sha256": "92f33843c7f0072c0d58469e04945653f351aff02250f07438808c696e57f305",
+          "bytes": 6540208,
+          "dimensionsMm": [
+            75.0,
+            37.7052,
+            76.0432
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/rosemary-fries/processed/desktop/3.glb",
+          "sha256": "92f33843c7f0072c0d58469e04945653f351aff02250f07438808c696e57f305",
+          "bytes": 6540208,
+          "dimensionsMm": [
+            75.0,
+            37.7052,
+            76.0432
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 6,
+      "calibration": {
+        "scale": 0.65,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "classic-burger",
+      "stage": 0,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/classic-burger/source/0.glb",
+        "sha256": "c9ab697933cede258de11955e06f461725637229eb7c6f1db61d330ba043e180",
+        "bytes": 18514384
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/classic-burger/processed/mobile/0.glb",
+          "sha256": "32e224aa794983354e0b8f8bfc732c4a6e1609a63cc1b092ff5b81024ffba1f4",
+          "bytes": 5065344,
+          "dimensionsMm": [
+            65534000,
+            54454000,
+            65374000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/classic-burger/processed/desktop/0.glb",
+          "sha256": "ce9e097e74cd9ff5168d481a44dfc28d058d167b3471ea2ea9cc0ed706dcf41c",
+          "bytes": 9810556,
+          "dimensionsMm": [
+            65534000,
+            54454000,
+            65374000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 5,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "classic-burger",
+      "stage": 1,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/classic-burger/source/1.glb",
+        "sha256": "5cea586ec41b3f5c3a1b5e0046983c485173fe8ae99bb5b3083f24949b464db2",
+        "bytes": 17235596
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/classic-burger/processed/mobile/1.glb",
+          "sha256": "e02532ce46911f1ecc185a6e6499171c2672e548b1367d7c377ac158b398ca07",
+          "bytes": 4482220,
+          "dimensionsMm": [
+            65534000,
+            51710000,
+            62470000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/classic-burger/processed/desktop/1.glb",
+          "sha256": "d9aebd964c26f11bc4b93aebeae51be078f01100a5780e28169af36dda368e44",
+          "bytes": 9115644,
+          "dimensionsMm": [
+            65534000,
+            51710000,
+            62470000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 6,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "classic-burger",
+      "stage": 2,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/classic-burger/source/2.glb",
+        "sha256": "7888e7288a920c928417d1f67107d86d4afa292eda5c97eb5e8cedf9c4471657",
+        "bytes": 18942740
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/classic-burger/processed/mobile/2.glb",
+          "sha256": "1845dca6e3f82d2b64fe74aadf8a5121f93452b532ac3481fc31b05a876262ee",
+          "bytes": 5392628,
+          "dimensionsMm": [
+            65534000,
+            42516000,
+            60302000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/classic-burger/processed/desktop/2.glb",
+          "sha256": "bd3ed46263e36ab6d1cedfd79eadf3dd80a53ab28d1298466dff1a59798bda78",
+          "bytes": 10455344,
+          "dimensionsMm": [
+            65534000,
+            42516000,
+            60302000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 5,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "classic-burger",
+      "stage": 3,
+      "sourceKind": "existing-project-asset",
+      "processing": [
+        "Static runtime color and roughness grade baked into embedded PNG textures; metalness=0; mesh bytes retained.",
+        "scene.extras.foodMaterialsBaked=true prevents duplicate runtime grading."
+      ],
+      "notes": "Existing GLB asset; original upstream provenance is not fully recorded. Runtime scale/bottom alignment is stored in catalog; dimensionsMm is mesh-local, not scene-world bounds.",
+      "source": {
+        "path": "assets/classic-burger/source/3.glb",
+        "sha256": "48aa2f6a848a03af59eb4d318198709c3e96f3102535d7e01ebbaf2ecbde3fde",
+        "bytes": 20670604
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/classic-burger/processed/mobile/3.glb",
+          "sha256": "69fb3db472e8e3491d378675b044dd0a1605e986a86858fd26e579d8deae378a",
+          "bytes": 6118680,
+          "dimensionsMm": [
+            65534000,
+            63430000,
+            40076000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/classic-burger/processed/desktop/3.glb",
+          "sha256": "94dce022d00131b9e9335871945a626fd8690773c4762c737f7bd59a5308d342",
+          "bytes": 11317460,
+          "dimensionsMm": [
+            65534000,
+            63430000,
+            40076000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 6,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      }
+    },
+    {
+      "foodId": "crispy-chicken",
+      "stage": 0,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Actual Lux3D CN G1 task5009771 for v3 drumstick stage0.",
+        "Recorded quaternion/uniform alignment and Meshopt mobile/desktop optimization; scene.foodMaterialsBaked=true.",
+        "Exact source/variant/runtime hashes: assets/crispy-chicken/provenance-v3.json."
+      ],
+      "notes": "Local stage1 bite cap remains smoother than natural torn fibers; independent stage reconstruction can change surviving shape/texture. Current provenance does not reference superseded task4954280. dimensionsMm is mesh-local POSITION bounds, not decoded scene-world physical size.",
+      "source": {
+        "path": "assets/crispy-chicken/source/0.glb",
+        "sha256": "cd3a40b6e5ccf72f2905208906ff6372759dd3660cfb59908afbab2d462c90c8",
+        "bytes": 16537004
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/crispy-chicken/processed/mobile/0.glb",
+          "sha256": "f5501a3ef4b977c17627c375ed1155887512c9d4060cdbaf73dc1c96dadbca05",
+          "bytes": 1960232,
+          "dimensionsMm": [
+            47900000,
+            47244000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/crispy-chicken/processed/desktop/0.glb",
+          "sha256": "5e45c6794600f393929a5945eee7bf35515fe46ac49ba9ba990e50203119a987",
+          "bytes": 2259620,
+          "dimensionsMm": [
+            47900000,
+            47244000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "crispy-chicken",
+      "stage": 1,
+      "sourceKind": "lux3d-stage-model-with-local-bite-and-fibrous-cap-edit",
+      "processing": [
+        "Actual Lux3D CN G1 task5032024; original raw retained.",
+        "Local Manifold bite followed by v4 restrained anisotropic cap relief (-1.47..1.90mm), warm meat-reference albedo and normal texture.",
+        "445 cap boundary edges and exact boundary coordinates preserved; exterior positions/faces/UV unchanged.",
+        "Same recorded bone transform, baked scene materials and Meshopt mobile/desktop variants.",
+        "Current five-file hashes and preservation evidence: assets/crispy-chicken/provenance-v4.json."
+      ],
+      "notes": "Local meat fibers remain simplified; no claim of provider-original geometry or new watertight certification. Earlier v3 provenance retained as history. dimensionsMm records mesh-local POSITION bounds, not decoded scene-world physical size.",
+      "source": {
+        "path": "assets/crispy-chicken/source/1.glb",
+        "sha256": "d03429f95973e8c256f6caa559d8601aef11db52904241ede3d2c18f35a04f52",
+        "bytes": 21845920
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/crispy-chicken/processed/mobile/1.glb",
+          "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c",
+          "bytes": 1410280,
+          "dimensionsMm": [
+            65534000,
+            64806000,
+            65534000
+          ],
+          "meshCount": 2,
+          "materialCount": 2,
+          "imageCount": 4
+        },
+        "desktop": {
+          "path": "assets/crispy-chicken/processed/desktop/1.glb",
+          "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c",
+          "bytes": 1691552,
+          "dimensionsMm": [
+            65534000,
+            64806000,
+            65534000
+          ],
+          "meshCount": 2,
+          "materialCount": 2,
+          "imageCount": 4
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "crispy-chicken",
+      "stage": 2,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Actual Lux3D CN G1 task5009800 for v3 drumstick stage2.",
+        "Recorded quaternion/uniform alignment and Meshopt mobile/desktop optimization; scene.foodMaterialsBaked=true.",
+        "Exact source/variant/runtime hashes: assets/crispy-chicken/provenance-v3.json."
+      ],
+      "notes": "Local stage1 bite cap remains smoother than natural torn fibers; independent stage reconstruction can change surviving shape/texture. Current provenance does not reference superseded task4954280. dimensionsMm is mesh-local POSITION bounds, not decoded scene-world physical size.",
+      "source": {
+        "path": "assets/crispy-chicken/source/2.glb",
+        "sha256": "bfeaf399b316700d787211f71cea40955a340df3058829c787e5cf08a544e8f7",
+        "bytes": 14475964
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/crispy-chicken/processed/mobile/2.glb",
+          "sha256": "a8f3795ccd99c2c824857fbb3d5dc58cf4c699f4aa0cde0fd56dc80edd7c0f58",
+          "bytes": 1695004,
+          "dimensionsMm": [
+            63206000,
+            61398000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/crispy-chicken/processed/desktop/2.glb",
+          "sha256": "4fad43d18168b309985cbb4780cb958c202e9666b8cfbbe92ee3bd5470958324",
+          "bytes": 1930940,
+          "dimensionsMm": [
+            63206000,
+            61398000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "crispy-chicken",
+      "stage": 3,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Actual Lux3D CN G1 task5009814 for v3 drumstick stage3.",
+        "Recorded quaternion/uniform alignment and Meshopt mobile/desktop optimization; scene.foodMaterialsBaked=true.",
+        "Exact source/variant/runtime hashes: assets/crispy-chicken/provenance-v3.json."
+      ],
+      "notes": "Local stage1 bite cap remains smoother than natural torn fibers; independent stage reconstruction can change surviving shape/texture. Current provenance does not reference superseded task4954280. dimensionsMm is mesh-local POSITION bounds, not decoded scene-world physical size.",
+      "source": {
+        "path": "assets/crispy-chicken/source/3.glb",
+        "sha256": "0644a4a9b6424100c1ba0caacb5c0ee1927b1bb163da6114e4e11e1ebc1cf46f",
+        "bytes": 14668156
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/crispy-chicken/processed/mobile/3.glb",
+          "sha256": "70e8a2b5eed72f4af44dcae107faa0cbc0fe1c5e4e31bef5cefe6b51dfb04c16",
+          "bytes": 1413300,
+          "dimensionsMm": [
+            33036000,
+            48188000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/crispy-chicken/processed/desktop/3.glb",
+          "sha256": "733b69b318ca7efa11112e37f679b54faf3f4c09422462d31f4a2849c50388bc",
+          "bytes": 1679096,
+          "dimensionsMm": [
+            33036000,
+            48188000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "lemon-soda",
+      "stage": 0,
+      "sourceKind": "reference-guided-local-transparent-model",
+      "processing": [
+        "image/gpt-image-2.5 reference; perspective-adjusted reference citrus texture",
+        "Closed parameterized85x120mm cup; identical glass body; independent liquid/ice/lemon and rim/base nodes",
+        "Fill85/60/35/10% within usable height8..118mm; alpha glass/liquid/ice .13/.25/.30; transmission=0 avoids nested ghosts",
+        "See artifacts/lemonade-reference3d/publication-report.json and REPORT.md"
+      ],
+      "notes": "Clarity-oriented alpha approximation, simplified ice, limited reference resolution; not photogrammetry or physically correct refraction. No Lux3D paid drink task. All resources embedded.",
+      "source": {
+        "path": "assets/lemon-soda/source/0.glb",
+        "sha256": "b970d4b1b42e9185c078793df50aa7de098fd0dd916bb7ab4c8440d5b38422b4",
+        "bytes": 1600540
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/lemon-soda/processed/mobile/0.glb",
+          "sha256": "b970d4b1b42e9185c078793df50aa7de098fd0dd916bb7ab4c8440d5b38422b4",
+          "bytes": 1600540,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        },
+        "desktop": {
+          "path": "assets/lemon-soda/processed/desktop/0.glb",
+          "sha256": "b970d4b1b42e9185c078793df50aa7de098fd0dd916bb7ab4c8440d5b38422b4",
+          "bytes": 1600540,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "lemon-soda",
+      "stage": 1,
+      "sourceKind": "reference-guided-local-transparent-model",
+      "processing": [
+        "image/gpt-image-2.5 reference; perspective-adjusted reference citrus texture",
+        "Closed parameterized85x120mm cup; identical glass body; independent liquid/ice/lemon and rim/base nodes",
+        "Fill85/60/35/10% within usable height8..118mm; alpha glass/liquid/ice .13/.25/.30; transmission=0 avoids nested ghosts",
+        "See artifacts/lemonade-reference3d/publication-report.json and REPORT.md"
+      ],
+      "notes": "Clarity-oriented alpha approximation, simplified ice, limited reference resolution; not photogrammetry or physically correct refraction. No Lux3D paid drink task. All resources embedded.",
+      "source": {
+        "path": "assets/lemon-soda/source/1.glb",
+        "sha256": "a2b945519b17a15d7cf2187884014016d5aa257f1870c8429644735e27f12b5a",
+        "bytes": 1600548
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/lemon-soda/processed/mobile/1.glb",
+          "sha256": "a2b945519b17a15d7cf2187884014016d5aa257f1870c8429644735e27f12b5a",
+          "bytes": 1600548,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        },
+        "desktop": {
+          "path": "assets/lemon-soda/processed/desktop/1.glb",
+          "sha256": "a2b945519b17a15d7cf2187884014016d5aa257f1870c8429644735e27f12b5a",
+          "bytes": 1600548,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "lemon-soda",
+      "stage": 2,
+      "sourceKind": "reference-guided-local-transparent-model",
+      "processing": [
+        "image/gpt-image-2.5 reference; perspective-adjusted reference citrus texture",
+        "Closed parameterized85x120mm cup; identical glass body; independent liquid/ice/lemon and rim/base nodes",
+        "Fill85/60/35/10% within usable height8..118mm; alpha glass/liquid/ice .13/.25/.30; transmission=0 avoids nested ghosts",
+        "See artifacts/lemonade-reference3d/publication-report.json and REPORT.md"
+      ],
+      "notes": "Clarity-oriented alpha approximation, simplified ice, limited reference resolution; not photogrammetry or physically correct refraction. No Lux3D paid drink task. All resources embedded.",
+      "source": {
+        "path": "assets/lemon-soda/source/2.glb",
+        "sha256": "e889d4c03c2ef7588940b830af145ff14a48354af28e0f6c8e930f5e67f741b9",
+        "bytes": 1600540
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/lemon-soda/processed/mobile/2.glb",
+          "sha256": "e889d4c03c2ef7588940b830af145ff14a48354af28e0f6c8e930f5e67f741b9",
+          "bytes": 1600540,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        },
+        "desktop": {
+          "path": "assets/lemon-soda/processed/desktop/2.glb",
+          "sha256": "e889d4c03c2ef7588940b830af145ff14a48354af28e0f6c8e930f5e67f741b9",
+          "bytes": 1600540,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "lemon-soda",
+      "stage": 3,
+      "sourceKind": "reference-guided-local-transparent-model",
+      "processing": [
+        "image/gpt-image-2.5 reference; perspective-adjusted reference citrus texture",
+        "Closed parameterized85x120mm cup; identical glass body; independent liquid/ice/lemon and rim/base nodes",
+        "Fill85/60/35/10% within usable height8..118mm; alpha glass/liquid/ice .13/.25/.30; transmission=0 avoids nested ghosts",
+        "See artifacts/lemonade-reference3d/publication-report.json and REPORT.md"
+      ],
+      "notes": "Clarity-oriented alpha approximation, simplified ice, limited reference resolution; not photogrammetry or physically correct refraction. No Lux3D paid drink task. All resources embedded.",
+      "source": {
+        "path": "assets/lemon-soda/source/3.glb",
+        "sha256": "8e15d21d6805de132e8d6bc6bf9da078b80675132ee9594347603ec027672c8d",
+        "bytes": 1600552
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/lemon-soda/processed/mobile/3.glb",
+          "sha256": "8e15d21d6805de132e8d6bc6bf9da078b80675132ee9594347603ec027672c8d",
+          "bytes": 1600552,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        },
+        "desktop": {
+          "path": "assets/lemon-soda/processed/desktop/3.glb",
+          "sha256": "8e15d21d6805de132e8d6bc6bf9da078b80675132ee9594347603ec027672c8d",
+          "bytes": 1600552,
+          "dimensionsMm": [
+            85.0,
+            120.0,
+            85.0
+          ],
+          "meshCount": 9,
+          "materialCount": 5,
+          "imageCount": 1
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size"
+    },
+    {
+      "foodId": "mango-cheesecake",
+      "stage": 0,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Independent Lux3D CN G1 image-to-3D task5021391 from its accepted refined stage reference.",
+        "Recorded wrapper alignment, original UVs/materials and scene baked flag; mobile/desktop Meshopt optimization.",
+        "Actual task/input/source/promotion evidence: assets/mango-cheesecake/provenance-v3.json."
+      ],
+      "notes": "Actual stage-specific Lux3D generation can change surviving shape/texture. Original outputs preserved in artifacts/food-redo-v3/lux3d/. dimensionsMm is mesh-local POSITION bounds, not decoded world physical size.",
+      "source": {
+        "path": "assets/mango-cheesecake/source/0.glb",
+        "sha256": "32e92c3916da0485c37d05a63cd161c4ca16a9d6f790cad50aa579723161773f",
+        "bytes": 13417752
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/mango-cheesecake/processed/mobile/0.glb",
+          "sha256": "eae2ad996c417b196213e469e4919891aed8f9d552ac9045ab413e0a2b1f78dc",
+          "bytes": 1406656,
+          "dimensionsMm": [
+            43652000,
+            32306000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/mango-cheesecake/processed/desktop/0.glb",
+          "sha256": "8b1dc681faad1d2479817fccfed783c537066ecf13dfdec25c81d283d2624f96",
+          "bytes": 1609768,
+          "dimensionsMm": [
+            43652000,
+            32306000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "mango-cheesecake",
+      "stage": 1,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Independent Lux3D CN G1 image-to-3D task5021394 from its accepted refined stage reference.",
+        "Recorded wrapper alignment, original UVs/materials and scene baked flag; mobile/desktop Meshopt optimization.",
+        "Actual task/input/source/promotion evidence: assets/mango-cheesecake/provenance-v3.json."
+      ],
+      "notes": "Actual stage-specific Lux3D generation can change surviving shape/texture. Original outputs preserved in artifacts/food-redo-v3/lux3d/. dimensionsMm is mesh-local POSITION bounds, not decoded world physical size.",
+      "source": {
+        "path": "assets/mango-cheesecake/source/1.glb",
+        "sha256": "d696d1bf0bb98ff6c495f8e974f225fee5ca757fa817b34d305fdd6e538b18bc",
+        "bytes": 13096688
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/mango-cheesecake/processed/mobile/1.glb",
+          "sha256": "66fbaadf4dce9e77a6239f776c7521d101b79cc0fe96b8889cdfa3021417e15f",
+          "bytes": 1422092,
+          "dimensionsMm": [
+            52686000,
+            38964000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/mango-cheesecake/processed/desktop/1.glb",
+          "sha256": "336c3a3ab2e890feaf3b3a89723cd23461b868f90a218a4077c6270ae63d9937",
+          "bytes": 1619868,
+          "dimensionsMm": [
+            52686000,
+            38964000,
+            65534000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "mango-cheesecake",
+      "stage": 2,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Independent Lux3D CN G1 image-to-3D task5021400 from its accepted refined stage reference.",
+        "Recorded wrapper alignment, original UVs/materials and scene baked flag; mobile/desktop Meshopt optimization.",
+        "Actual task/input/source/promotion evidence: assets/mango-cheesecake/provenance-v3.json."
+      ],
+      "notes": "Actual stage-specific Lux3D generation can change surviving shape/texture. Original outputs preserved in artifacts/food-redo-v3/lux3d/. dimensionsMm is mesh-local POSITION bounds, not decoded world physical size.",
+      "source": {
+        "path": "assets/mango-cheesecake/source/2.glb",
+        "sha256": "fbff5f55f1877f04d7928794df1e82f9a0dac991155a7260f47f75937210c0fc",
+        "bytes": 13888028
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/mango-cheesecake/processed/mobile/2.glb",
+          "sha256": "716611bd70b5a43517956db417eb0bb54ad19f6801361b929cf27da54a46aef9",
+          "bytes": 1539408,
+          "dimensionsMm": [
+            65534000,
+            54470000,
+            65470000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/mango-cheesecake/processed/desktop/2.glb",
+          "sha256": "1f2ab8778b5ca725ca0ae97ce676635fb78f8a52779671dbf2b2a6c4db5def95",
+          "bytes": 1743256,
+          "dimensionsMm": [
+            65534000,
+            54470000,
+            65470000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    },
+    {
+      "foodId": "mango-cheesecake",
+      "stage": 3,
+      "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+      "processing": [
+        "Independent Lux3D CN G1 image-to-3D task5021407 from its accepted refined stage reference.",
+        "Recorded wrapper alignment, original UVs/materials and scene baked flag; mobile/desktop Meshopt optimization.",
+        "Actual task/input/source/promotion evidence: assets/mango-cheesecake/provenance-v3.json."
+      ],
+      "notes": "Actual stage-specific Lux3D generation can change surviving shape/texture. Original outputs preserved in artifacts/food-redo-v3/lux3d/. dimensionsMm is mesh-local POSITION bounds, not decoded world physical size.",
+      "source": {
+        "path": "assets/mango-cheesecake/source/3.glb",
+        "sha256": "2407e9ebafe66ec13e3c54c6348b920555c707111dbb87d8b94d2063057681fc",
+        "bytes": 15536264
+      },
+      "variants": {
+        "mobile": {
+          "path": "assets/mango-cheesecake/processed/mobile/3.glb",
+          "sha256": "9c7c1037bf45a442c2fb47a0308fac11c574fbe045acf8b9c37555db1f40563e",
+          "bytes": 1775204,
+          "dimensionsMm": [
+            54238000,
+            65534000,
+            44668000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        },
+        "desktop": {
+          "path": "assets/mango-cheesecake/processed/desktop/3.glb",
+          "sha256": "778d9ccba7d3ecc1360c28c027c3742b4cd3b1bfd6942cc71c4be71548e2f2be",
+          "bytes": 2217876,
+          "dimensionsMm": [
+            54238000,
+            65534000,
+            44668000
+          ],
+          "meshCount": 1,
+          "materialCount": 1,
+          "imageCount": 2
+        }
+      },
+      "bites": 3,
+      "calibration": {
+        "scale": 1,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0
+      },
+      "presentation": "physical-size-stable"
+    }
+  ]
+}

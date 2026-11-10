@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "foods": [
+    {
+      "id": "pepperoni-pizza",
+      "runtimePrefix": "pepperoni-pizza",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        }
+      ]
+    },
+    {
+      "id": "rosemary-fries",
+      "runtimePrefix": "rosemary-fries",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 0.8,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 0.65,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "classic-burger",
+      "runtimePrefix": "burger",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 5,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        },
+        {
+          "bites": 6,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "crispy-chicken",
+      "runtimePrefix": "crispy-chicken",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        }
+      ]
+    },
+    {
+      "id": "lemon-soda",
+      "runtimePrefix": "lemon-soda",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size"
+        }
+      ]
+    },
+    {
+      "id": "mango-cheesecake",
+      "runtimePrefix": "mango-cheesecake",
+      "stageCount": 4,
+      "stages": [
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        },
+        {
+          "bites": 3,
+          "calibration": {
+            "scale": 1,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "yaw": 0
+          },
+          "presentation": "physical-size-stable"
+        }
+      ]
+    }
+  ]
+}

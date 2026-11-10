@@ -1,0 +1,447 @@
+{
+  "foodId": "crispy-chicken",
+  "changedStage": 1,
+  "sourceKind": "lux3d-stage-model-with-local-bite-and-fibrous-cap-edit",
+  "historicalProvenance": "assets/crispy-chicken/provenance-v3.json",
+  "baseProviderTaskId": "5032024",
+  "originalProviderRawPreserved": true,
+  "localRefinement": {
+    "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\v3-chicken-review\\stage1-local-bite.glb",
+    "output": "D:\\project\\jiaoguang\\artifacts\\food-redo-v4\\chicken\\stage1-fibrous-bite.glb",
+    "capFacesBefore": 2463,
+    "capFacesAfter": 2463,
+    "displacementMmMinMax": [
+      -1.4699799049499187,
+      1.8962729544940706
+    ],
+    "boundaryVertexCount": 444,
+    "outerGeometryAndUvExactlyUnchanged": true,
+    "combinedWatertight": false,
+    "combinedVolume": false,
+    "normalTexture": true,
+    "note": "Locally authored restrained anisotropic meat relief; source and original reference retained; only cap changed. Pixel texture is derivative of approved white meat reference crop."
+  },
+  "preservation": {
+    "capBoundaryEdgeCounts": [
+      445,
+      445
+    ],
+    "capBoundaryCoordinatesExactlyEqual": true,
+    "outerVerticesExactlyEqual": true,
+    "outerFacesExactlyEqual": true,
+    "outerUvExactlyEqual": true,
+    "capFaceCounts": [
+      2463,
+      2463
+    ],
+    "note": "Boundary topology and coordinates unchanged. Split material source itself does not reload as watertight; no new closure certification claimed."
+  },
+  "staging": {
+    "status": "staged-awaiting-visual-review",
+    "records": [
+      {
+        "food": "crispy-chicken",
+        "stage": 1,
+        "raw": {
+          "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v4\\chicken\\stage1-fibrous-bite.glb",
+          "sha256": "da2f4c5ba0695b15fc50c5b69efcbcd231454e5b29d9648caf5c575d0bc88f98",
+          "bytes": 21845628
+        },
+        "transform": {
+          "scale": 0.8089300278313589,
+          "yaw": 0,
+          "quaternion": [
+            -0.17072389674625305,
+            0.0674372625632512,
+            0.2276318623283374,
+            0.9562893400800213
+          ],
+          "translation": [
+            -0.002636256419246128,
+            0.0013387138970323903,
+            0.0012073221927624347
+          ]
+        },
+        "source": {
+          "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\staging-source\\crispy-chicken\\1.glb",
+          "sha256": "d03429f95973e8c256f6caa559d8601aef11db52904241ede3d2c18f35a04f52",
+          "bytes": 21845920,
+          "dimensionsMm": [
+            140,
+            141.7368,
+            143.3228
+          ],
+          "world": {
+            "size": [
+              0.15898288770012559,
+              0.1842027735741142,
+              0.1654517714646268
+            ],
+            "center": [
+              -0.0026362564192461274,
+              0.0013387138970323842,
+              0.0012073221927624278
+            ],
+            "bounds": [
+              [
+                -0.08212770026930892,
+                -0.09076267289002471,
+                -0.08151856353955098
+              ],
+              [
+                0.07685518743081667,
+                0.09344010068408948,
+                0.08393320792507583
+              ]
+            ]
+          },
+          "meshCount": 2,
+          "materialCount": 2,
+          "imageCount": 4,
+          "foodMaterialsBaked": true,
+          "meshes": [
+            {
+              "name": "Local_closed_bite_surface",
+              "vertices": 1451,
+              "triangles": 2463,
+              "bounds": [
+                [
+                  -0.07113461627103003,
+                  -0.01553679979877523,
+                  -0.02936543362415552
+                ],
+                [
+                  -0.0027355220384850188,
+                  0.056793141434607126,
+                  0.03347959342129961
+                ]
+              ],
+              "hasUV": true
+            },
+            {
+              "name": "Lux3D_outer_surface",
+              "vertices": 514623,
+              "triangles": 171541,
+              "bounds": [
+                [
+                  -0.08212770026930892,
+                  -0.09076267289002471,
+                  -0.08151856353955098
+                ],
+                [
+                  0.07685518743081667,
+                  0.09344010068408948,
+                  0.08393320792507583
+                ]
+              ],
+              "hasUV": true
+            }
+          ]
+        },
+        "variants": {
+          "mobile": {
+            "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-mobile\\crispy-chicken\\1.glb",
+            "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c",
+            "bytes": 1410280,
+            "dimensionsMm": [
+              65534000,
+              64806000,
+              65534000
+            ],
+            "world": {
+              "size": [
+                0.1589795252499771,
+                0.18419808150893283,
+                0.16545004169768285
+              ],
+              "center": [
+                -0.0026362564192461274,
+                0.0013387138970323842,
+                0.0012073221927624278
+              ],
+              "bounds": [
+                [
+                  -0.08212601904423468,
+                  -0.09076032685743403,
+                  -0.081517698656079
+                ],
+                [
+                  0.07685350620574243,
+                  0.0934377546514988,
+                  0.08393234304160385
+                ]
+              ]
+            },
+            "meshCount": 2,
+            "materialCount": 2,
+            "imageCount": 4,
+            "foodMaterialsBaked": true,
+            "meshes": [
+              {
+                "name": "Local_closed_bite_surface",
+                "vertices": 1325,
+                "triangles": 2214,
+                "bounds": [
+                  [
+                    -0.07113434210961267,
+                    -0.015536078937502789,
+                    -0.029364507028997074
+                  ],
+                  [
+                    -0.002735796199902406,
+                    0.05679242057333468,
+                    0.03347866682614117
+                  ]
+                ],
+                "hasUV": true
+              },
+              {
+                "name": "Lux3D_outer_surface",
+                "vertices": 136158,
+                "triangles": 170360,
+                "bounds": [
+                  [
+                    -0.08212601904423468,
+                    -0.09076032685743403,
+                    -0.081517698656079
+                  ],
+                  [
+                    0.07685350620574243,
+                    0.0934377546514988,
+                    0.08393234304160385
+                  ]
+                ],
+                "hasUV": true
+              }
+            ],
+            "command": [
+              "E:\\nvm\\installs\\v22.22.2\\node.exe",
+              "E:/npm-cache/_npx/39bd747c6932aaf5/node_modules/@gltf-transform/cli/bin/cli.js",
+              "optimize",
+              "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\staging-source\\crispy-chicken\\1.glb",
+              "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-mobile\\crispy-chicken\\1.glb",
+              "--compress",
+              "meshopt",
+              "--meshopt-level",
+              "high",
+              "--simplify",
+              "true",
+              "--simplify-ratio",
+              "0.35",
+              "--simplify-error",
+              "0.0001",
+              "--texture-size",
+              "1024",
+              "--texture-compress",
+              "webp",
+              "--flatten",
+              "false",
+              "--instance",
+              "false",
+              "--join",
+              "false",
+              "--palette",
+              "false",
+              "--prune",
+              "true",
+              "--weld",
+              "true"
+            ]
+          },
+          "desktop": {
+            "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-desktop\\crispy-chicken\\1.glb",
+            "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c",
+            "bytes": 1691552,
+            "dimensionsMm": [
+              65534000,
+              64806000,
+              65534000
+            ],
+            "world": {
+              "size": [
+                0.1589795252499771,
+                0.18419808150893283,
+                0.16545004169768285
+              ],
+              "center": [
+                -0.0026362564192461274,
+                0.0013387138970323842,
+                0.0012073221927624278
+              ],
+              "bounds": [
+                [
+                  -0.08212601904423468,
+                  -0.09076032685743403,
+                  -0.081517698656079
+                ],
+                [
+                  0.07685350620574243,
+                  0.0934377546514988,
+                  0.08393234304160385
+                ]
+              ]
+            },
+            "meshCount": 2,
+            "materialCount": 2,
+            "imageCount": 4,
+            "foodMaterialsBaked": true,
+            "meshes": [
+              {
+                "name": "Local_closed_bite_surface",
+                "vertices": 1325,
+                "triangles": 2214,
+                "bounds": [
+                  [
+                    -0.07113434210961267,
+                    -0.015536078937502789,
+                    -0.029364507028997074
+                  ],
+                  [
+                    -0.002735796199902406,
+                    0.05679242057333468,
+                    0.03347866682614117
+                  ]
+                ],
+                "hasUV": true
+              },
+              {
+                "name": "Lux3D_outer_surface",
+                "vertices": 136158,
+                "triangles": 170360,
+                "bounds": [
+                  [
+                    -0.08212601904423468,
+                    -0.09076032685743403,
+                    -0.081517698656079
+                  ],
+                  [
+                    0.07685350620574243,
+                    0.0934377546514988,
+                    0.08393234304160385
+                  ]
+                ],
+                "hasUV": true
+              }
+            ],
+            "command": [
+              "E:\\nvm\\installs\\v22.22.2\\node.exe",
+              "E:/npm-cache/_npx/39bd747c6932aaf5/node_modules/@gltf-transform/cli/bin/cli.js",
+              "optimize",
+              "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\staging-source\\crispy-chicken\\1.glb",
+              "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-desktop\\crispy-chicken\\1.glb",
+              "--compress",
+              "meshopt",
+              "--meshopt-level",
+              "high",
+              "--simplify",
+              "true",
+              "--simplify-ratio",
+              "0.65",
+              "--simplify-error",
+              "0.0001",
+              "--texture-size",
+              "2048",
+              "--texture-compress",
+              "webp",
+              "--flatten",
+              "false",
+              "--instance",
+              "false",
+              "--join",
+              "false",
+              "--palette",
+              "false",
+              "--prune",
+              "true",
+              "--weld",
+              "true"
+            ]
+          }
+        },
+        "materialPolicy": "Provider materials/UVs unchanged in source; scene extras.foodMaterialsBaked=true prevents runtime food grading",
+        "alignmentStatus": "Explicit supplied transform; geometry identity and visual acceptance require review",
+        "reference": {
+          "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\references\\crispy-chicken\\1.png",
+          "sha256": "a0e07dbab67db3678e2b720ee7393ac8c1618c32ca6d839ed1997a36a4af4675",
+          "bytes": 914270
+        },
+        "provider": {
+          "attemptPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d-chicken-repair\\attempt.json",
+          "taskId": "5032024",
+          "parameters": {
+            "version": "G1",
+            "faceCount": 200000,
+            "outputFormat": [
+              "glb"
+            ],
+            "customSize": 140
+          },
+          "inputSha256": "a0e07dbab67db3678e2b720ee7393ac8c1618c32ca6d839ed1997a36a4af4675"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "mode": "apply",
+    "copies": [
+      {
+        "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\staging-source\\crispy-chicken\\1.glb",
+        "target": "assets\\crispy-chicken\\source\\1.glb",
+        "sha256": "d03429f95973e8c256f6caa559d8601aef11db52904241ede3d2c18f35a04f52"
+      },
+      {
+        "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-mobile\\crispy-chicken\\1.glb",
+        "target": "assets\\crispy-chicken\\processed\\mobile\\1.glb",
+        "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c"
+      },
+      {
+        "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-mobile\\crispy-chicken\\1.glb",
+        "target": "public\\models-mobile\\crispy-chicken-1.glb",
+        "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c"
+      },
+      {
+        "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-desktop\\crispy-chicken\\1.glb",
+        "target": "assets\\crispy-chicken\\processed\\desktop\\1.glb",
+        "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c"
+      },
+      {
+        "source": "D:\\project\\jiaoguang\\artifacts\\food-redo-v2\\integration\\runs\\v4-chicken-fibrous-stage1-final\\processed-desktop\\crispy-chicken\\1.glb",
+        "target": "public\\models-desktop\\crispy-chicken-1.glb",
+        "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c"
+      }
+    ],
+    "backupPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v4\\backups\\20261109T150820050537Z"
+  },
+  "currentFiles": [
+    {
+      "path": "assets/crispy-chicken/source/1.glb",
+      "sha256": "d03429f95973e8c256f6caa559d8601aef11db52904241ede3d2c18f35a04f52",
+      "bytes": 21845920
+    },
+    {
+      "path": "assets/crispy-chicken/processed/mobile/1.glb",
+      "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c",
+      "bytes": 1410280
+    },
+    {
+      "path": "assets/crispy-chicken/processed/desktop/1.glb",
+      "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c",
+      "bytes": 1691552
+    },
+    {
+      "path": "public/models-mobile/crispy-chicken-1.glb",
+      "sha256": "15735393c913bc937859f4cc7039aaeda0e0a0aa9b0b5dc8401f37fcd9aef86c",
+      "bytes": 1410280
+    },
+    {
+      "path": "public/models-desktop/crispy-chicken-1.glb",
+      "sha256": "6a8d4722849154caa88b978174b1fc176f39bb0a24c719dd4c5aa93e0481802c",
+      "bytes": 1691552
+    }
+  ],
+  "limits": [
+    "Meat fiber geometry remains locally authored and simplified, not a provider-original surface.",
+    "Source split-material GLB itself does not reload as watertight; unchanged cap boundary and exterior coordinate preservation was directly verified.",
+    "No other consumption stage, mango or drink changed."
+  ]
+}

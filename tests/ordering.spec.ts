@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('table menu builds an order and restores its local receipt', async ({ page }) => {
   await page.goto('/?table=a01');
-  await expect(page.getByText('A01', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('A01 桌', { exact: true }).first()).toBeVisible();
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await expect(page.getByRole('button', { name: '虚拟试吃' })).toBeVisible();
   await page.getByRole('radio', { name: /双份芝士/ }).check();
@@ -46,7 +46,8 @@ test('category filters and sold-out details stay browseable without a tasting mo
   await page.evaluate(() => window.scrollTo(0, 260));
   const menuScroll = await page.evaluate(() => window.scrollY);
   await page.getByRole('button', { name: '查看鲜柠气泡饮' }).click();
-  await expect(page.getByRole('button', { name: '虚拟试吃' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: '虚拟试吃', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /加入点单/ })).toBeEnabled();
   await page.getByRole('button', { name: /返回菜单/ }).click();
   await expect(page.getByRole('button', { name: '饮品', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(menuScroll);

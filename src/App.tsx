@@ -99,7 +99,7 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
     const finishing = state.bites === food.stages[state.stage]!.bites - 1;
     const role = finishing ? 'finish' : state.bites === 0 ? 'bite' : 'chew';
     impulse(motion, finishing ? 1 : 0.65);
-    biteFeedback(settings, food.sound, role);
+    biteFeedback(settings, food.sound, role, food.interaction);
     setChewing(true);
     if (!finishing) dispatch({ type: 'BITE' });
     chewTimer.current = setTimeout(() => {
@@ -107,7 +107,7 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
       setChewing(false);
       if (finishing) dispatch({ type: 'BITE' });
     }, CHEW_SECONDS * 1000);
-  }, [contextLost, food.stages, food.sound, hitReady, motion, settings, state.bites, state.phase, state.stage]);
+  }, [contextLost, food.stages, food.sound, food.interaction, hitReady, motion, settings, state.bites, state.phase, state.stage]);
   const playable = state.phase === 'idle' && !chewing && !contextLost && hitReady;
   const input = useFoodInput(motion, hit, playable, bite, settings.sensitivity);
   const current = entries[state.stage];
@@ -122,7 +122,7 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
     <section className={`stage${state.phase === 'finished' ? ' empty' : ''}`} aria-label="食物空间">
       {state.phase === 'finished' && <div className="finished-state"><div className="finished-stamp">吃光了</div><h2>刚刚好</h2><p>这一刻，值得再来一次。</p></div>}
       {state.phase !== 'finished' && <SceneBoundary><div className="food-input" role="button" tabIndex={0} aria-label={food.name} aria-describedby="food-hint" aria-disabled={!playable} data-hit-ready={hitReady} {...input} onContextMenu={event => event.preventDefault()}>
-        {!contextLost && current?.status === 'ready' && base?.status === 'ready' && <Scene asset={current.asset} base={base.asset} state={state} motion={motion} stage={food.stages[state.stage]!} reduced={reduced} dispatch={event => dispatch(event)} setHit={setHit} onContextLost={handleContextLost} />}
+        {!contextLost && current?.status === 'ready' && base?.status === 'ready' && <Scene interaction={food.interaction} asset={current.asset} base={base.asset} state={state} motion={motion} stage={food.stages[state.stage]!} reduced={reduced} dispatch={event => dispatch(event)} setHit={setHit} onContextLost={handleContextLost} />}
       </div></SceneBoundary>}
     </section>
     <footer className="action-dock">

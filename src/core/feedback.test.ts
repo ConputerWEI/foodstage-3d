@@ -234,6 +234,30 @@ describe('milestoneFeedback', () => {
 });
 
 describe('biteFeedback', () => {
+  it.each([{ chews: [] }, sound])('silences drink mouth audio while preserving haptics and milestone cues for %j', async (drinkSound) => {
+    const { context, nodes } = audioBoundary();
+    const fetch = stubFetch();
+    const vibrate = vi.fn();
+    vi.stubGlobal('navigator', { vibrate });
+    const { biteFeedback, milestoneFeedback } = await import('./feedback');
+    for (const role of ['bite', 'chew', 'finish'] as const) {
+      biteFeedback({ ...settings, haptics: true }, drinkSound, role, 'drink');
+      await flush();
+    }
+    expect(nodes).toHaveLength(0);
+    expect(context.createOscillator).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+    expect(vibrate.mock.calls.map(([pattern]) => pattern)).toEqual([[14, 18, 12], 12, [12, 30, 22]]);
+    milestoneFeedback(settings, 'transition', 1);
+    await flush();
+    milestoneFeedback(settings, 'complete', 3);
+    await flush();
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/audio/ui/stage-transition.wav', '/audio/ui/complete.ogg']);
+    const sources = nodes.filter(entry => entry.kind === 'source');
+    expect(sources).toHaveLength(2);
+    expect(sources.every(source => source.start.mock.calls.length === 1)).toBe(true);
+    expect(context.createOscillator).not.toHaveBeenCalled();
+  });
   it('does not create audio when muted, while allowing optional finishing vibration', async () => {
     const { Constructor } = audioBoundary();
     const vibrate = vi.fn();

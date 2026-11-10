@@ -7,8 +7,20 @@ playwright-report/
 .env.*
 !.env.example
 *.log
+__pycache__/
+*.pyc
 
 # Local asset auditions and PR review downloads
 .audio-candidates/
 .pr1-audio-review/
 pr1-review.zip
+
+# Local 3D generation scratch, bundled runtime, secrets and review/experiment pages
+artifacts/aholo-lux3d-runtime/
+*.private.json
+public/drink-comparison/
+public/drink-comparison.html
+public/food-redo-v2-models/
+public/food-redo-v2-models.html
+public/food-redo-v2-references/
+public/food-redo-v2-review.html

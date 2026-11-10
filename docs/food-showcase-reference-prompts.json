@@ -1,0 +1,40 @@
+{
+  "status": "references-generated-modeling-and-integration-in-progress",
+  "channel": "image",
+  "model": "gpt-image-2.5",
+  "order": ["crispy-chicken", "lemon-soda", "chocolate-brownie"],
+  "foods": [
+    {
+      "id": "crispy-chicken",
+      "name": "黄金炸鸡块",
+      "dimensionsMm": [160, 65, 130],
+      "stageCounts": [6, 4, 2, 1],
+      "referencePrompt": "Photorealistic isolated food asset reference for high-quality 3D reconstruction. Exactly SIX individual boneless golden fried chicken bites, substantial irregular chicken thigh chunks, appetizing craggy crispy coating, natural warm golden-brown variation and tiny toasted crumbs. Arrange in a low compact loose cluster, all six distinct and countable, no intersections, no stacking hiding pieces: three toward rear, two middle, one front. No plate, bowl, basket, paper, sauce, garnish, text or props. Plain seamless white background. Elevated three-quarter camera around 35 degrees, whole cluster visible with generous margin. Soft neutral studio light, subtle contact shadows, sharp realistic food texture. Each bite about 40mm long, cluster about 160mm wide. No cartoon style or plastic shine.",
+      "stageMethod": "Revised after inspecting the merged six-piece trial: generate one image of a single bite, reconstruct that bite, optimize one textured master, then instance shared geometry/materials into nested 6/4/2/1 layouts. Preserve each survivor transform and scale.",
+      "generatedReference": {"path":"assets/crispy-chicken/reference/single-bite.png","imageTaskId":"e1d68e13-6428-41af-9acb-9b0ed861653a","sha256":"0d68760c30ccc04bf849faaa0836c3869b15c79d54f2f29143361fab8f4ff143","role":"actual single-bite reconstruction input; original six-piece prompt above retained as earlier design provenance"},
+      "modelTaskId":"4954280",
+      "checks": ["Exactly 6/4/2/1 substantial pieces", "Stable surviving piece identity", "Closed underside", "No floating texture sheets", "No sauce or container generated"]
+    },
+    {
+      "id": "lemon-soda",
+      "name": "鲜柠气泡饮",
+      "dimensionsMm": [85, 120, 85],
+      "liquidFillTargets": [0.85, 0.6, 0.35, 0.1],
+      "generatedReference":{"path":"assets/lemon-soda/reference/glass-lemonade.png","imageTaskId":"d4772220-b636-4702-9be9-28be3681001b","sha256":"90a5480536b1b1901ac7f81b864591c096218076d4b926bff41256e7e22d584a","role":"appearance and citrus texture reference for local transparent parameterized model; not remote photo reconstruction"},
+      "referencePrompt": "Photorealistic product reference of one short cylindrical clear glass tumbler containing pale lemon-yellow sparkling lemonade, a few angular translucent ice cubes and two natural lemon slices. No straw, no handle, no text, no logo, no coaster, no extra props. A simple subtly thick glass rim and base, realistic refraction and transmission, clearly visible liquid surface near 85 percent of usable interior height. Glass about 85mm diameter and 120mm high. Entire object centered with ample white margin, elevated three-quarter camera around 25 degrees, neutral studio soft lighting, plain white background. Elegant believable drink, no exaggerated opaque yellow liquid, no opaque white glass.",
+      "stageMethod": "Parametric closed cup shell and liquid volume with independent named glass/liquid/ice/lemon nodes. Reference image guides appearance; do not reconstruct transparent glass as an opaque photo-textured solid. Keep cup geometry identical and vary liquid fill only; review ice positioning as liquid falls.",
+      "checks": ["Identical cup across stages", "Closed liquid top and volume", "Plausible wall thickness", "No solid-food crumbs", "Transmission legible on light and dark backgrounds", "Fill measured within usable interior height"]
+    },
+    {
+      "id": "chocolate-brownie",
+      "name": "巧克力布朗尼",
+      "dimensionsMm": [80, 35, 65],
+      "remainingFractions": [1, 0.75, 0.5, 0.25],
+      "generatedReference":{"path":"assets/chocolate-brownie/reference/whole-brownie.png","imageTaskId":"7c295894-404a-4bd7-b113-842348984959","sha256":"1df76a6a58d589122f801ff02a90e72ba0666fe222904c10fcad6b39e05875b5","role":"actual whole-brownie reconstruction input"},
+      "modelTaskId":"4955541",
+      "referencePrompt": "Photorealistic isolated reference of one rectangular chocolate brownie, approximately 80mm wide, 65mm deep and 35mm tall. Thin delicate crackled dark chocolate crust on top, moist fine porous rich brown cake interior visible on vertical cut sides, darker baked bottom. Natural small irregularities, no nuts, frosting, sauce, plate, ice cream, garnish, text or props. Entire single brownie visible, elevated three-quarter view around 30 degrees with front and right cut faces clearly visible. Plain white studio background, soft neutral illumination and minimal contact shadow, physically realistic food detail, no plastic or clay appearance.",
+      "stageMethod": "Derive all stages from the approved full model by sequential clipping from one side. Close new cut faces with separate cake-interior material and keep top crust/underside identities. Preserve source scale instead of normalizing every stage to equal width.",
+      "checks": ["Remaining geometry decreases monotonically", "Closed new cut surfaces", "Crust differs from interior and underside", "No repeated top crust on cut faces", "Stable scale and surviving texture"]
+    }
+  ]
+}

@@ -65,6 +65,7 @@ function adjustedTexture(texture: Texture, grade: (pixels: Uint8ClampedArray | U
 
 /** Apply once when a food GLTF loads, consistently across desktop/mobile and every bite stage. */
 export function applyFoodMaterials(scene: Object3D): void {
+  if (scene.userData.foodMaterialsBaked === true) return;
   const materials = new Map<Material, Material>();
   const colors = new Map<Texture, Texture>();
   const roughness = new Map<Texture, Texture>();

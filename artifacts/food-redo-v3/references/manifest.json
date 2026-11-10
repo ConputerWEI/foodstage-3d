@@ -1,0 +1,86 @@
+﻿[
+    {
+        "path":  "artifacts/food-redo-v3/references/crispy-chicken/0.png",
+        "sha256":  "01825ceee083fa542d38efd5dc42b500ef14b7f6212bb245cb3777442d440e24",
+        "food":  "crispy-chicken",
+        "bytes":  1199155,
+        "stage":  0
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/crispy-chicken/1.png",
+        "sha256":  "a0e07dbab67db3678e2b720ee7393ac8c1618c32ca6d839ed1997a36a4af4675",
+        "food":  "crispy-chicken",
+        "bytes":  914270,
+        "stage":  1
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/crispy-chicken/2.png",
+        "sha256":  "f49785efbc1ea9d4bf37fc4b753c881d880db0d4e9877ec63bca7a266a080b23",
+        "food":  "crispy-chicken",
+        "bytes":  820675,
+        "stage":  2
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/crispy-chicken/3.png",
+        "sha256":  "76c3bef192fd8b06fac8c648c00c8b2ade4699e3f8171ba134d99908d3ee78ec",
+        "food":  "crispy-chicken",
+        "bytes":  746605,
+        "stage":  3
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/lemon-soda/0.png",
+        "sha256":  "c874e9a1bf8153025c31695fbcd30b652f7a58ed238e809808bf73e5b553f045",
+        "food":  "lemon-soda",
+        "bytes":  1415557,
+        "stage":  0
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/lemon-soda/1.png",
+        "sha256":  "b66a49978e58191af6511882aba3714cec9bf1ccd0cf867eb1f95b505022119d",
+        "food":  "lemon-soda",
+        "bytes":  808894,
+        "stage":  1
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/lemon-soda/2.png",
+        "sha256":  "0f0b3f23471b675a0ba6cd1408f13408df9cf94433816f322bd588ffca96f418",
+        "food":  "lemon-soda",
+        "bytes":  799684,
+        "stage":  2
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/lemon-soda/3.png",
+        "sha256":  "134895217fdfaefadc331e17915b12743420e6d8c901b590e1a8f112701df1c5",
+        "food":  "lemon-soda",
+        "bytes":  1675226,
+        "stage":  3
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/mango-cheesecake/0.png",
+        "sha256":  "115fd42ddf072a69b2fb2f64a71dd6f4536c4d883e5aa744ec28cc026db9ce59",
+        "food":  "mango-cheesecake",
+        "bytes":  1460943,
+        "stage":  0
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/mango-cheesecake/1.png",
+        "sha256":  "eeb8b518ff80c78bffa3a8920dd0d742679ccdb40430315f9ad8d2643f18d1f6",
+        "food":  "mango-cheesecake",
+        "bytes":  979186,
+        "stage":  1
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/mango-cheesecake/2.png",
+        "sha256":  "7ed0da61108d12f428ad4bf140e60a8f3aba55c0df0f30b77f4ded20ad2a1a4b",
+        "food":  "mango-cheesecake",
+        "bytes":  615779,
+        "stage":  2
+    },
+    {
+        "path":  "artifacts/food-redo-v3/references/mango-cheesecake/3.png",
+        "sha256":  "73c60018f646081cc85a0a4955c7bb0e71a104c82d8c2ace3021f57abb25747e",
+        "food":  "mango-cheesecake",
+        "bytes":  555216,
+        "stage":  3
+    }
+]

@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T13:51:01.331007+00:00",
+  "foodId": "mango-cheesecake",
+  "sourceKind": "lux3d-image-to-3d-with-local-alignment",
+  "notableLimits": [
+    "Each stage originates in its own actual Lux3D task; no sliced clone substitution.",
+    "Local wrapper alignment and actual source/optimized files are identified by exact staging hashes.",
+    "Visible mango topping refined reference inputs are recorded by provider input hashes; generated stage shapes/materials retain model-specific deviations."
+  ],
+  "stagingMetadata": {
+    "path": "artifacts/food-redo-v3/mango-review/metadata.json",
+    "sha256": "cd51d3e564b528f1ec6b82e4815beb75a864cc356a1d4cee68a48a722ee1cdfe",
+    "bytes": 35656
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "provider": {
+        "attemptPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\attempts\\mango-cheesecake-stage-0-v3-a1.json",
+        "taskId": "5021391",
+        "parameters": {
+          "version": "G1",
+          "faceCount": 200000,
+          "outputFormat": [
+            "glb"
+          ],
+          "customSize": 110
+        },
+        "inputSha256": "115fd42ddf072a69b2fb2f64a71dd6f4536c4d883e5aa744ec28cc026db9ce59"
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\refined-mango\\0.png",
+        "sha256": "115fd42ddf072a69b2fb2f64a71dd6f4536c4d883e5aa744ec28cc026db9ce59",
+        "bytes": 1460943
+      },
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\mango-cheesecake-stage-0\\mango-cheesecake-stage-0_glb.glb",
+        "sha256": "022110889a71db97e17c658ead9cb5273429ecca39c7e8c5113a33bb92d11c12",
+        "bytes": 13417564
+      },
+      "transform": {
+        "scale": 0.9999999999999999,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          1.2837092181923156e-17
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.1000000014901161,
+          0.07400079816579817,
+          0.15012009441852567
+        ],
+        "center": [
+          0,
+          0,
+          1.3877787807814457e-17
+        ],
+        "bounds": [
+          [
+            -0.05000000074505805,
+            -0.03700039908289909,
+            -0.07506004720926282
+          ],
+          [
+            0.05000000074505805,
+            0.03700039908289909,
+            0.07506004720926285
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/mango-cheesecake/source/0.glb",
+          "sha256": "32e92c3916da0485c37d05a63cd161c4ca16a9d6f790cad50aa579723161773f",
+          "bytes": 13417752,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/mobile/0.glb",
+          "sha256": "eae2ad996c417b196213e469e4919891aed8f9d552ac9045ab413e0a2b1f78dc",
+          "bytes": 1406656,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/mango-cheesecake-0.glb",
+          "sha256": "eae2ad996c417b196213e469e4919891aed8f9d552ac9045ab413e0a2b1f78dc",
+          "bytes": 1406656,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/desktop/0.glb",
+          "sha256": "8b1dc681faad1d2479817fccfed783c537066ecf13dfdec25c81d283d2624f96",
+          "bytes": 1609768,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/mango-cheesecake-0.glb",
+          "sha256": "8b1dc681faad1d2479817fccfed783c537066ecf13dfdec25c81d283d2624f96",
+          "bytes": 1609768,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "provider": {
+        "attemptPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\attempts\\mango-cheesecake-stage-1-v3-a1.json",
+        "taskId": "5021394",
+        "parameters": {
+          "version": "G1",
+          "faceCount": 200000,
+          "outputFormat": [
+            "glb"
+          ],
+          "customSize": 110
+        },
+        "inputSha256": "44b33f7604e8041c8c451fff847aa9cd7813ce3cbbe2f6c35acef756cd0255a9"
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\refined-mango\\1.png",
+        "sha256": "44b33f7604e8041c8c451fff847aa9cd7813ce3cbbe2f6c35acef756cd0255a9",
+        "bytes": 1718498
+      },
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\mango-cheesecake-stage-1\\mango-cheesecake-stage-1_glb.glb",
+        "sha256": "1aeb5d3daefffb079e39901999639993232e8f6f034efc2ae4a34a5ea3f5a26c",
+        "bytes": 13096504
+      },
+      "transform": {
+        "scale": 1.0006054678074983,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          -0.012828218347177692
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.10006054827176816,
+          0.07400079816579819,
+          0.12446365772417031
+        ],
+        "center": [
+          0,
+          0,
+          -0.012828218347177695
+        ],
+        "bounds": [
+          [
+            -0.05003027413588408,
+            -0.037000399082899094,
+            -0.07506004720926285
+          ],
+          [
+            0.05003027413588408,
+            0.037000399082899094,
+            0.04940361051490746
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/mango-cheesecake/source/1.glb",
+          "sha256": "d696d1bf0bb98ff6c495f8e974f225fee5ca757fa817b34d305fdd6e538b18bc",
+          "bytes": 13096688,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/mobile/1.glb",
+          "sha256": "66fbaadf4dce9e77a6239f776c7521d101b79cc0fe96b8889cdfa3021417e15f",
+          "bytes": 1422092,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/mango-cheesecake-1.glb",
+          "sha256": "66fbaadf4dce9e77a6239f776c7521d101b79cc0fe96b8889cdfa3021417e15f",
+          "bytes": 1422092,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/desktop/1.glb",
+          "sha256": "336c3a3ab2e890feaf3b3a89723cd23461b868f90a218a4077c6270ae63d9937",
+          "bytes": 1619868,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/mango-cheesecake-1.glb",
+          "sha256": "336c3a3ab2e890feaf3b3a89723cd23461b868f90a218a4077c6270ae63d9937",
+          "bytes": 1619868,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "provider": {
+        "attemptPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\attempts\\mango-cheesecake-stage-2-v3-a1.json",
+        "taskId": "5021400",
+        "parameters": {
+          "version": "G1",
+          "faceCount": 200000,
+          "outputFormat": [
+            "glb"
+          ],
+          "customSize": 110
+        },
+        "inputSha256": "752572c0762c209d63551d817267c769d10bc6beb9d612b6a9397c61f135ec92"
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\refined-mango\\2.png",
+        "sha256": "752572c0762c209d63551d817267c769d10bc6beb9d612b6a9397c61f135ec92",
+        "bytes": 1276891
+      },
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\mango-cheesecake-stage-2\\mango-cheesecake-stage-2_glb.glb",
+        "sha256": "bc08445bc6aad1cf3bb036c6484b6829192c4635809b705be293245fa16bc2d9",
+        "bytes": 13887836
+      },
+      "transform": {
+        "scale": 0.8903501333165045,
+        "yaw": 0,
+        "translation": [
+          0,
+          0,
+          -0.03058567834623177
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.08903501465837553,
+          0.07400079816579819,
+          0.08894873772606213
+        ],
+        "center": [
+          0,
+          0,
+          -0.03058567834623177
+        ],
+        "bounds": [
+          [
+            -0.044517507329187765,
+            -0.037000399082899094,
+            -0.07506004720926283
+          ],
+          [
+            0.044517507329187765,
+            0.037000399082899094,
+            0.013888690516799293
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/mango-cheesecake/source/2.glb",
+          "sha256": "fbff5f55f1877f04d7928794df1e82f9a0dac991155a7260f47f75937210c0fc",
+          "bytes": 13888028,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/mobile/2.glb",
+          "sha256": "716611bd70b5a43517956db417eb0bb54ad19f6801361b929cf27da54a46aef9",
+          "bytes": 1539408,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/mango-cheesecake-2.glb",
+          "sha256": "716611bd70b5a43517956db417eb0bb54ad19f6801361b929cf27da54a46aef9",
+          "bytes": 1539408,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/desktop/2.glb",
+          "sha256": "1f2ab8778b5ca725ca0ae97ce676635fb78f8a52779671dbf2b2a6c4db5def95",
+          "bytes": 1743256,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/mango-cheesecake-2.glb",
+          "sha256": "1f2ab8778b5ca725ca0ae97ce676635fb78f8a52779671dbf2b2a6c4db5def95",
+          "bytes": 1743256,
+          "foodMaterialsBaked": true
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "provider": {
+        "attemptPath": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\attempts\\mango-cheesecake-stage-3-v3-a1.json",
+        "taskId": "5021407",
+        "parameters": {
+          "version": "G1",
+          "faceCount": 200000,
+          "outputFormat": [
+            "glb"
+          ],
+          "customSize": 110
+        },
+        "inputSha256": "f5e4999a8fa6b6bbdb0f30545888c5f113abee06d1b484bedbc923b230781c09"
+      },
+      "reference": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\refined-mango\\3.png",
+        "sha256": "f5e4999a8fa6b6bbdb0f30545888c5f113abee06d1b484bedbc923b230781c09",
+        "bytes": 1586110
+      },
+      "raw": {
+        "path": "D:\\project\\jiaoguang\\artifacts\\food-redo-v3\\lux3d\\models\\mango-cheesecake-stage-3\\mango-cheesecake-stage-3_glb.glb",
+        "sha256": "9730c73a9b34a779ac927d8082ac160d52e0f8e7af28db69122f3dcbf242f6b1",
+        "bytes": 15536064
+      },
+      "transform": {
+        "scale": 1.020692302277341,
+        "yaw": 3.141592653589793,
+        "translation": [
+          0,
+          0,
+          -0.0498427884960848
+        ]
+      },
+      "sourceWorldBounds": {
+        "size": [
+          0.061241532965410295,
+          0.07400079816579817,
+          0.050434517426356094
+        ],
+        "center": [
+          0,
+          0,
+          -0.0498427884960848
+        ],
+        "bounds": [
+          [
+            -0.030620766482705147,
+            -0.03700039908289909,
+            -0.07506004720926285
+          ],
+          [
+            0.030620766482705147,
+            0.03700039908289909,
+            -0.024625529782906753
+          ]
+        ]
+      },
+      "promotedFiles": [
+        {
+          "path": "assets/mango-cheesecake/source/3.glb",
+          "sha256": "2407e9ebafe66ec13e3c54c6348b920555c707111dbb87d8b94d2063057681fc",
+          "bytes": 15536264,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/mobile/3.glb",
+          "sha256": "9c7c1037bf45a442c2fb47a0308fac11c574fbe045acf8b9c37555db1f40563e",
+          "bytes": 1775204,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-mobile/mango-cheesecake-3.glb",
+          "sha256": "9c7c1037bf45a442c2fb47a0308fac11c574fbe045acf8b9c37555db1f40563e",
+          "bytes": 1775204,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "assets/mango-cheesecake/processed/desktop/3.glb",
+          "sha256": "778d9ccba7d3ecc1360c28c027c3742b4cd3b1bfd6942cc71c4be71548e2f2be",
+          "bytes": 2217876,
+          "foodMaterialsBaked": true
+        },
+        {
+          "path": "public/models-desktop/mango-cheesecake-3.glb",
+          "sha256": "778d9ccba7d3ecc1360c28c027c3742b4cd3b1bfd6942cc71c4be71548e2f2be",
+          "bytes": 2217876,
+          "foodMaterialsBaked": true
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "stageCount": 4,
+    "promotedFileCount": 20,
+    "allHashesMatchStaging": true,
+    "allSceneBakedFlags": true
+  },
+  "taskIds": [
+    "5021391",
+    "5021394",
+    "5021400",
+    "5021407"
+  ]
+}

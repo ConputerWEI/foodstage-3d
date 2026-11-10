@@ -1,6 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { CHEW_SECONDS, bitePose, createCrumbBurst, stageBlend } from './bite-effects';
 
+import { foodById } from '../data/foods';
+import { createSequenceState, sequenceReducer } from '../core/sequence';
+
+describe('drink interaction', () => {
+  it('keeps the glass rigid and emits no crumbs while consuming all four stages', () => {
+    const food = foodById('lemon-soda');
+    let state = createSequenceState(food.stages, [0, 1, 2, 3]);
+    for (let stage = 0; stage < 4; stage++) {
+      expect(state.stage).toBe(stage);
+      for (let sip = 0; sip < 3; sip++) {
+        expect(bitePose(0.08, 1, false, food.interaction)).toEqual({ x: 0, y: 0, roll: 0, scaleX: 1, scaleY: 1 });
+        expect(createCrumbBurst({ x: 0.08, y: 0.1, z: 0.08 }, sip === 2, () => 0.5, food.interaction)).toEqual([]);
+        state = sequenceReducer(food.stages, state, { type: 'BITE' });
+      }
+      expect(state.phase).toBe('final');
+      state = sequenceReducer(food.stages, state, { type: 'FINAL_DONE', run: state.run, transition: state.transition });
+    }
+    expect(state.phase).toBe('finished');
+  });
+});
+
 describe('bite effects', () => {
   it('crossfades stages with a smooth bounded blend and bypasses motion when reduced', () => {
     expect(stageBlend(0, false)).toBe(0);
