@@ -1,0 +1,43 @@
+.ordering-hero:has(.ordering-carousel-stage) {
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+}
+.ordering-hero:has(.ordering-carousel-stage) .ordering-hero-copy {
+  align-self: center;
+  padding: 34px clamp(24px, 3.4vw, 49px);
+}
+.ordering-carousel-stage {
+  position: relative;
+  min-width: 0;
+  height: clamp(310px, 29vw, 370px);
+  color: #382218;
+  background: #f5bd47;
+}
+@media (max-width: 760px) {
+  .ordering-hero:has(.ordering-carousel-stage) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ordering-hero:has(.ordering-carousel-stage) .ordering-hero-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 12px;
+    padding: 20px;
+  }
+  .ordering-hero:has(.ordering-carousel-stage) .ordering-sign-caption {
+    grid-column: 1 / -1;
+  }
+  .ordering-hero:has(.ordering-carousel-stage) h1 {
+    margin: 6px 0 0;
+    font-size: clamp(33px, 8.8vw, 45px);
+  }
+  .ordering-hero:has(.ordering-carousel-stage) p {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+  .ordering-hero:has(.ordering-carousel-stage) .ordering-sign-note {
+    display: none;
+  }
+  .ordering-carousel-stage {
+    height: clamp(296px, 78vw, 365px);
+  }
+}

@@ -1,0 +1,68 @@
+.food-carousel-hero {
+  color: #352115;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  background-color: #f5bd47;
+  background-image:
+    radial-gradient(ellipse at 45% 42%, #ffe49b 0%, transparent 67%),
+    repeating-conic-gradient(from -6deg at 50% 54%, #ffdc841c 0deg 10deg, #ecaa2917 10deg 20deg);
+}
+
+.food-carousel-hero .circular-carousel__caption {
+  bottom: 15px;
+  width: fit-content;
+  max-width: calc(100% - 20px);
+  margin-inline: auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 40px minmax(0, auto) 40px;
+  gap: 5px;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.food-carousel-hero .circular-carousel__title {
+  min-width: 158px;
+  gap: 1px;
+  line-height: 1.25;
+  font-size: 18px;
+  letter-spacing: 0.025em;
+  font-weight: 800;
+}
+
+.food-carousel-hero .circular-carousel__subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.food-carousel-hero button {
+  color: inherit;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.food-carousel-hero button:hover { background: #fff4d567; }
+.food-carousel-hero button:focus-visible { outline: 2px solid #40271c; outline-offset: 1px; }
+.food-carousel-hero .food-carousel-hero__play {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 36px;
+  height: 36px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-carousel-hero .food-carousel-hero__play { display: none; }
+}

@@ -1,6 +1,8 @@
-import { useState, type ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { ArrowUpRight, MapPin, ShoppingBag, UtensilsCrossed } from 'lucide-react';
 import { menuCategories, type MenuItem } from '../data/menu';
+import CarouselHero from './CarouselHero';
+import './hero-layout.css';
 import { MenuFoodVisual } from './MenuFoodVisual';
 
 export interface MenuHomeProps {
@@ -17,6 +19,14 @@ export interface MenuHomeProps {
 }
 const price = (cents: number) => `¥${(cents / 100).toFixed(2)}`;
 
+const plateById: Record<string, string> = {
+  'classic-burger': 'burger',
+  'rosemary-fries': 'fries',
+  'pepperoni-pizza': 'pizza',
+  'crispy-chicken': 'chicken',
+  'mango-cheesecake': 'cake',
+};
+
 export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDemoTable, tools, category: selectedCategory, onCategoryChange }: MenuHomeProps) {
   const [localCategory, setLocalCategory] = useState('全部');
   const category = selectedCategory ?? localCategory;
@@ -26,6 +36,15 @@ export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDem
   const categories = ['全部', ...menuCategories];
   const shown = category === '全部' ? items : items.filter(item => item.category === category || (category === '推荐' && Boolean(item.foodId)));
   const featured = items.find(item => item.foodId && item.available) ?? items.find(item => item.available);
+  const plates = useMemo(() => items
+    .filter(item => item.available && plateById[item.id])
+    .map(item => ({
+      menuItem: item,
+      src: `/foods/plates/${plateById[item.id]}.webp`,
+      title: item.name,
+      alt: item.name,
+      subtitle: price(item.price),
+    })), [items]);
   return <main className="ordering-menu">
     <header className="ordering-topbar">
       <a className="ordering-wordmark" href="#restaurant-menu" aria-label="食刻菜单"><UtensilsCrossed aria-hidden="true" size={24} /><span>食刻</span></a>
@@ -34,7 +53,11 @@ export function MenuHome({ table, items, onOpen, onCart, cartCount, total, onDem
     <div className="ordering-menu-inner">
       <section className="ordering-hero" aria-label="食刻餐厅">
         <div className="ordering-hero-copy"><span className="ordering-sign-caption">好好吃饭 · 快乐加倍</span><h1>食刻开饭！</h1><p>现做的好滋味，<br />从这一口开始。</p><span className="ordering-sign-note">汉堡 / 小食 / 清爽饮品</span></div>
-        {featured && <button className="ordering-hero-food" onClick={() => onOpen(featured)} aria-label={`招牌推荐：${featured.name}`}><MenuFoodVisual item={featured} variant="hero" onActivate={() => onOpen(featured)} /><span>招牌推荐 <ArrowUpRight size={16} aria-hidden="true" /></span></button>}
+        {plates.length > 1 ? (
+          <div className="ordering-carousel-stage">
+            <CarouselHero items={plates} onOpenCurrent={plate => onOpen(plate.menuItem)} />
+          </div>
+        ) : featured && <button className="ordering-hero-food" onClick={() => onOpen(featured)} aria-label={`招牌推荐：${featured.name}`}><MenuFoodVisual item={featured} variant="hero" onActivate={() => onOpen(featured)} /><span>招牌推荐 <ArrowUpRight size={16} aria-hidden="true" /></span></button>}
       </section>
       {!table && <div className="ordering-table-hint"><span>扫描桌码，即可为本桌点单</span><button onClick={onDemoTable}>使用演示桌号 A01</button></div>}
       <section className="ordering-catalog" id="restaurant-menu" aria-labelledby="ordering-menu-heading">

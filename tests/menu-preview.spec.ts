@@ -13,15 +13,15 @@ async function rotatePreview(page: Page, preview: Locator) {
   await expect(preview).not.toHaveAttribute('data-rotation', before!);
 }
 
-test('menu, hero and detail share cached mobile models across category changes', async ({ page }) => {
+test('menu and detail share cached mobile models across category changes', async ({ page }) => {
   const models: string[] = [];
   page.on('request', request => { if (/\.glb(?:\?|$)/.test(request.url())) models.push(request.url()); });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/?table=A01');
   const burgerCard = page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).first();
   const preview = burgerCard.getByTestId('menu-model-preview');
-  await expect(page.getByTestId('menu-model-preview')).toHaveCount(menuItems.length + 1);
-  await expect(page.locator('.ordering-menu img')).toHaveCount(0);
+  await expect(page.getByTestId('menu-model-preview')).toHaveCount(menuItems.length);
+  await expect(page.locator('.ordering-food-card img')).toHaveCount(0);
   await rotatePreview(page, preview);
   expect(models.filter(url => url.includes('/burger-'))).toHaveLength(1);
   expect(models.map(url => new URL(url).pathname)).toContain('/models-mobile/burger-0.glb');
@@ -88,8 +88,8 @@ test('desktop catalog gives every card one model and keeps sold-out ordering dis
   const cards = page.locator('.ordering-food-card');
   await expect(cards).toHaveCount(menuItems.length);
   await expect(cards.getByTestId('menu-model-preview')).toHaveCount(menuItems.length);
-  await expect(page.getByTestId('menu-model-preview')).toHaveCount(menuItems.length + 1);
-  await expect(page.locator('.ordering-menu img')).toHaveCount(0);
+  await expect(page.getByTestId('menu-model-preview')).toHaveCount(menuItems.length);
+  await expect(page.locator('.ordering-food-card img')).toHaveCount(0);
   const first = await cards.nth(0).boundingBox();
   const second = await cards.nth(1).boundingBox();
   expect(first).not.toBeNull();
@@ -110,23 +110,36 @@ test('desktop catalog gives every card one model and keeps sold-out ordering dis
 });
 
 for (const width of [390, 1440]) {
-  test(`hero rotates without navigation, opens on tap and supports keyboard activation at ${width}px`, async ({ page }) => {
+  test(`hero carousel supports drag, tap and keyboard navigation at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/?table=A01');
-    const hero = page.getByRole('button', { name: '招牌推荐：经典汉堡', exact: true });
-    const heroPreview = hero.getByTestId('menu-model-preview');
-    await rotatePreview(page, heroPreview);
+    const carousel = page.getByRole('region', { name: /招牌菜轮播/ });
+    await expect(carousel).toHaveAttribute('data-ready', '');
+    await carousel.scrollIntoViewIfNeeded();
+    const caption = carousel.locator('.circular-carousel__title');
+    const bounds = (await carousel.boundingBox())!;
+    const y = bounds.y + bounds.height * 0.4;
+    await page.mouse.move(bounds.x + bounds.width * 0.8, y);
+    await page.mouse.down();
+    await page.mouse.move(bounds.x + bounds.width * 0.2, y, { steps: 12 });
+    await expect(caption).not.toContainText('经典汉堡');
+    await page.mouse.up();
     await expect(page.locator('.ordering-menu')).toBeVisible();
     await expect(page.locator('.ordering-detail')).toHaveCount(0);
-    const bounds = (await heroPreview.boundingBox())!;
-    await heroPreview.click({ position: { x: bounds.width * 0.5, y: bounds.height * 0.45 } });
+
+    await carousel.press('Home');
+    await expect(caption).toContainText('经典汉堡');
+    await carousel.click({ position: { x: bounds.width * 0.5, y: bounds.height * 0.4 } });
     const detailPreview = page.locator('.ordering-detail-art').getByTestId('menu-model-preview');
-    await expect(detailPreview).toHaveAttribute('data-ready', 'true');
-    await rotatePreview(page, detailPreview);
     await expect(page.getByRole('heading', { name: '经典汉堡', exact: true })).toBeVisible();
+    await rotatePreview(page, detailPreview);
     await page.getByRole('button', { name: /返回菜单/ }).click();
-    await hero.focus();
-    await page.keyboard.press('Enter');
+
+    await carousel.press('ArrowRight');
+    await expect(caption).toContainText('迷迭香薯条');
+    await carousel.press('Enter');
+    await expect(page.getByRole('heading', { name: '迷迭香薯条', exact: true })).toBeVisible();
     await expect(detailPreview).toHaveAttribute('data-ready', 'true');
     await expect(page.getByRole('button', { name: /加入点单/ })).toBeEnabled();
   });
