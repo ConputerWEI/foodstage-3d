@@ -1,10 +1,12 @@
 import { ArrowLeft, Minus, Plus, ShoppingBag } from 'lucide-react';
 import type { MenuItem } from '../data/menu';
+import { BurgerHoloCard } from './BurgerHoloCard';
 import { MenuFoodVisual } from './MenuFoodVisual';
 
 export interface MenuItemDraft { choices: Record<string, string>; quantity: number; note: string }
 export interface MenuItemDetailProps {
   item: MenuItem;
+  reducedMotion?: boolean;
   onClose: () => void;
   onTaste: () => void;
   onAdd: (choices: Record<string, string>, quantity: number, note: string) => void;
@@ -13,7 +15,7 @@ export interface MenuItemDetailProps {
 }
 const price = (cents: number) => `¥${(cents / 100).toFixed(2)}`;
 
-export function MenuItemDetail({ item, onClose, onTaste, onAdd, draft, onDraftChange }: MenuItemDetailProps) {
+export function MenuItemDetail({ item, reducedMotion = false, onClose, onTaste, onAdd, draft, onDraftChange }: MenuItemDetailProps) {
   const choices: Record<string, string> = {};
   let unitPrice = item.price;
   for (const group of item.options ?? []) {
@@ -26,7 +28,7 @@ export function MenuItemDetail({ item, onClose, onTaste, onAdd, draft, onDraftCh
     <header className="ordering-detail-top"><button onClick={onClose}><ArrowLeft size={20} aria-hidden="true" />返回菜单</button><span>食刻</span></header>
     <div className="ordering-detail-layout">
       <section className="ordering-detail-art" aria-label={`${item.name}3D展示`}>
-        <MenuFoodVisual item={item} variant="detail" />
+        {item.id === 'classic-burger' ? <BurgerHoloCard item={item} reducedMotion={reducedMotion} /> : <MenuFoodVisual item={item} variant="detail" />}
       </section>
       <section className="ordering-detail-content" aria-labelledby="ordering-detail-title">
         <div className="ordering-detail-heading"><span className="ordering-detail-category">{item.category}</span><h1 id="ordering-detail-title">{item.name}</h1><p>{item.description}</p><strong className="ordering-price">{price(item.price)}<small> / {item.unit ?? '份'}</small></strong>{!item.available && <p className="ordering-unavailable" role="status">暂时售罄，看看其他好吃的吧</p>}</div>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalStore } from 'react';
 import { foodById, type FoodDefinition } from './data/foods';
-import { menuItems, type MenuItem } from './data/menu';
+import { menuItemById, menuItems, type MenuItem } from './data/menu';
 import { addLine, cartTotal, readCart, saveCart, setLineQuantity } from './core/cart';
 import { createDemoOrder, readOrder, saveOrder } from './core/orders';
 import { parseTable } from './core/table';
@@ -50,7 +50,7 @@ function AppHeader({ settings, onSettingsChange, onBack }: { settings: Settings;
   </header>;
 }
 
-function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDefinition; settings: Settings; onSettingsChange: (settings: Settings) => void; onBack: () => void }) {
+function PlayScreen({ food, settings, reduced, onSettingsChange, onBack }: { food: FoodDefinition; settings: Settings; reduced: boolean; onSettingsChange: (settings: Settings) => void; onBack: () => void }) {
   const [store] = useState(() => createModelStore(food.stages));
   const entries = useSyncExternalStore(store.subscribe, store.getSnapshot);
   const reducer = useCallback((state: ReturnType<typeof createSequenceState>, event: SequenceEvent) => sequenceReducer(food.stages, state, event), [food.stages]);
@@ -67,8 +67,6 @@ function PlayScreen({ food, settings, onSettingsChange, onBack }: { food: FoodDe
     hit.current = next;
     setHitReady(Boolean(next));
   }, []);
-  const systemReduced = useSystemReducedMotion();
-  const reduced = settings.motion === 'reduced' || (settings.motion === 'system' && systemReduced);
   const handleContextLost = useCallback(() => { setContextLost(true); setHit(null); }, [setHit]);
 
   useEffect(() => { void store.load(0); }, [store]);
@@ -145,14 +143,19 @@ const emptyDraft = (): MenuItemDraft => ({ choices: {}, quantity: 1, note: '' })
 
 export default function App() {
   const [settings, setSettings] = useState<Settings>(() => readSettings());
+  const systemReduced = useSystemReducedMotion();
+  const reducedMotion = settings.motion === 'reduced' || (settings.motion === 'system' && systemReduced);
   const [table, setTable] = useState(() => parseTable(window.location.search));
   const [cart, setCart] = useState(() => readCart(browserStorage()));
   const [order, setOrder] = useState(() => readOrder(browserStorage()));
-  const [screen, setScreen] = useState<OrderScreen>(() => {
-    const restored = readOrder(browserStorage());
-    return restored && restored.table === parseTable(window.location.search) && readCart(browserStorage()).length === 0 ? 'result' : 'menu';
+  const [selected, setSelected] = useState<MenuItem | null>(() => {
+    const id = new URLSearchParams(window.location.search).get('item');
+    return id ? menuItemById(id) ?? null : null;
   });
-  const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [screen, setScreen] = useState<OrderScreen>(() => {
+    if (selected) return 'detail';
+    return order && order.table === table && cart.length === 0 ? 'result' : 'menu';
+  });
   const [draft, setDraft] = useState<MenuItemDraft>(emptyDraft);
   const [category, setCategory] = useState('全部');
   const menuScroll = useRef(0);
@@ -163,6 +166,11 @@ export default function App() {
     if (!saveCart(browserStorage(), cart)) setError('无法保存点单，请检查浏览器存储权限。当前选择仍保留在此页面。');
   }, [cart]);
   useEffect(() => {
+    const url = new URL(window.location.href);
+    if (screen !== 'detail' && url.searchParams.has('item')) {
+      url.searchParams.delete('item');
+      window.history.replaceState(window.history.state, '', url);
+    }
     window.scrollTo(0, screen === 'menu' ? menuScroll.current : 0);
     const heading = document.querySelector<HTMLElement>('.ordering-app h1, .ordering-app h2');
     if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
@@ -183,12 +191,12 @@ export default function App() {
     }
     setOrder(next); setCart([]); setError(''); setScreen('result');
   };
-  if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.foodId} food={foodById(selected.foodId)} settings={settings} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
+  if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.foodId} food={foodById(selected.foodId)} settings={settings} reduced={reducedMotion} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
   return <main className="ordering-app">
     {screen === 'menu' && <>
       <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
     </>}
-    {screen === 'detail' && selected && <MenuItemDetail item={selected} draft={draft} onDraftChange={setDraft} onClose={() => setScreen('menu')} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
+    {screen === 'detail' && selected && <MenuItemDetail item={selected} reducedMotion={reducedMotion} draft={draft} onDraftChange={setDraft} onClose={() => setScreen('menu')} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
       setCart(current => addLine(current, selected, Object.entries(choices).map(([groupId, choiceId]) => ({ groupId, choiceId })), quantity, note));
       setScreen('menu');
     }} />}
