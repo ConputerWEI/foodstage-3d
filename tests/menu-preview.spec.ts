@@ -1,10 +1,10 @@
 import { test, expect, type Locator, type Page } from '@playwright/test';
 import { menuItemById, menuItems } from '../src/data/menu';
 
-async function rotatePreview(page: Page, preview: Locator) {
-  await preview.scrollIntoViewIfNeeded();
+async function rotatePreview(page: Page, preview: Locator, stage: Locator = preview) {
+  await stage.scrollIntoViewIfNeeded();
   await expect(preview).toHaveAttribute('data-ready', 'true');
-  const bounds = (await preview.boundingBox())!;
+  const bounds = (await stage.boundingBox())!;
   const before = await preview.getAttribute('data-rotation');
   await page.mouse.move(bounds.x + bounds.width * 0.25, bounds.y + bounds.height * 0.45);
   await page.mouse.down();
@@ -12,6 +12,23 @@ async function rotatePreview(page: Page, preview: Locator) {
   await page.mouse.up();
   await expect(preview).not.toHaveAttribute('data-rotation', before!);
 }
+
+test('welcome shows the interactive burger on its own and respects reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/?table=A01');
+  const hero = page.locator('.welcome-hero-food');
+  const floatingModel = hero.locator('[data-floating]');
+  await expect(hero.locator('img, .food-holo-card')).toHaveCount(0);
+  await expect(hero.getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
+  await expect(floatingModel).toHaveCSS('animation-name', 'food-holo-hover');
+  await rotatePreview(page, hero.getByTestId('menu-model-preview'), hero);
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(floatingModel).toHaveCount(0);
+  await expect(hero.locator('canvas')).toBeVisible();
+  await page.getByRole('button', { name: /堂食/ }).click();
+  await expect(page.getByRole('dialog', { name: '几位用餐？' })).toBeVisible();
+});
 
 test('menu and detail share cached mobile models across category changes', async ({ page }) => {
   const models: string[] = [];
@@ -117,6 +134,11 @@ for (const width of [390, 1440]) {
     await page.goto('/?table=A01&mode=dine-in&guests=2');
     const carousel = page.getByRole('region', { name: /招牌菜轮播/ });
     await expect(carousel).toHaveAttribute('data-ready', '');
+    const featuredIds = menuItems.filter(item => item.available && item.foodId && item.category !== '饮品')
+      .map(item => item.modelFoodId ?? item.foodId).join(' ');
+    await expect(carousel.locator('img')).toHaveCount(0);
+    await expect(carousel.locator('.food-carousel-models')).toHaveAttribute('data-loaded-models', featuredIds);
+    await expect(carousel.locator('canvas')).toHaveCount(1);
     await carousel.scrollIntoViewIfNeeded();
     const caption = carousel.locator('.circular-carousel__title');
     const bounds = (await carousel.boundingBox())!;

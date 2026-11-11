@@ -1,61 +1,12 @@
-import { Component, useEffect, useMemo, useRef, useState, type PointerEvent, type ReactNode } from 'react';
+import { SceneBoundary } from './SceneBoundary';
+import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Box3, Mesh, PerspectiveCamera, PMREMGenerator, Vector3, type Group } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { PerspectiveCamera, PMREMGenerator } from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { foodById } from '../data/foods';
-import { applyFoodMaterials } from '../scene/food-materials';
+import { loadPreview, type PreviewAsset } from '../scene/menu-preview-asset';
 import { FoodInkEffect } from '../scene/FoodInkEffect';
 
-interface PreviewAsset { scene: Group; center: Vector3; scale: number; radius: number }
 type PreviewVariant = 'thumbnail' | 'hero' | 'detail';
-const models = new Map<string, Promise<PreviewAsset>>();
-
-function loadPreview(foodId: string, previewModelUrl?: string): Promise<PreviewAsset> {
-  const cacheKey = previewModelUrl ?? foodId;
-  const existing = models.get(cacheKey);
-  if (existing) return existing;
-  const request = (async () => {
-    // Stage-based foods always use their small variant here, including on desktop.
-    const url = previewModelUrl ?? foodById(foodId).stages[0]?.url.replace('/models-desktop/', '/models-mobile/');
-    if (!url) throw new Error('Missing food model');
-    const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-    const gltf = await loader.loadAsync(url);
-    applyFoodMaterials(gltf.scene);
-    const bounds = new Box3().setFromObject(gltf.scene);
-    const size = bounds.getSize(new Vector3());
-    const extent = Math.max(size.x, size.y, size.z);
-    if (!Number.isFinite(extent) || extent <= 0) throw new Error('Empty food model');
-    const center = bounds.getCenter(new Vector3());
-    // Fit the actual mesh rather than the empty corners of its bounding box.
-    // Computed once per cached asset; a sphere remains safe at every yaw angle.
-    const point = new Vector3();
-    let radiusSquared = 0;
-    gltf.scene.traverse(object => {
-      if (!(object instanceof Mesh)) return;
-      const positions = object.geometry.getAttribute('position');
-      if (!positions) return;
-      for (let i = 0; i < positions.count; i++) {
-        point.fromBufferAttribute(positions, i).applyMatrix4(object.matrixWorld);
-        radiusSquared = Math.max(radiusSquared, point.distanceToSquared(center));
-      }
-    });
-    const radius = radiusSquared > 0 ? Math.sqrt(radiusSquared) * 2 / extent : size.length() / extent;
-    return { scene: gltf.scene, center, scale: 2 / extent, radius };
-  })();
-  models.set(cacheKey, request);
-  // Permit another activation to retry a failed request.
-  void request.catch(() => { if (models.get(cacheKey) === request) models.delete(cacheKey); });
-  return request;
-}
-
-class PreviewBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() { return { failed: true }; }
-  componentDidCatch() { this.props.onError(); }
-  render() { return this.state.failed ? null : this.props.children; }
-}
 
 function ContextLossListener({ onError }: { onError: () => void }) {
   const gl = useThree(state => state.gl);
@@ -189,7 +140,7 @@ export default function MenuModelPreview({ foodId, name, onClose, showClose = tr
   };
   const stopDrag = () => { drag.current = null; };
   return <div ref={container} className={`ordering-model-preview ordering-model-preview--${variant}${ready && active && !failed ? ' is-ready' : ''}`} data-testid="menu-model-preview" data-ready={ready && active && !failed} data-rotation={rotation.toFixed(4)} aria-label={`${name}3D预览`} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={stopDrag} onPointerCancel={() => { moved.current = true; stopDrag(); }} onLostPointerCapture={stopDrag} onClick={event => { event.stopPropagation(); if (!moved.current) onActivate?.(); }}>
-    {active && asset && !failed && <PreviewBoundary onError={markFailed}>
+    {active && asset && !failed && <SceneBoundary fallback={null} onError={markFailed}>
       <Canvas frameloop="demand" dpr={[1, 2]} camera={{ fov: 38, near: 0.1, far: 100 }} gl={{ antialias: false, alpha: true, powerPreference: 'low-power' }} fallback={<span className="ordering-preview-status" role="status">加载失败</span>}>
         <ContextLossListener onError={markFailed} />
         {standalone ? <PackagingStudio /> : <>
@@ -205,7 +156,7 @@ export default function MenuModelPreview({ foodId, name, onClose, showClose = tr
         <PreviewModel asset={asset} rotation={rotation} foodId={foodId} variant={variant} standalone={standalone} onReady={markReady} />
         <FoodInkEffect preview={variant === 'thumbnail'} />
       </Canvas>
-    </PreviewBoundary>}
+    </SceneBoundary>}
     {(!ready || failed) && <span className="ordering-preview-status" role="status">{failed ? '加载失败' : active ? '加载中…' : '预览已暂停'}</span>}
     {showClose && <button className="ordering-preview-close" aria-label="关闭3D预览" onClick={event => { event.stopPropagation(); onClose(); }}>×</button>}
   </div>;

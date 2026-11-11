@@ -230,7 +230,7 @@ export default function App() {
   };
   if (screen === 'tasting' && selected?.foodId) return <PlayScreen key={selected.id} item={selected} food={foodById(selected.foodId)} settings={settings} reduced={reducedMotion} onSettingsChange={updateSettings} onBack={() => setScreen('detail')} />;
   return <main className="ordering-app">
-    {screen === 'welcome' && <OrderWelcome onChoose={chooseDining} />}
+    {screen === 'welcome' && <OrderWelcome reducedMotion={reducedMotion} onChoose={chooseDining} />}
     {screen === 'menu' && <>
       <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} dining={dining} onChooseDining={() => setScreen('welcome')} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
     </>}

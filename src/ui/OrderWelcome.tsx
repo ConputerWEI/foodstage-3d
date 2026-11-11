@@ -1,14 +1,17 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { ArrowRight, Rotate3D, ShoppingBag, Utensils, UtensilsCrossed, X } from 'lucide-react';
 import { menuItemById } from '../data/menu';
-import { MenuFoodVisual } from './MenuFoodVisual';
+import { FoodHoloStage } from './FoodHoloCard';
 import './order-welcome.css';
 
 type OrderMode = 'dine-in' | 'takeaway';
 const quickCounts = [1, 2, 3, 4, 5];
 const featured = menuItemById('classic-burger');
 
-export function OrderWelcome({ onChoose }: { onChoose: (mode: OrderMode, guests?: number) => void }) {
+export function OrderWelcome({ onChoose, reducedMotion }: {
+  onChoose: (mode: OrderMode, guests?: number) => void;
+  reducedMotion: boolean;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [guests, setGuests] = useState<number | 'custom'>(2);
   const [customCount, setCustomCount] = useState('');
@@ -42,8 +45,7 @@ export function OrderWelcome({ onChoose }: { onChoose: (mode: OrderMode, guests?
         </div>
         <figure className="welcome-hero-art">
           <div className="welcome-hero-food">
-            <img className="welcome-hero-poster" src="/foods/burger-double-cutout.png" alt="" fetchPriority="high" />
-            {featured && <MenuFoodVisual item={featured} variant="hero" />}
+            {featured && <FoodHoloStage item={featured} variant="hero" reducedMotion={reducedMotion} />}
           </div>
           <figcaption><Rotate3D size={16} aria-hidden="true" />经典汉堡</figcaption>
         </figure>

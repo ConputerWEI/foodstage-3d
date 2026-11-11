@@ -77,16 +77,6 @@
   background: radial-gradient(#a570293d 19%, transparent 22%) 0 0 / 5px 5px, #f5c35d;
 }
 .welcome-hero-food { position: absolute; inset: 0 4% 2% -3%; }
-.welcome-hero-poster {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 7% 14%;
-  filter: drop-shadow(2px 3px 0 #57371f);
-}
-.welcome-hero-food:has(.is-ready) .welcome-hero-poster { visibility: hidden; }
 .welcome-hero-food .ordering-model-preview.is-ready { background: transparent; }
 .welcome-hero-art figcaption {
   display: flex;

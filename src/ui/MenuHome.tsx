@@ -22,14 +22,6 @@ export interface MenuHomeProps {
 }
 const price = (cents: number) => `¥${(cents / 100).toFixed(2)}`;
 
-const plateById: Record<string, string> = {
-  'classic-burger': 'burger',
-  'rosemary-fries': 'fries',
-  'pepperoni-pizza': 'pizza',
-  'crispy-chicken': 'chicken',
-  'mango-cheesecake': 'cake',
-};
-
 export function MenuHome({ table, dining, onChooseDining, items, onOpen, onCart, cartCount, total, onDemoTable, tools, category: selectedCategory, onCategoryChange }: MenuHomeProps) {
   const [localCategory, setLocalCategory] = useState('全部');
   const category = selectedCategory ?? localCategory;
@@ -40,12 +32,11 @@ export function MenuHome({ table, dining, onChooseDining, items, onOpen, onCart,
   const shown = category === '全部' ? items : items.filter(item => item.category === category || (category === '推荐' && item.available && Boolean(item.foodId)));
   const featured = items.find(item => item.foodId && item.available) ?? items.find(item => item.available);
   const plates = useMemo(() => items
-    .filter(item => item.available && plateById[item.id])
+    .filter(item => item.available && item.category !== '饮品' && item.foodId)
     .map(item => ({
       menuItem: item,
-      src: `/foods/plates/${plateById[item.id]}.webp`,
+      modelId: item.modelFoodId ?? item.foodId!,
       title: item.name,
-      alt: item.name,
       subtitle: price(item.price),
     })), [items]);
   return <main className="ordering-menu">

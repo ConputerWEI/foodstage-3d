@@ -1,19 +1,22 @@
-import { useState } from 'react';
-import CircularCarousel, { type CarouselItem } from './CircularCarousel';
+import { useRef, useState } from 'react';
+import CircularCarousel, { type CarouselItem, type CarouselSceneBridge } from './CircularCarousel';
+import { CarouselModels } from './CarouselModels';
 import './carousel-hero.css';
 
-interface CarouselHeroProps<Item extends CarouselItem> {
+interface CarouselHeroProps<Item extends CarouselItem & { modelId: string }> {
   items: readonly Item[];
   onOpenCurrent?: (item: Item) => void;
 }
 
-export default function CarouselHero<Item extends CarouselItem>({ items, onOpenCurrent }: CarouselHeroProps<Item>) {
+export default function CarouselHero<Item extends CarouselItem & { modelId: string }>({ items, onOpenCurrent }: CarouselHeroProps<Item>) {
   const [playing, setPlaying] = useState(true);
+  const sceneBridge = useRef<CarouselSceneBridge>({});
   if (!items.length) return null;
   return (
     <div className="food-carousel-hero">
       <CircularCarousel
         items={items}
+        sceneBridge={sceneBridge}
         onOpenCurrent={onOpenCurrent}
         preset="cylinder"
         intro="rise"
@@ -33,7 +36,9 @@ export default function CarouselHero<Item extends CarouselItem>({ items, onOpenC
         parallax={0.16}
         stretch={0.2}
         captions
-      />
+      >
+        <CarouselModels items={items} bridge={sceneBridge} />
+      </CircularCarousel>
       <button
         type="button"
         className="food-carousel-hero__play"

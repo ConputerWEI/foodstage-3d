@@ -66,3 +66,17 @@
 @media (prefers-reduced-motion: reduce) {
   .food-carousel-hero .food-carousel-hero__play { display: none; }
 }
+
+.food-carousel-models {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.food-carousel-status {
+  position: absolute;
+  inset: 43% 0 auto;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 650;
+  color: #55331c;
+}

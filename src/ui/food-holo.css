@@ -82,3 +82,31 @@
   .food-holo { padding: 10px 0 7px; gap: 11px; }
   .food-holo-stage { width: min(75%, 320px); aspect-ratio: 1.12; }
 }
+
+/* The homepage supplies the yellow backdrop. Only the transparent model moves. */
+.food-holo-stage.food-holo-stage--hero {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.food-holo-stage--hero:focus-visible {
+  outline: 2px solid var(--welcome-ink);
+  outline-offset: -4px;
+}
+
+.food-holo-object {
+  position: absolute;
+  inset: 0;
+}
+
+.food-holo-object[data-floating]:has(.is-ready) {
+  animation: food-holo-hover 2.25s ease-in-out infinite alternate;
+}
+
+@keyframes food-holo-hover {
+  from { translate: 0 -1.3%; }
+  to { translate: 0 1.3%; }
+}

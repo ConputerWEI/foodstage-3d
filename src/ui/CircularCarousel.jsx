@@ -99,6 +99,8 @@ const usePrefersReducedMotion = () => {
 
 const CircularCarousel = ({
   items,
+  sceneBridge,
+  children,
   preset = 'cylinder',
   intro = 'rise',
   cardWidth = 220,
@@ -130,7 +132,7 @@ const CircularCarousel = ({
 }) => {
   const incoming = items;
   const [loadedItems, setList] = useState(incoming);
-  const list = loadedItems.length === incoming.length && loadedItems.every((item, index) => item.src === incoming[index].src)
+  const list = loadedItems.length === incoming.length && loadedItems.every((item, index) => (item.modelId ?? item.src) === (incoming[index].modelId ?? incoming[index].src))
     ? incoming
     : loadedItems;
   const [leaving, setLeaving] = useState(null);
@@ -256,11 +258,17 @@ const CircularCarousel = ({
   incomingRef.current = incoming;
   const listRef = useRef(list);
   listRef.current = list;
-  const sourcesKey = incoming.map(item => item.src).join('|');
+  const sourcesKey = incoming.map(item => item.modelId ?? item.src).join('|');
 
   useEffect(() => {
     let cancelled = false;
     const next = incomingRef.current;
+    if (sceneBridge) {
+      setList(next);
+      setReady(true);
+      wakeRef.current();
+      return;
+    }
     const smooth = readyRef.current && next.length === listRef.current.length;
     if (!smooth) {
       setReady(false);
@@ -302,7 +310,7 @@ const CircularCarousel = ({
     return () => {
       cancelled = true;
     };
-  }, [sourcesKey]);
+  }, [sourcesKey, sceneBridge]);
 
   useEffect(() => {
     if (!leaving) return undefined;
@@ -492,7 +500,18 @@ const CircularCarousel = ({
         ring.style.transform = `rotateY(${angle}deg)`;
       }
 
-      for (let index = 0; index < s.count; index++) {
+      if (sceneBridge) {
+        const slots = Array.from({ length: s.count }, (_, index) => {
+          const mod = introCard(elapsed, index * s.step);
+          return { radius: R * mod.radius, lift: mod.lift };
+        });
+        sceneBridge.current.pose = {
+          angle, radius: R, perspective: s.perspective, pitch: s.tilt + state.pitch, yaw: state.yaw,
+          fit: state.fit, shift: state.shift, cardWidth: s.cardW, cardHeight: s.cardH, slots
+        };
+        sceneBridge.current.redraw?.();
+      }
+      for (let index = 0; !sceneBridge && index < s.count; index++) {
         const card = cardRefs.current[index];
         if (!card) continue;
         const base = index * s.step;
@@ -748,8 +767,10 @@ const CircularCarousel = ({
       return;
     }
     const card = event.target.closest?.('[data-cc-index]');
-    if (!card) return;
-    const index = Number(card.getAttribute('data-cc-index'));
+    const index = sceneBridge
+      ? sceneBridge.current.pick?.(event.clientX, event.clientY)
+      : card ? Number(card.getAttribute('data-cc-index')) : undefined;
+    if (index == null || event.target.closest('button')) return;
     if (index === activeRef.current && onOpenCurrent) {
       onOpenCurrent(list[index]);
       return;
@@ -866,7 +887,7 @@ const CircularCarousel = ({
         <div ref={stageRef} className="circular-carousel__stage">
           <div ref={cameraRef} className="circular-carousel__camera">
             <div ref={ringRef} className="circular-carousel__ring">
-              {list.map((item, index) => (
+              {!sceneBridge && list.map((item, index) => (
                 <div
                   key={index}
                   ref={element => {
@@ -886,6 +907,7 @@ const CircularCarousel = ({
           </div>
         </div>
       </div>
+      {sceneBridge && children}
       {captions && current && (
         <div className="circular-carousel__caption">
           <button type="button" aria-label="上一道菜" onClick={() => stepBy(-1)}>

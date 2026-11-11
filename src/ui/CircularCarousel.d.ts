@@ -1,14 +1,29 @@
-import type { CSSProperties, ReactElement } from 'react';
+import type { CSSProperties, ReactElement, ReactNode, RefObject } from 'react';
 
 export interface CarouselItem {
-  readonly src: string;
+  readonly src?: string;
+  readonly modelId?: string;
   readonly alt?: string;
   readonly title?: string;
   readonly subtitle?: string;
 }
 
+export interface CarouselPose {
+  angle: number; pitch: number; yaw: number; radius: number; perspective: number;
+  fit: number; shift: number; cardWidth: number; cardHeight: number;
+  slots: { radius: number; lift: number }[];
+}
+
+export interface CarouselSceneBridge {
+  pose?: CarouselPose;
+  redraw?: () => void;
+  pick?: (clientX: number, clientY: number) => number | undefined;
+}
+
 interface CircularCarouselProps<Item extends CarouselItem> {
   items: readonly Item[];
+  sceneBridge?: RefObject<CarouselSceneBridge>;
+  children?: ReactNode;
   preset?: 'cylinder' | 'orbit' | 'wheel' | 'panorama';
   intro?: 'assemble' | 'rise' | 'spin' | 'none';
   cardWidth?: number;
