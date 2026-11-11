@@ -41,8 +41,8 @@ describe('restaurant menu', () => {
       expect(item?.foodId).toBeUndefined();
       expect(item?.modelFoodId).toBeUndefined();
     }
-    expect(menuItemById('truffle-fries')).toMatchObject({ available: false, modelFoodId: 'rosemary-fries' });
-    expect(menuItemById('truffle-fries')?.foodId).toBeUndefined();
+    expect(menuItemById('truffle-fries')).toMatchObject({ available: false, foodId: 'rosemary-fries' });
+    for (const item of menuItems) expect(Boolean(item.foodId)).toBe(item.category !== '饮品');
     expect(menuItemById('lemon-soda')?.foodId).toBeUndefined();
   });
 });

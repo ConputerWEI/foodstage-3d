@@ -12,7 +12,7 @@ for (const width of [390, 1440]) {
       page.on('pageerror', error => errors.push(error.message));
       const variant = width < 768 ? 'mobile' : 'desktop';
       const response = page.waitForResponse(r => r.url().includes(`/models-${variant}/${food.id}-0.glb`) && r.ok());
-      await page.goto('/');
+      await page.goto('/?mode=dine-in&guests=2');
       await page.getByRole('button', { name: `查看${food.name}`, exact: true }).click();
       await page.getByRole('button', { name: '虚拟试吃' }).click();
       await response;

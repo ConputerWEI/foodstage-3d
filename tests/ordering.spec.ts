@@ -1,7 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-test('table menu builds an order and restores its local receipt', async ({ page }) => {
+test('dine-in records the selected guest count through checkout and restored receipt', async ({ page }) => {
   await page.goto('/?table=a01');
+  const dineIn = page.getByRole('button', { name: /堂食/ });
+  await dineIn.click();
+  const dialog = page.getByRole('dialog', { name: '几位用餐？' });
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(dineIn).toBeFocused();
+  await dineIn.click();
+  await dialog.getByRole('button', { name: '3 人', exact: true }).click();
+  await dialog.getByRole('button', { name: '进入菜单' }).click();
+  await expect(page.getByRole('button', { name: /当前堂食 · 3 位/ })).toBeVisible();
   await expect(page.getByText('A01 桌', { exact: true }).first()).toBeVisible();
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await expect(page.getByRole('button', { name: '虚拟试吃' })).toBeVisible();
@@ -15,15 +26,33 @@ test('table menu builds an order and restores its local receipt', async ({ page 
   await expect(page.locator('.order-total')).toContainText('¥70.00');
   await page.getByRole('button', { name: '确认点单' }).click();
   await expect(page.getByRole('heading', { name: '确认订单' })).toBeVisible();
+  await expect(page.getByText('堂食 · 3 位', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '提交演示订单' }).click();
   await expect(page.getByRole('heading', { name: '演示订单已生成' })).toBeVisible();
   await expect(page.getByText(/DEMO-/)).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { name: '演示订单已生成' })).toBeVisible();
+  await expect(page.getByText('堂食 · 3 位', { exact: true })).toBeVisible();
+});
+
+test('takeaway goes straight to the menu and can order without a table', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.getByRole('button', { name: /打包/ }).click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(page.getByRole('button', { name: /当前打包自取/ })).toBeVisible();
+  await page.getByRole('button', { name: '查看经典汉堡' }).click();
+  await page.getByRole('button', { name: /加入点单/ }).click();
+  await page.getByRole('button', { name: /查看购物车/ }).click();
+  await page.getByRole('button', { name: '确认点单' }).click();
+  await expect(page.getByText('打包自取', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '提交演示订单' }).click();
+  await expect(page.getByRole('heading', { name: '演示订单已生成' })).toBeVisible();
+  await expect(page.getByText('打包自取', { exact: true })).toBeVisible();
 });
 
 test('menu works without a table and an empty cart invites browsing', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await expect(page.getByText(/扫描桌码/).first()).toBeVisible();
   await page.getByRole('button', { name: /查看购物车/ }).click();
   await expect(page.getByText('还没有选菜')).toBeVisible();
@@ -37,9 +66,9 @@ test('menu works without a table and an empty cart invites browsing', async ({ p
   await expect(page.getByRole('button', { name: '提交演示订单' })).toBeEnabled();
 });
 
-test('category filters and sold-out details stay browseable without a tasting model', async ({ page }) => {
+test('category filters and sold-out details stay browseable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/?table=B02');
+  await page.goto('/?table=B02&mode=dine-in&guests=2');
   await page.getByRole('button', { name: '饮品', exact: true }).click();
   await expect(page.getByRole('button', { name: '查看鲜柠气泡饮' })).toBeVisible();
   await expect(page.getByRole('button', { name: '查看经典汉堡' })).toHaveCount(0);
@@ -57,7 +86,7 @@ test('category filters and sold-out details stay browseable without a tasting mo
 });
 
 test('storage failure never clears the cart or claims a submitted order', async ({ page }) => {
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: /加入点单/ }).click();
   await page.getByRole('button', { name: /查看购物车/ }).click();

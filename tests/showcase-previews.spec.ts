@@ -4,7 +4,7 @@ for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto('/');
+    await page.goto('/?mode=dine-in&guests=2');
     for (const name of ['黄金炸鸡腿', '芒果芝士蛋糕']) {
       const card = page.locator('.ordering-food-card').filter({ has: page.getByRole('heading', { name, exact: true }) });
       const preview = card.getByTestId('menu-model-preview');

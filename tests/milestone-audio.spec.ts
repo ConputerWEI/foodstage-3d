@@ -15,7 +15,7 @@ test('real milestone assets decode, three transitions and one victory play per m
       return source;
     };
   });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '设置' }).click();
   await page.getByRole('checkbox', { name: '声音' }).check();
   await page.getByRole('button', { name: '完成', exact: true }).click();

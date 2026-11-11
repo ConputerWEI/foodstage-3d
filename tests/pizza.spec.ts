@@ -9,7 +9,7 @@ for (const width of [390, 1440]) {
       if (response.ok() && /pepperoni-pizza-[0-3]\.glb/.test(response.url())) loaded.add(new URL(response.url()).pathname);
     });
     await page.setViewportSize({ width, height: 900 });
-    await page.goto('/?table=A01');
+    await page.goto('/?table=A01&mode=dine-in&guests=2');
     await page.getByRole('button', { name: '查看意式双重芝士披萨' }).click();
     await expect(page.locator('.ordering-detail-art img')).toHaveAttribute('src', '/foods/pizza-six-0-cutout.png');
     await page.getByRole('button', { name: '虚拟试吃', exact: true }).click();

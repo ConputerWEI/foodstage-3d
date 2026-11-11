@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('food remains interactive after vertical and horizontal flips', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   const food = page.getByRole('button', { name: '经典汉堡' });

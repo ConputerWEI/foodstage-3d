@@ -15,15 +15,18 @@ import { FoodInkEffect } from './FoodInkEffect';
 export type HitTest = (x: number, y: number) => boolean;
 interface Props {
   interaction?: FoodInteraction;
+  zoom: number; spinning: boolean;
   asset: ModelAsset; base: ModelAsset; state: SequenceState; motion: Motion; stage: FoodStage;
   reduced: boolean; dispatch: (event: SequenceEvent) => void;
   setHit: (hit: HitTest | null, owner?: HitTest) => void;
   onContextLost: () => void;
 }
-function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, interaction = 'solid' }: Props) {
+function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, zoom, spinning, interaction = 'solid' }: Props) {
   const rotation = useRef<Group>(null), shakeGroup = useRef<Group>(null), crumbPoints = useRef<Points>(null);
   const seenCrumbPulse = useRef(0);
   const entrance = useRef(0);
+  const view = useRef({ clock: 0, pitch: 0, yaw: 0, spinSpeed: 0 });
+  const floating = useRef<Group>(null);
   const incoming = useRef<Group>(null), outgoing = useRef<Group>(null);
   const { camera, size, gl } = useThree();
   const ownedMaterials = useRef(new Set<Material>());
@@ -103,11 +106,31 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, in
       if (outgoing.current) { outgoing.current.visible = blend < 1; outgoing.current.scale.setScalar(interaction === 'drink' || stage.presentation === 'physical-size-stable' ? 1 : 1 - 0.035 * blend); }
     }
     gl.domElement.dataset.stageBlend = String(blend);
-    entrance.current = motion.dragging ? 2 : Math.min(2, entrance.current + dt);
-    const reveal = reduced ? 0 : 0.38 * Math.pow(1 - entrance.current / 2, 3);
-    rotation.current.rotation.set(motion.x, motion.y + reveal, 0);
-    gl.domElement.dataset.rotationX = String(motion.x);
-    gl.domElement.dataset.rotationY = String(motion.y);
+    // Keep the tasting raycast on exactly the same hierarchy as the viewer transforms.
+    const dtView = Math.min(dt, 0.1);
+    const smooth = 1 - Math.exp(-dtView * 8);
+    const viewer = view.current;
+    viewer.clock += dtView;
+    entrance.current = reduced || motion.dragging ? 1 : Math.min(1, entrance.current + dtView / 0.85);
+    const entering = (1 - entrance.current) ** 3;
+    const autoSpin = spinning && !reduced && !motion.dragging && motion.idle > 2;
+    viewer.spinSpeed += ((autoSpin ? 0.35 : 0) - viewer.spinSpeed) * smooth;
+    if (!motion.dragging && !reduced && spinning) motion.y += viewer.spinSpeed * dtView;
+    viewer.pitch += (motion.hoverPitch - viewer.pitch) * smooth;
+    viewer.yaw += (motion.hoverYaw - viewer.yaw) * smooth;
+    rotation.current.rotation.set(motion.x + (reduced ? 0 : viewer.pitch), motion.y + (reduced ? 0 : viewer.yaw) - 0.32 * entering, 0, 'YXZ');
+    if (floating.current) {
+      const bob = reduced || !spinning ? 0 : Math.sin(viewer.clock * 1.4) * 0.015;
+      floating.current.position.y = layer.pivotY + base.size.length() * (bob - 0.14 * entering);
+    }
+    const cam = camera as PerspectiveCamera;
+    if (Math.abs(cam.zoom - zoom) > 0.0001) {
+      cam.zoom = reduced || Math.abs(cam.zoom - zoom) < 0.002 ? zoom : cam.zoom + (zoom - cam.zoom) * smooth;
+      cam.updateProjectionMatrix();
+    }
+    gl.domElement.dataset.rotationX = String(rotation.current.rotation.x);
+    gl.domElement.dataset.rotationY = String(rotation.current.rotation.y);
+    gl.domElement.dataset.zoom = String(cam.zoom);
     const pose = bitePose(motion.age, motion.crumbPulse > 0 ? 0.8 : 0, reduced, interaction);
     shakeGroup.current.position.set(pose.x, pose.y, 0);
     shakeGroup.current.rotation.z = pose.roll;
@@ -153,7 +176,21 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, in
     }
   });
   const previous = previousLayer.current;
-  return <group position={[layer.calibration.position[0], layer.pivotY, layer.calibration.position[2]]}><group ref={rotation}><group ref={shakeGroup}>
+  const shadowWidth = Math.max(asset.size.x, asset.size.z) * layer.scale * 1.45;
+  return <>
+    <mesh position-y={-base.size.y / 2 - base.size.length() * 0.055} rotation-x={-Math.PI / 2}>
+      <planeGeometry args={[shadowWidth, shadowWidth]} />
+      <shaderMaterial transparent depthWrite={false}
+        vertexShader={`varying vec2 shadowUv;
+          void main() { shadowUv = uv - 0.5; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`}
+        fragmentShader={`varying vec2 shadowUv;
+          void main() {
+            float falloff = exp(-dot(shadowUv, shadowUv) * 20.0);
+            float opacity = smoothstep(0.012, 1.0, falloff) * 0.26;
+            gl_FragColor = vec4(0.13, 0.055, 0.024, opacity);
+          }`} />
+    </mesh>
+    <group ref={floating} position={[layer.calibration.position[0], layer.pivotY, layer.calibration.position[2]]}><group ref={rotation}><group ref={shakeGroup}>
     {previous && <group ref={outgoing} position-y={previous.pivotY - layer.pivotY}>
       <group scale={previous.scale} rotation-y={previous.calibration.yaw}>
         <primitive object={previous.scene} position={previous.placement.centeredPosition} dispose={null} />
@@ -165,7 +202,7 @@ function Food({ asset, base, state, motion, stage, reduced, dispatch, setHit, in
         <pointsMaterial color="#B78553" size={4} sizeAttenuation={false} transparent opacity={0.9} depthWrite={false} />
       </points>
     </group></group>
-  </group></group></group>;
+  </group></group></group></>;
 }
 function StudioReflections() {
   const { gl, scene } = useThree();

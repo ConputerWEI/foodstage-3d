@@ -25,7 +25,7 @@ test('real model, drag isolation, percentage transition and complete replay', as
   page.on('pageerror', error => failures.push(error.message));
   page.on('console', message => { if (message.type() === 'error') failures.push(message.text()); });
   const loaded = page.waitForResponse(response => response.url().includes('/models-desktop/burger-0.glb') && response.ok());
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   const desktopModel = await loaded; await idle(page, 0);
@@ -74,7 +74,7 @@ test('real model, drag isolation, percentage transition and complete replay', as
 test('failed next asset retains full progress and model until retry succeeds', async ({ page }) => {
   let fail = true;
   await page.route('**/models-desktop/burger-1.glb', route => fail ? route.fulfill({ status: 503, body: 'temporary failure' }) : route.continue());
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await idle(page, 0); await bites(page, 5, false);
@@ -87,7 +87,7 @@ test('failed next asset retains full progress and model until retry succeeds', a
 
 test('direct food interaction and help restore focus without a separate eat button', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await idle(page, 0);
@@ -119,7 +119,7 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
     const path = new URL(request.url()).pathname;
     if (path.endsWith('.glb') && !visibleOnlyUrls.has(path)) modelRequests.push(path);
   });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   const menu = page.locator('.ordering-menu');
   await expect(menu).toBeVisible();
   await expect(page.getByRole('heading', { name: '食刻开饭！', exact: true })).toBeVisible();
@@ -134,7 +134,7 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'docs/screenshots/menu-mobile.png', fullPage: true });
   await page.getByRole('button', { name: '使用演示桌号 A01' }).click();
-  await expect(page).toHaveURL(/\?table=A01$/);
+  await expect(page).toHaveURL(url => url.searchParams.get('table') === 'A01');
   await expect(menu.locator('.ordering-table')).toContainText('A01');
 
   const settingsTrigger = page.locator('.ordering-tools').getByRole('button', { name: '设置' });
@@ -203,7 +203,7 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
 
 test('mobile layout fits and reduced-motion completes transitions', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 }); await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await idle(page, 0);

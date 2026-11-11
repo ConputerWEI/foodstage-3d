@@ -164,3 +164,23 @@ h1 { margin: 0; font-size: 29px; font-weight: 950; letter-spacing: -2px; line-he
 }
 @media (max-height: 680px) and (max-width: 760px) { .experience { min-height: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+
+/* A warm studio backdrop leaves the contact shadow and the food silhouette visible. */
+.experience .stage {
+  background: radial-gradient(ellipse at 46% 38%, #fff9e6 0%, #ffe9ba 54%, #edca8a 100%);
+}
+.experience .stage::before, .experience .stage::after { content: none; }
+.viewer-controls {
+  position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 2;
+  display: flex; align-items: center; padding: 2px 4px; border: 2px solid var(--ink);
+  border-radius: 8px; background: var(--paper); box-shadow: 3px 3px 0 var(--ink);
+}
+.viewer-controls button {
+  display: grid; place-items: center; width: 42px; height: 40px; padding: 0;
+  border: 0; border-radius: 4px; background: transparent; color: var(--ink);
+}
+.viewer-controls button:hover:enabled { background: var(--cream); }
+.viewer-controls button:disabled { opacity: .35; }
+.viewer-controls button:last-child { border-left: 1px solid var(--line); border-radius: 0; margin-left: 3px; }
+.viewer-controls svg { width: 18px; height: 18px; }
+.viewer-controls output { min-width: 38px; color: var(--ink); text-align: center; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }

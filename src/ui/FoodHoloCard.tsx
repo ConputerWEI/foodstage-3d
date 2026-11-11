@@ -2,13 +2,13 @@ import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } fr
 import { Rotate3D } from 'lucide-react';
 import type { MenuItem } from '../data/menu';
 import { MenuFoodVisual } from './MenuFoodVisual';
-import './burger-holo.css';
+import './food-holo.css';
 
 const restingLight = { x: 0.43, y: 0.38, strength: 0.2 };
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 
 /** The card and the live model share one light position, measured on the untransformed stage. */
-export function BurgerHoloCard({ item, reducedMotion }: { item: MenuItem; reducedMotion: boolean }) {
+export function FoodHoloCard({ item, reducedMotion }: { item: MenuItem; reducedMotion: boolean }) {
   const [light, setLight] = useState(restingLight);
   const position = useRef(restingLight);
   const target = useRef(restingLight);
@@ -63,20 +63,20 @@ export function BurgerHoloCard({ item, reducedMotion }: { item: MenuItem; reduce
     transform: reducedMotion ? undefined : `perspective(920px) rotateX(${-y * 18}deg) rotateY(${x * 22}deg) scale(${1 + 0.018 * pose.strength})`,
   };
 
-  return <figure className="burger-holo">
-    <div className="burger-holo-stage" role="group" aria-label="经典汉堡全息展示卡" aria-describedby="burger-holo-hint"
+  return <figure className="food-holo">
+    <div className="food-holo-stage" role="group" aria-label={`${item.name}展示卡`} aria-describedby="food-holo-hint"
       tabIndex={reducedMotion ? undefined : 0} onKeyDown={handleKey} onBlur={() => aim(restingLight)}
       onPointerEnter={track} onPointerMove={track} onPointerDown={track}
       onPointerUp={event => { if (event.pointerType !== 'mouse') aim(restingLight); }}
       onPointerLeave={() => aim(restingLight)} onPointerCancel={() => aim(restingLight)}>
-      <div className="burger-holo-card" style={style}>
-        <div className="burger-holo-print">
+      <div className="food-holo-card" style={style}>
+        <div className="food-holo-print">
           <MenuFoodVisual item={item} variant="detail" holo={pose} />
         </div>
       </div>
     </div>
-    <figcaption id="burger-holo-hint"><Rotate3D size={15} aria-hidden="true" />
-      {reducedMotion ? '拖动旋转汉堡' : <>移动看流光 · 拖动旋转<span className="burger-holo-key-hint"> · 方向键可调光</span></>}
+    <figcaption id="food-holo-hint"><Rotate3D size={15} aria-hidden="true" />
+      {reducedMotion ? '拖动旋转' : <>移动看流光 · 拖动旋转<span className="food-holo-key-hint"> · 方向键可调光</span></>}
     </figcaption>
   </figure>;
 }

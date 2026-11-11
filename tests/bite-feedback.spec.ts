@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('bite has visible crumbs and recoil, settles, and respects reduced motion', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   const food = page.getByRole('button', { name: '经典汉堡' });

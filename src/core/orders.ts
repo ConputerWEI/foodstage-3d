@@ -1,9 +1,11 @@
 import { CART_STORAGE_KEY, cartTotal, restoreCartLines, type CartLine, type ReadStorage, type WriteStorage } from './cart';
+import { type DiningChoice, validGuests } from './dining';
 import { parseTable } from './table';
 
 export interface DemoOrder {
   id: string;
-  table: string;
+  table: string | null;
+  dining?: DiningChoice;
   lines: CartLine[];
   total: number;
   createdAt: string;
@@ -13,15 +15,16 @@ export const ORDER_STORAGE_KEY = CART_STORAGE_KEY;
 let sequence = 0;
 
 /** A local receipt only: callers must persist successfully before clearing their cart. */
-export function createDemoOrder(table: string, lines: readonly CartLine[], now = new Date()): DemoOrder {
-  const normalizedTable = parseTable(`?table=${encodeURIComponent(table)}`);
+export function createDemoOrder(table: string | null, lines: readonly CartLine[], now = new Date(), dining?: DiningChoice): DemoOrder {
+  const takeaway = dining?.mode === 'takeaway';
+  const normalizedTable = takeaway || !table ? null : parseTable(`?table=${encodeURIComponent(table)}`);
   const snapshot = restoreCartLines(lines);
-  if (!normalizedTable || !snapshot.length || !Number.isFinite(now.getTime())) throw new Error('Invalid demo order');
+  if ((!takeaway && !normalizedTable) || (dining?.mode === 'dine-in' && !validGuests(dining.guests)) || !snapshot.length || !Number.isFinite(now.getTime())) throw new Error('Invalid demo order');
   const createdAt = now.toISOString();
   const suffix = `${now.getTime().toString(36)}${(++sequence).toString(36)}${Math.random().toString(36).slice(2, 8)}`.toUpperCase();
   return {
     id: `DEMO-${createdAt.slice(0, 10).replaceAll('-', '')}-${suffix}`,
-    table: normalizedTable, lines: snapshot, total: cartTotal(snapshot), createdAt, status: 'received',
+    table: normalizedTable, ...(dining ? { dining: { ...dining } } : {}), lines: snapshot, total: cartTotal(snapshot), createdAt, status: 'received',
   };
 }
 
@@ -58,13 +61,22 @@ function snapshotLines(value: unknown): CartLine[] {
 function validatedOrder(value: unknown): DemoOrder {
   if (!value || typeof value !== 'object') throw new Error('Invalid order');
   const order = value as Record<string, unknown>;
+  let dining: DiningChoice | undefined;
+  if (order.dining !== undefined) {
+    const choice = order.dining as Partial<DiningChoice> | null;
+    if (choice?.mode === 'takeaway') dining = { mode: 'takeaway' };
+    else if (choice?.mode === 'dine-in' && validGuests(choice.guests)) dining = { mode: 'dine-in', guests: choice.guests };
+    else throw new Error('Invalid dining choice');
+  }
+  const table = order.table;
+  if (dining?.mode === 'takeaway' ? table !== null
+    : typeof table !== 'string' || parseTable(`?table=${encodeURIComponent(table)}`) !== table) throw new Error('Invalid order table');
   if (typeof order.id !== 'string' || !/^DEMO-\d{8}-[A-Z0-9]+$/.test(order.id)
-    || typeof order.table !== 'string' || parseTable(`?table=${encodeURIComponent(order.table)}`) !== order.table
     || order.status !== 'received' || typeof order.createdAt !== 'string'
     || !Number.isFinite(Date.parse(order.createdAt)) || new Date(order.createdAt).toISOString() !== order.createdAt) throw new Error('Invalid order metadata');
   const lines = snapshotLines(order.lines);
   if (!Number.isSafeInteger(order.total) || order.total !== cartTotal(lines)) throw new Error('Invalid order total');
-  return { id: order.id, table: order.table, lines, total: cartTotal(lines), createdAt: order.createdAt, status: 'received' };
+  return { id: order.id, table: typeof table === 'string' ? table : null, ...(dining ? { dining } : {}), lines, total: cartTotal(lines), createdAt: order.createdAt, status: 'received' };
 }
 export function readOrder(storage: ReadStorage): DemoOrder | null {
   try {

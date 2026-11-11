@@ -17,7 +17,7 @@ test('menu and detail share cached mobile models across category changes', async
   const models: string[] = [];
   page.on('request', request => { if (/\.glb(?:\?|$)/.test(request.url())) models.push(request.url()); });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   const burgerCard = page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).first();
   const preview = burgerCard.getByTestId('menu-model-preview');
   await expect(page.getByTestId('menu-model-preview')).toHaveCount(menuItems.length);
@@ -59,7 +59,7 @@ test('menu and detail share cached mobile models across category changes', async
 
 test('all four canned drinks have 3D previews and can be ordered without virtual tasting', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   await page.getByRole('button', { name: '饮品', exact: true }).click();
   const cans = ['coca-cola', 'sprite', 'fanta-orange', 'coca-cola-no-sugar'].map(id => menuItemById(id)!);
   for (const can of cans) {
@@ -84,7 +84,7 @@ test('all four canned drinks have 3D previews and can be ordered without virtual
 
 test('desktop catalog gives every card one model and keeps sold-out ordering disabled', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   const cards = page.locator('.ordering-food-card');
   await expect(cards).toHaveCount(menuItems.length);
   await expect(cards.getByTestId('menu-model-preview')).toHaveCount(menuItems.length);
@@ -106,14 +106,15 @@ test('desktop catalog gives every card one model and keeps sold-out ordering dis
   const detailPreview = page.locator('.ordering-detail-art').getByTestId('menu-model-preview');
   await expect(detailPreview).toHaveAttribute('data-ready', 'true');
   await expect(page.getByRole('button', { name: '暂时售罄', exact: true })).toBeDisabled();
-  await expect(page.getByRole('button', { name: '虚拟试吃', exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: '虚拟试吃', exact: true }).click();
+  await expect(page.getByRole('heading', { name: '黑松露帕玛森薯条' })).toBeVisible();
 });
 
 for (const width of [390, 1440]) {
   test(`hero carousel supports drag, tap and keyboard navigation at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/?table=A01');
+    await page.goto('/?table=A01&mode=dine-in&guests=2');
     const carousel = page.getByRole('region', { name: /招牌菜轮播/ });
     await expect(carousel).toHaveAttribute('data-ready', '');
     await carousel.scrollIntoViewIfNeeded();
@@ -147,7 +148,7 @@ for (const width of [390, 1440]) {
 
 test('burger preview resumes after scrolling out of view', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 480 });
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   const preview = page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).first().getByTestId('menu-model-preview');
   await preview.scrollIntoViewIfNeeded();
   await expect(preview).toHaveAttribute('data-ready', 'true');
@@ -162,7 +163,7 @@ test('burger preview resumes after scrolling out of view', async ({ page }) => {
 test('failed model leaves ordering usable and retries when returning to the menu', async ({ page }) => {
   let fail = true;
   await page.route('**/models-mobile/burger-0.glb', route => fail ? route.abort() : route.continue());
-  await page.goto('/?table=A01');
+  await page.goto('/?table=A01&mode=dine-in&guests=2');
   const preview = page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).first().getByTestId('menu-model-preview');
   await expect(preview).toContainText('加载失败');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();

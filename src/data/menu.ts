@@ -62,7 +62,7 @@ export const menuItems: readonly MenuItem[] = [
   {
     id: 'truffle-fries', name: '黑松露帕玛森薯条', category: '小食',
     description: '金黄薯条佐黑松露风味酱与帕玛森芝士，今日份已售罄',
-    price: 2600, cover: '/foods/rosemary-fries-cutout.png', modelFoodId: 'rosemary-fries', available: false,
+    price: 2600, cover: '/foods/rosemary-fries-cutout.png', foodId: 'rosemary-fries', available: false,
   },
   {
     id: 'lemon-soda', name: '鲜柠气泡饮', category: '饮品',

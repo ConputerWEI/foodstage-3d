@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('first parser failure retries and gesture cancellation never bites', async ({ page }) => {
   let corrupt = true;
   await page.route('**/burger-0.glb', route => corrupt ? route.fulfill({ status: 200, body: 'invalid GLB' }) : route.continue());
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByRole('button', { name: '重试加载' })).toBeVisible();
@@ -46,7 +46,7 @@ test('renderer fallback retry remains clickable inside food input', async ({ pag
       return getContext.call(this, type, ...args);
     };
   });
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByRole('button', { name: '重试画面' })).toBeVisible();
@@ -68,7 +68,7 @@ test('renderer fallback retry remains clickable inside food input', async ({ pag
 });
 
 test('WebGL context loss provides a recovery action', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?mode=dine-in&guests=2');
   await page.getByRole('button', { name: '查看经典汉堡' }).click();
   await page.getByRole('button', { name: '虚拟试吃' }).click();
   await expect(page.getByTestId('experience')).toHaveAttribute('data-phase', 'idle');

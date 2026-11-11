@@ -9,7 +9,7 @@ for (const width of [390, 1440]) {
       if (response.ok() && /rosemary-fries-[0-3]\.glb/.test(response.url())) loaded.add(new URL(response.url()).pathname);
     });
     await page.setViewportSize({ width, height: 900 });
-    await page.goto('/?table=A01');
+    await page.goto('/?table=A01&mode=dine-in&guests=2');
     await page.getByRole('button', { name: '查看迷迭香薯条' }).click();
     await page.getByRole('button', { name: '虚拟试吃' }).click();
     const experience = page.getByTestId('experience');
