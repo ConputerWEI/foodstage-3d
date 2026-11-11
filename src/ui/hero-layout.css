@@ -8,7 +8,7 @@
 .ordering-carousel-stage {
   position: relative;
   min-width: 0;
-  height: clamp(310px, 29vw, 370px);
+  height: clamp(246px, 24vw, 290px);
   color: #382218;
   background: #f5bd47;
 }
@@ -38,6 +38,6 @@
     display: none;
   }
   .ordering-carousel-stage {
-    height: clamp(296px, 78vw, 365px);
+    height: clamp(190px, 53vw, 236px);
   }
 }

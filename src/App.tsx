@@ -232,7 +232,7 @@ export default function App() {
   return <main className="ordering-app">
     {screen === 'welcome' && <OrderWelcome reducedMotion={reducedMotion} onChoose={chooseDining} />}
     {screen === 'menu' && <>
-      <MenuHome tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} dining={dining} onChooseDining={() => setScreen('welcome')} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
+      <MenuHome reducedMotion={reducedMotion} tools={<><HelpSheet /><SettingsSheet settings={settings} onChange={updateSettings} /></>} table={table} dining={dining} onChooseDining={() => setScreen('welcome')} items={menuItems} onOpen={openItem} onCart={() => leaveMenu('cart')} category={category} onCategoryChange={setCategory} cartCount={cart.reduce((count, line) => count + line.quantity, 0)} total={cartTotal(cart)} onDemoTable={demoTable} />
     </>}
     {screen === 'detail' && selected && <MenuItemDetail item={selected} reducedMotion={reducedMotion} draft={draft} onDraftChange={setDraft} onClose={returnToMenu} onTaste={() => setScreen('tasting')} onAdd={(choices, quantity, note) => {
       setCart(current => addLine(current, selected, Object.entries(choices).map(([groupId, choiceId]) => ({ groupId, choiceId })), quantity, note));

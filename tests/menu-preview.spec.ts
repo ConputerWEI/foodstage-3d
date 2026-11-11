@@ -128,43 +128,60 @@ test('desktop catalog gives every card one model and keeps sold-out ordering dis
 });
 
 for (const width of [390, 1440]) {
-  test(`hero carousel supports drag, tap and keyboard navigation at ${width}px`, async ({ page }) => {
+  test(`menu model loop can be dragged, clicked and navigated by keyboard at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
+    const coverRequests: string[] = [];
+    page.on('request', request => {
+      if (new URL(request.url()).pathname.startsWith('/foods/')) coverRequests.push(request.url());
+    });
     await page.goto('/?table=A01&mode=dine-in&guests=2');
-    const carousel = page.getByRole('region', { name: /招牌菜轮播/ });
-    await expect(carousel).toHaveAttribute('data-ready', '');
-    const featuredIds = menuItems.filter(item => item.available && item.foodId && item.category !== '饮品')
-      .map(item => item.modelFoodId ?? item.foodId).join(' ');
-    await expect(carousel.locator('img')).toHaveCount(0);
-    await expect(carousel.locator('.food-carousel-models')).toHaveAttribute('data-loaded-models', featuredIds);
-    await expect(carousel.locator('canvas')).toHaveCount(1);
-    await carousel.scrollIntoViewIfNeeded();
-    const caption = carousel.locator('.circular-carousel__title');
-    const bounds = (await carousel.boundingBox())!;
-    const y = bounds.y + bounds.height * 0.4;
-    await page.mouse.move(bounds.x + bounds.width * 0.8, y);
+    const loop = page.getByRole('region', { name: '招牌菜滚动展示' });
+    const strip = loop.locator('.food-loop-window');
+    const featured = menuItems.filter(item => item.available && item.foodId && item.category !== '饮品');
+    const modelIds = featured.map(item => item.modelFoodId ?? item.foodId).join(' ');
+    await expect(loop.locator('.food-carousel-models')).toHaveAttribute('data-loaded-models', modelIds);
+    await expect(loop.locator('canvas')).toHaveCount(1);
+    await expect(loop.locator('img')).toHaveCount(0);
+    expect(coverRequests).toEqual([]);
+    for (const item of featured) {
+      const label = loop.getByRole('button', { name: `打开${item.name}详情`, exact: true }).first();
+      await expect(label).toContainText(item.name);
+      await expect(label).toContainText((item.price / 100).toFixed(2));
+    }
+
+    await strip.scrollIntoViewIfNeeded();
+    const bounds = (await strip.boundingBox())!;
+    const center = { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+    const centeredIndex = () => page.evaluate(({ x, y }) =>
+      document.elementFromPoint(x, y)?.closest<HTMLButtonElement>('.food-loop-item')?.dataset.index, center);
+
+    await strip.press('Home');
+    await expect.poll(centeredIndex).toBe('0');
+    await page.mouse.move(bounds.x + bounds.width * 0.8, center.y);
     await page.mouse.down();
-    await page.mouse.move(bounds.x + bounds.width * 0.2, y, { steps: 12 });
-    await expect(caption).not.toContainText('经典汉堡');
+    await page.mouse.move(bounds.x + bounds.width * 0.2, center.y, { steps: 12 });
     await page.mouse.up();
-    await expect(page.locator('.ordering-menu')).toBeVisible();
+    await expect.poll(centeredIndex).toMatch(/^[1-9]\d*$/);
+    await expect(loop).toBeVisible();
     await expect(page.locator('.ordering-detail')).toHaveCount(0);
 
-    await carousel.press('Home');
-    await expect(caption).toContainText('经典汉堡');
-    await carousel.click({ position: { x: bounds.width * 0.5, y: bounds.height * 0.4 } });
-    const detailPreview = page.locator('.ordering-detail-art').getByTestId('menu-model-preview');
-    await expect(page.getByRole('heading', { name: '经典汉堡', exact: true })).toBeVisible();
-    await rotatePreview(page, detailPreview);
-    await page.getByRole('button', { name: /返回菜单/ }).click();
-
-    await carousel.press('ArrowRight');
-    await expect(caption).toContainText('迷迭香薯条');
-    await carousel.press('Enter');
-    await expect(page.getByRole('heading', { name: '迷迭香薯条', exact: true })).toBeVisible();
-    await expect(detailPreview).toHaveAttribute('data-ready', 'true');
-    await expect(page.getByRole('button', { name: /加入点单/ })).toBeEnabled();
+    await strip.press('Home');
+    await expect.poll(centeredIndex).toBe('0');
+    await page.mouse.click(center.x, center.y);
+    const detail = page.locator('.ordering-detail');
+    await expect(detail.getByRole('heading', { name: featured[0]!.name, exact: true })).toBeVisible();
+    await rotatePreview(page, detail.getByTestId('menu-model-preview'));
+    await page.getByRole('button', { name: '返回菜单' }).click();
+    await strip.press('Home');
+    await strip.press('ArrowRight');
+    await expect.poll(centeredIndex).toBe('1');
+    await strip.press('ArrowLeft');
+    await expect.poll(centeredIndex).toBe('0');
+    await strip.press('ArrowRight');
+    await strip.press('Enter');
+    await expect(detail.getByRole('heading', { name: featured[1]!.name, exact: true })).toBeVisible();
+    await expect(detail.getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
   });
 }
 

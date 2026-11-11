@@ -8,6 +8,7 @@ import { MenuFoodVisual } from './MenuFoodVisual';
 
 export interface MenuHomeProps {
   tools?: ReactNode;
+  reducedMotion?: boolean;
   table: string | null;
   dining?: DiningChoice;
   onChooseDining?: () => void;
@@ -22,7 +23,7 @@ export interface MenuHomeProps {
 }
 const price = (cents: number) => `¥${(cents / 100).toFixed(2)}`;
 
-export function MenuHome({ table, dining, onChooseDining, items, onOpen, onCart, cartCount, total, onDemoTable, tools, category: selectedCategory, onCategoryChange }: MenuHomeProps) {
+export function MenuHome({ table, dining, onChooseDining, items, onOpen, onCart, cartCount, total, onDemoTable, tools, category: selectedCategory, onCategoryChange, reducedMotion }: MenuHomeProps) {
   const [localCategory, setLocalCategory] = useState('全部');
   const category = selectedCategory ?? localCategory;
   const setCategory = (value: string) => {
@@ -49,7 +50,7 @@ export function MenuHome({ table, dining, onChooseDining, items, onOpen, onCart,
         <div className="ordering-hero-copy"><span className="ordering-sign-caption">好好吃饭 · 快乐加倍</span><h1>食刻开饭！</h1><p>现做的好滋味，<br />从这一口开始。</p><span className="ordering-sign-note">汉堡 / 小食 / 清爽饮品</span></div>
         {plates.length > 1 ? (
           <div className="ordering-carousel-stage">
-            <CarouselHero items={plates} onOpenCurrent={plate => onOpen(plate.menuItem)} />
+            <CarouselHero reducedMotion={reducedMotion} items={plates} onOpenCurrent={plate => onOpen(plate.menuItem)} />
           </div>
         ) : featured && <button className="ordering-hero-food" onClick={() => onOpen(featured)} aria-label={`招牌推荐：${featured.name}`}><MenuFoodVisual item={featured} variant="hero" onActivate={() => onOpen(featured)} /><span>招牌推荐 <ArrowUpRight size={16} aria-hidden="true" /></span></button>}
       </section>

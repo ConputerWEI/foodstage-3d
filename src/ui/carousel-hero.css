@@ -1,82 +1,68 @@
 .food-carousel-hero {
-  color: #352115;
   position: relative;
   isolation: isolate;
   width: 100%;
   height: 100%;
   min-width: 0;
-  background-color: #f5bd47;
-  background-image:
-    radial-gradient(ellipse at 45% 42%, #ffe49b 0%, transparent 67%),
-    repeating-conic-gradient(from -6deg at 50% 54%, #ffdc841c 0deg 10deg, #ecaa2917 10deg 20deg);
+  color: #382218;
+  background: radial-gradient(ellipse at 48% 50%, #ffe397 0%, transparent 72%),
+    repeating-conic-gradient(from -6deg at 50% 54%, #ffdc8429 0deg 10deg, #ecaa2917 10deg 20deg), #f5bd47;
 }
 
-.food-carousel-hero .circular-carousel__caption {
-  bottom: 15px;
-  width: fit-content;
-  max-width: calc(100% - 20px);
-  margin-inline: auto;
+.food-loop-window {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+.food-loop-window:focus-visible { outline-offset: -5px; }
+.food-carousel-models { position: absolute; inset: 0; pointer-events: none; }
+.food-carousel-status { position: absolute; inset: 38% 0 auto; text-align: center; font-size: 13px; }
+
+.food-carousel-hero .food-loop-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--food-step);
+  height: 100%;
   padding: 0;
-  display: grid;
-  grid-template-columns: 40px minmax(0, auto) 40px;
-  gap: 5px;
-  align-items: center;
-  pointer-events: auto;
-}
-
-.food-carousel-hero .circular-carousel__title {
-  min-width: 158px;
-  gap: 1px;
-  line-height: 1.25;
-  font-size: 18px;
-  letter-spacing: 0.025em;
-  font-weight: 800;
-}
-
-.food-carousel-hero .circular-carousel__subtitle {
-  font-size: 14px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.85;
-}
-
-.food-carousel-hero button {
+  border: 0;
+  background: transparent;
   color: inherit;
+  touch-action: pan-y pinch-zoom;
+  -webkit-tap-highlight-color: transparent;
+}
+.food-loop-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--food-caption-y);
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  pointer-events: none;
+  line-height: 1.25;
+}
+.food-loop-caption strong { font-size: clamp(13px, 1.35vw, 17px); font-weight: 800; }
+.food-loop-caption > span { font-size: 12px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.food-carousel-hero .food-loop-item:focus-visible { outline: none; }
+.food-loop-item:focus-visible strong { outline: 2px solid currentColor; outline-offset: 3px; }
+.food-loop-item:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.food-carousel-hero .food-loop-play {
+  position: absolute;
+  top: 5px;
+  right: 5px;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   padding: 0;
   border: 0;
   border-radius: 50%;
-  cursor: pointer;
   background: transparent;
-  -webkit-tap-highlight-color: transparent;
+  color: #493017;
 }
-.food-carousel-hero button:hover { background: #fff4d567; }
-.food-carousel-hero button:focus-visible { outline: 2px solid #40271c; outline-offset: 1px; }
-.food-carousel-hero .food-carousel-hero__play {
-  position: absolute;
-  right: 7px;
-  top: 7px;
-  width: 36px;
-  height: 36px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .food-carousel-hero .food-carousel-hero__play { display: none; }
-}
-
-.food-carousel-models {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.food-carousel-status {
-  position: absolute;
-  inset: 43% 0 auto;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 650;
-  color: #55331c;
-}
+.food-loop-play:hover { background: #fff4d566; }
