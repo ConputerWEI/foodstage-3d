@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import type { HoloLight } from '../scene/FoodInkEffect';
+import type { HoloLight } from './MenuModelPreview';
 import type { MenuItem } from '../data/menu';
 
 const MenuModelPreview = lazy(() => import('./MenuModelPreview'));

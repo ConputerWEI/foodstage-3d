@@ -6,7 +6,7 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { foodById } from '../data/foods';
 import { applyFoodMaterials } from '../scene/food-materials';
-import { FoodInkEffect, type HoloLight } from '../scene/FoodInkEffect';
+import { FoodInkEffect } from '../scene/FoodInkEffect';
 
 interface PreviewAsset { scene: Group; center: Vector3; scale: number; radius: number }
 type PreviewVariant = 'thumbnail' | 'hero' | 'detail';
@@ -117,6 +117,8 @@ function PreviewModel({ asset, rotation, foodId, variant, standalone, onReady }:
   </group>;
 }
 
+export interface HoloLight { x: number; y: number; strength: number }
+
 interface MenuModelPreviewProps {
   foodId: string;
   name: string;
@@ -193,11 +195,15 @@ export default function MenuModelPreview({ foodId, name, onClose, showClose = tr
         {standalone ? <PackagingStudio /> : <>
           <ambientLight intensity={0.65} />
           <hemisphereLight args={['#fff6e8', '#665344', 0.55]} />
-          <directionalLight color="#fff0da" position={[-3, 5, 4]} intensity={3} />
+          <directionalLight
+            color={holo ? '#fff8ee' : '#fff0da'}
+            position={holo ? [(holo.x - 0.5) * 10, 2 + (1 - holo.y) * 4, 4] : [-3, 5, 4]}
+            intensity={holo ? 2.6 + holo.strength * 0.8 : 3}
+          />
           <directionalLight color="#fff5e7" position={[3, 2, -3]} intensity={1.6} />
         </>}
         <PreviewModel asset={asset} rotation={rotation} foodId={foodId} variant={variant} standalone={standalone} onReady={markReady} />
-        <FoodInkEffect preview={variant === 'thumbnail'} holo={holo} />
+        <FoodInkEffect preview={variant === 'thumbnail'} />
       </Canvas>
     </PreviewBoundary>}
     {(!ready || failed) && <span className="ordering-preview-status" role="status">{failed ? '加载失败' : active ? '加载中…' : '预览已暂停'}</span>}
