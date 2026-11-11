@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { menuItems } from '../src/data/menu';
 
 async function idle(page: Page, stage: number) {
   await expect(page.getByTestId('experience')).toHaveAttribute('data-stage', String(stage));
@@ -109,21 +110,21 @@ test('direct food interaction and help restore focus without a separate eat butt
 });
 
 test('menu table and settings persist, and tasting returns to the dish draft', async ({ page }) => {
+  const expectedModels = [
+    'burger', 'rosemary-fries', 'pepperoni-pizza', 'crispy-chicken', 'mango-cheesecake', 'lemon-soda',
+  ].map(id => `/models-mobile/${id}-0.glb`).sort();
+  const visibleOnlyUrls = new Set(menuItems.flatMap(item => item.previewModelUrl ? [item.previewModelUrl] : []));
   const modelRequests: string[] = [];
-  page.on('request', request => { if (/\.glb(?:\?|$)/i.test(request.url())) modelRequests.push(request.url()); });
+  page.on('request', request => {
+    const path = new URL(request.url()).pathname;
+    if (path.endsWith('.glb') && !visibleOnlyUrls.has(path)) modelRequests.push(path);
+  });
   await page.goto('/');
   const menu = page.locator('.ordering-menu');
   await expect(menu).toBeVisible();
   await expect(page.getByRole('heading', { name: '食刻开饭！', exact: true })).toBeVisible();
   await expect(page.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
-  expect(modelRequests).toHaveLength(5);
-  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
-    '/models-mobile/burger-0.glb',
-    '/models-mobile/rosemary-fries-0.glb',
-    '/models-mobile/pepperoni-pizza-0.glb',
-    '/models-mobile/crispy-chicken-0.glb',
-    '/models-mobile/mango-cheesecake-0.glb',
-  ]));
+  await expect.poll(() => [...modelRequests].sort()).toEqual(expectedModels);
   await page.screenshot({ path: 'docs/screenshots/menu-desktop.png' });
   await page.setViewportSize({ width: 320, height: 740 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -145,6 +146,8 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await settings.getByRole('button', { name: '完成' }).click();
   await expect(settings).not.toBeVisible();
   await expect(settingsTrigger).toBeFocused();
+  // A full reload creates a new module cache; count requests per document.
+  modelRequests.length = 0;
   await page.reload();
   await expect(menu).toBeVisible();
   await expect(menu.locator('.ordering-table')).toContainText('A01');
@@ -155,14 +158,8 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await page.keyboard.press('Escape');
   await expect(retained).not.toBeVisible();
   await expect(settingsTrigger).toBeFocused();
-  expect(modelRequests).toHaveLength(5);
-  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
-    '/models-mobile/burger-0.glb',
-    '/models-mobile/rosemary-fries-0.glb',
-    '/models-mobile/pepperoni-pizza-0.glb',
-    '/models-mobile/crispy-chicken-0.glb',
-    '/models-mobile/mango-cheesecake-0.glb',
-  ]));
+  await expect(menu.locator('.ordering-food-card').filter({ hasText: '经典汉堡' }).getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
+  await expect.poll(() => [...modelRequests].sort()).toEqual(expectedModels);
 
   await page.getByRole('button', { name: '查看经典汉堡', exact: true }).focus();
   await page.keyboard.press('Enter');
@@ -173,15 +170,10 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await page.getByRole('radio', { name: '微辣', exact: true }).check();
   await page.getByRole('button', { name: '增加数量' }).click();
   await page.getByRole('textbox', { name: '备注', exact: true }).fill('不要洋葱');
-  await expect(page.locator('canvas')).toHaveCount(0);
-  expect(modelRequests).toHaveLength(5);
-  expect(new Set(modelRequests.map(url => new URL(url).pathname))).toEqual(new Set([
-    '/models-mobile/burger-0.glb',
-    '/models-mobile/rosemary-fries-0.glb',
-    '/models-mobile/pepperoni-pizza-0.glb',
-    '/models-mobile/crispy-chicken-0.glb',
-    '/models-mobile/mango-cheesecake-0.glb',
-  ]));
+  await detail.getByTestId('menu-model-preview').scrollIntoViewIfNeeded();
+  await expect(detail.getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
+  await expect(page.locator('canvas')).toHaveCount(1);
+  await expect.poll(() => [...modelRequests].sort()).toEqual(expectedModels);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'docs/screenshots/detail-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -196,7 +188,9 @@ test('menu table and settings persist, and tasting returns to the dish draft', a
   await expect(page.getByRole('radio', { name: '微辣', exact: true })).toBeChecked();
   await expect(page.getByRole('status', { name: '数量' })).toHaveText('2');
   await expect(page.getByRole('textbox', { name: '备注', exact: true })).toHaveValue('不要洋葱');
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await detail.getByTestId('menu-model-preview').scrollIntoViewIfNeeded();
+  await expect(detail.getByTestId('menu-model-preview')).toHaveAttribute('data-ready', 'true');
+  await expect(page.locator('canvas')).toHaveCount(1);
   await page.getByRole('button', { name: '返回菜单' }).click();
   await expect(menu).toBeVisible();
   await expect(menu.locator('.ordering-table')).toContainText('A01');

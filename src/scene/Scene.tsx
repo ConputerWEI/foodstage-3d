@@ -10,6 +10,7 @@ import { cloneFadeMaterial, applyMaterialFade } from './material-fade';
 import { modelPlacement, modelPivot } from './presentation';
 import { compactCrumbs } from './crumbs';
 import { bitePose, createCrumbBurst, stageBlend, STAGE_BLEND_SECONDS } from './bite-effects';
+import { FoodInkEffect } from './FoodInkEffect';
 
 export type HitTest = (x: number, y: number) => boolean;
 interface Props {
@@ -202,7 +203,8 @@ export function Scene(props: Props) {
     <hemisphereLight args={['#fff6e8', '#665344', 0.3]} />
     <directionalLight color="#fff0da" position={[-2.5, 3, 1.1]} intensity={2.6} />
     <directionalLight color="#edf4ff" position={[2, 0.5, 1]} intensity={0.3} />
-    <directionalLight color="#fff5e7" position={[0.5, 1.4, -2]} intensity={1.25} />
+    <directionalLight color="#fff5e7" position={[0.5, 1.4, -2]} intensity={1.5} />
     <Food {...props} />
+    <FoodInkEffect />
   </Canvas>;
 }

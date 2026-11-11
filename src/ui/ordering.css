@@ -34,3 +34,10 @@
 .ordering-preview-close{position:absolute;top:5px;right:5px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid #d8c9b1;border-radius:50%;background:var(--order-paper);font-size:22px;line-height:1;cursor:pointer}
 @media(max-width:760px){.ordering-food-card{grid-template-columns:112px minmax(0,1fr)}.ordering-food-card>.ordering-food-open{min-height:134px}.ordering-food-thumbnail{min-height:150px}.ordering-food-thumbnail>.ordering-cover,.ordering-food-image-open{padding:8px}.ordering-food-thumbnail>.ordering-cover img,.ordering-food-image-open .ordering-cover img{max-height:140px}}
 @media(prefers-reduced-motion:reduce){.ordering-menu *,.ordering-detail *{scroll-behavior:auto!important;transition:none!important}}
+/* Shared 3D artwork keeps each surface's existing backdrop visible. */
+.ordering-model-preview--hero.is-ready,.ordering-model-preview--detail.is-ready{background:transparent}
+.ordering-hero-food>.ordering-model-preview{inset:8px 12px}
+.ordering-hero-food>span{pointer-events:none}
+.ordering-detail-art>.ordering-model-preview{inset:16px}
+.is-sold-out .ordering-model-preview canvas{filter:grayscale(.8);opacity:.65}
+@media(max-width:760px){.ordering-detail-art{position:relative}.ordering-detail-art>.ordering-model-preview{inset:8px}.ordering-hero-food>.ordering-model-preview{inset:6px}}
